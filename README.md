@@ -1,6 +1,4 @@
----
-description: Out-of-the-Box Blockchain-powered MPC network
----
+# Delta隐私计算框架简介
 
-# Delta
+Out-of-the-Box Blockchain-powered MPC network
 
