@@ -18,4 +18,5 @@
 ## 系统详细设计
 
 * [系统整体架构说明](xi-tong-xiang-xi-she-ji/xi-tong-zheng-ti-jia-gou-shuo-ming.md)
+* [代码安全性检查](xi-tong-xiang-xi-she-ji/dai-ma-an-quan-xing-jian-cha.md)
 
