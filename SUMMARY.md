@@ -19,4 +19,8 @@
 
 * [系统整体架构说明](xi-tong-xiang-xi-she-ji/xi-tong-zheng-ti-jia-gou-shuo-ming.md)
 * [代码安全性检查](xi-tong-xiang-xi-she-ji/dai-ma-an-quan-xing-jian-cha.md)
+* [隐私计算任务生成](xi-tong-xiang-xi-she-ji/yin-si-ji-suan-ren-wu-sheng-cheng.md)
+* [横向联邦学习](xi-tong-xiang-xi-she-ji/heng-xiang-lian-bang-xue-xi.md)
+* [纵向联邦学习](xi-tong-xiang-xi-she-ji/zong-xiang-lian-bang-xue-xi.md)
+* [联邦统计](xi-tong-xiang-xi-she-ji/lian-bang-tong-ji.md)
 
