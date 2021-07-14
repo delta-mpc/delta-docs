@@ -1,6 +1,3 @@
----
-description: Out-of-the-Box Blockchain-powered MPC network
----
-
 # Delta
 
+Out-of-the-Box Blockchain-powered MPC network
