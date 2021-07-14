@@ -1,5 +1,5 @@
 # Table of contents
 
-* [Delta](../README.md)
+* [Delta](README.md)
 * [Getting Started](getting-started.md)
 
