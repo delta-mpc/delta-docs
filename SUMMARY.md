@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Delta隐私计算框架简介](README.md)
+* [Delta开发文档](README.md)
 * [系统使用整体流程](getting-started.md)
 
 ## 系统搭建和部署
