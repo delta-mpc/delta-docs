@@ -14,3 +14,9 @@ Delta保证了计算结果的可信性，在用户无法获取原始数据的前
 
 {% embed url="https://deltampc.com/" %}
 
+{% embed url="https://github.com/delta-mpc" %}
+
+{% embed url="https://docs.deltampc.com/" %}
+
+
+
