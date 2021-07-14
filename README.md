@@ -1,1 +1,6 @@
-## Delta MPC Docs
+---
+description: Out-of-the-Box Blockchain-powered MPC network
+---
+
+# Delta
+
