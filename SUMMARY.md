@@ -15,6 +15,7 @@
 ## 计算任务开发
 
 * [一个示例任务](ji-suan-ren-wu-kai-fa/yi-ge-shi-li-ren-wu.md)
+* [计算任务执行过程](ji-suan-ren-wu-kai-fa/ji-suan-ren-wu-zhi-hang-guo-cheng.md)
 
 ## 系统详细设计
 
