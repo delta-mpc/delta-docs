@@ -44,7 +44,7 @@ Delta Board用于对于Delta Node的可视化管理，同时嵌入JupyterLab做�
 
 在目前的Delta框架中，我们假设激励的问题已经由网络搭建者通过外部手段解决。在框架中暂时不包括激励机制的设计和运行，而是专注于隐私计算本身的功能和性能，以更好的满足用户需求。对于数据以及计算过程的可信性保障的问题，则通过零知识证明来解决。详细说明请参考系统详细设计中的对应文档。
 
-Delta网络中的区块链节点可以使用Delta提供的Delta Chain搭建，也可以使用任意其他的区块链系统，比如Ethereum，只要在区块链上部署了对应版本的Delta智能合约，并将Delta Node接入即可。
+Delta网络中的区块链节点可以使用Delta提供的Delta Chain搭建，也可以使用任意其他的区块链系统，比如Ethereum，只要在区块链上部署了其对应的Delta智能合约，并将Delta Node接入即可。
 
 Delta也提供了Solidity语言的智能合约，可直接部署在以太坊上。为了方便多种区块链系统的切换，以及安全的管理区块链账号涉及到的密钥，Delta抽象出了Chain Connector组件，用于管理Delta Node和区块链节点之间的连接。在Chain Connector中可以方便的切换不同的区块链系统，Chain Connector也支持配置一个额外的离线签名机用于密钥托管，实现密钥的离线保存和使用。
 
