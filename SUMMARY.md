@@ -2,7 +2,7 @@
 
 * [Delta开发文档](README.md)
 * [快速搭建指南](kuai-su-da-jian-zhi-nan.md)
-* [系统搭建流程](getting-started.md)
+* [Delta隐私计算网络结构](delta-architecture.md)
 * [Delta在线Demo](delta-zai-xian-demo.md)
 
 ## 系统搭建和部署
@@ -20,7 +20,6 @@
 
 ## 系统详细设计
 
-* [系统整体架构说明](xi-tong-xiang-xi-she-ji/xi-tong-zheng-ti-jia-gou-shuo-ming.md)
 * [代码安全性检查](xi-tong-xiang-xi-she-ji/dai-ma-an-quan-xing-jian-cha.md)
 * [隐私计算任务生成](xi-tong-xiang-xi-she-ji/yin-si-ji-suan-ren-wu-sheng-cheng.md)
 * [横向联邦学习](xi-tong-xiang-xi-she-ji/heng-xiang-lian-bang-xue-xi.md)
