@@ -1,7 +1,8 @@
 # Table of contents
 
 * [Delta开发文档](README.md)
-* [系统使用整体流程](getting-started.md)
+* [快速搭建指南](kuai-su-da-jian-zhi-nan.md)
+* [系统使用流程](getting-started.md)
 * [Delta在线Demo](delta-zai-xian-demo.md)
 
 ## 系统搭建和部署
