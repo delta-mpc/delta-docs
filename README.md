@@ -1,5 +1,8 @@
-# Delta区块链隐私计算框架
-# Delta: Out-of-the-Box Blockchain-powered MPC network
+# Delta隐私计算框架简介
+
+## Delta区块链隐私计算框架
+
+## Delta: Out-of-the-Box Blockchain-powered MPC network
 
 官网：[deltampc.com](https://deltampc.com)
 
