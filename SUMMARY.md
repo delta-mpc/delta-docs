@@ -2,7 +2,7 @@
 
 * [Delta开发文档](README.md)
 * [快速搭建指南](kuai-su-da-jian-zhi-nan.md)
-* [Delta隐私计算网络结构](delta-architecture.md)
+* [系统架构说明](delta-architecture.md)
 * [Delta在线Demo](delta-zai-xian-demo.md)
 
 ## 系统搭建和部署
