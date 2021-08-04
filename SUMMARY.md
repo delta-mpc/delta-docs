@@ -10,6 +10,7 @@
 * [启动区块链节点](xi-tong-da-jian-he-bu-shu/qi-dong-qu-kuai-lian-jie-dian.md)
 * [部署智能合约](xi-tong-da-jian-he-bu-shu/bu-shu-zhi-neng-he-yue.md)
 * [启动Delta Node](xi-tong-da-jian-he-bu-shu/qi-dong-delta-node.md)
+* [启动Deltaboard](xi-tong-da-jian-he-bu-shu/qi-dong-deltaboard.md)
 * [准备节点数据](xi-tong-da-jian-he-bu-shu/jie-dian-shu-ju-zhun-bei.md)
 * [执行计算任务](xi-tong-da-jian-he-bu-shu/zhi-hang-ji-suan-ren-wu.md)
 
