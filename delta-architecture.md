@@ -22,7 +22,7 @@
 
 ## 网络结构
 
-![Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](.gitbook/assets/1627982892-1-.png)
+![Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](.gitbook/assets/e89124f814c043299c1494ed9e1e277.png)
 
 Delta隐私计算网络由Delta Node节点和区块链节点共同组成。每一家加入网络的数据持有者，都需要启动一个区块链节点以及一个Delta Node节点。
 
@@ -70,7 +70,7 @@ Delta隐私计算网络的核心就是保证计算任务的成功执行。Delta 
 
 ## Deltaboard
 
-为了方便数据需求方本地开发调试，Delta提供了Delta Board实现对Delta Node的可视化管理。Delta Board中嵌入了JupyterLab，可以直接进行Delta Task的开发和可视化调试的工作。
+为了方便数据需求方本地开发调试，Delta提供了Deltaboard实现对Delta Node的可视化管理。Deltaboard中嵌入了JupyterLab，可以直接进行Delta Task的开发和可视化调试的工作。
 
-除了JupyterLab以外，Delta Board支持账号和权限配置，可多人同时提交计算任务，并查看各自的任务执行状态。Delta Board中支持对于Delta Node的配置，可查看Delta Node的节点状态以及任务执行情况。
+除了JupyterLab以外，Deltaboard支持账号和权限配置，可多人同时提交计算任务，并查看各自的任务执行状态。Deltaboard中支持对于Delta Node的配置，可查看Delta Node的节点状态以及任务执行情况。
 
