@@ -60,13 +60,13 @@ Delta也提供了Solidity语言的智能合约，可直接部署在以太坊上�
 
 Delta Node是整个隐私计算网络的核心，负责计算任务的整个生命周期的管理，包括任务注册、多节点间任务协调、任务本地执行、结果上报、结果聚合等整个任务执行流程，在整个生命周期中保证本地数据的隐私安全，同时对外提供API，供IDE或者其他系统接入。
 
+Delta Node的功能可以分为Server和Client两部分。Server端是任务的发起方，数据需求方编写的Delta Task通过Delta Node的Server端API提交到系统中，由Server端注册到区块链上开始执行，执行过程中其他节点的Client端会从Server端获取Delta Task代码，并上报本节点的计算结果片段，由Server端进行最终的聚合，得到计算结果。在需要多轮计算的任务中，Server端会多次在链上发起计算请求，并综合多轮的计算得到最终结果。出于安全和隐私的考虑，最终计算结果仅有发起任务的Server端可以获取到，不会在链上公开。
 
+## Delta Task
 
 ## Delta Board
 
 为了方便数据需求方本地开发调试，Delta提供了Delta Board实现对Delta Node的可视化管理。Delta Board中嵌入了JupyterLab，可以直接进行Delta Task的开发和可视化调试的工作。
 
 除了JupyterLab以外，Delta Board支持账号和权限配置，可多人同时提交计算任务，并查看各自的任务执行状态。Delta Board中支持对于Delta Node的配置，可查看Delta Node的节点状态以及任务执行情况。
-
-## Delta Task
 
