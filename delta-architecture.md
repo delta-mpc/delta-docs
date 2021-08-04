@@ -86,11 +86,15 @@ Delta隐私计算框架的设计思想是对隐私计算进行封装隔离，降
 
 Delta Task通过Delta Node的Server端API注册到隐私计算网络，通过网络协商后确定为横向联邦学习、纵向联邦学习、联邦统计等类型中的一种，并且由Server端发起协调过程，在多个节点的参与下完成隐私计算，由Server端汇总计算结果，返回给开发者。
 
-由于Delta Task在网络中执行的耗时较长，而开发者编写Delta Task少不了一个不断尝试修改的调试过程，因此Delta Task和Delta Node的交互被设计为Delta Task主动调用Delta Node的Client端API完成多方计算的过程。这样子开发者可以在Delta Node的安全隔离环境外执行Delta Task任务，比如本地的普通Python环境，或者JupyterLab中，只要提供一个Dev模式的Delta Node用于测试即可。
+由于Delta Task在网络中执行的耗时较长，而开发者编写Delta Task少不了一个不断尝试修改的调试过程，因此Delta Task和Delta Node的交互被设计为Delta Task主动调用Delta Node的Client端API完成多方计算的方式。通过这样的设计，开发者可以在Delta Node的安全隔离环境外执行Delta Task任务，比如本地的普通Python环境，或者JupyterLab中，只要提供一个Dev模式的Delta Node用于测试即可。
 
 ## Deltaboard
 
 为了方便数据需求方本地开发调试，Delta提供了Deltaboard实现对Delta Node的可视化管理。Deltaboard中嵌入了JupyterLab，可以直接进行Delta Task的开发和可视化调试的工作。
 
 除了JupyterLab以外，Deltaboard支持账号和权限配置，可多人同时提交计算任务，并查看各自的任务执行状态。Deltaboard中支持对于Delta Node的配置，可查看Delta Node的节点状态以及任务执行情况。
+
+加入了Deltaboard后，同一个Delta Node可供多人使用，每个开发者在Deltaboard中都可以获得一个独立的API地址，可以在自己的Delta Task中通过这个API地址调用Delta Node。并且在Deltaboard的账号中查看自己的任务执行状态。
+
+Delta官网上提供的在线演示版本，就是直接搭建了一个Deltaboard的服务，详情请阅读对应章节的内容。
 
