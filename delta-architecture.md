@@ -80,7 +80,13 @@ Delta Node的安全执行环境是保证原始数据不对外泄露的核心。�
 
 ## Delta Task
 
-Delta隐私计算网络的核心就是保证计算任务的成功执行。Delta Task就是对计算任务的封装。
+Delta隐私计算框架的设计思想是对隐私计算进行封装隔离，降低开发者搭建隐私计算网络的学习成本。让开发者在不需要了解任何隐私计算原理的前提下，完成搭建网络并编写、执行隐私计算任务。
+
+隐私计算任务是Delta框架的核心功能，Delta Task就是对隐私计算任务的封装。从Delta Task的开发者角度，开发者在开发Delta Task时，无需了解隐私计算，只需按照自己以前的方法，在Delta Task框架下编写计算逻辑即可。
+
+Delta Task通过Delta Node的Server端API注册到隐私计算网络，通过网络协商后确定为横向联邦学习、纵向联邦学习、联邦统计等类型中的一种，并且由Server端发起协调过程，在多个节点的参与下完成隐私计算，由Server端汇总计算结果，返回给开发者。
+
+由于Delta Task在网络中执行的耗时较长，而开发者编写Delta Task少不了一个不断尝试修改的调试过程，因此Delta Task和Delta Node的交互被设计为Delta Task主动调用Delta Node的Client端API完成多方计算的过程。这样子开发者可以在Delta Node的安全隔离环境外执行Delta Task任务，比如本地的普通Python环境，或者JupyterLab中，只要提供一个Dev模式的Delta Node用于测试即可。
 
 ## Deltaboard
 
