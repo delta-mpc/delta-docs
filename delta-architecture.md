@@ -30,7 +30,7 @@ Delta隐私计算网络由Delta Node节点和区块链节点共同组成。每�
 
 Delta Node的数据连接层连接到数据持有者的本地数据，可通过不同的适配器连接多种数据格式，比如文件、MySQL关系型数据库以及HDFS大数据存储等。Delta Node提供API供外部调用，完成任务注册、任务状态查询、计算结果下载等任务相关的功能，以及任务列表查询、节点状态查询、节点配置等节点管理的功能。
 
-Delta Board用于对于Delta Node的可视化管理，同时嵌入JupyterLab做为IDE，实现在线的任务编写和调试。Delta Board提供多用户管理的功能，支持多人同时使用同一个Delta Node。
+Deltaboard用于对于Delta Node的可视化管理，同时嵌入JupyterLab做为IDE，实现在线的任务编写和调试。Deltaboard提供多用户管理的功能，支持多人同时使用同一个Delta Node。
 
 ## Delta区块链
 
