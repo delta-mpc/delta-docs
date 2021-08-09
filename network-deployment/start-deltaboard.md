@@ -6,7 +6,7 @@ description: Deltaboard 是deltanode的用户界面和开发环境。支持在�
 
 ## 安装Docker
 
-docker是一个基于linux container技术的虚拟执行环境。启动deltaboard需要先安装docker,可以 ****[**访问docker官网安装Docker Desktop**](https://docs.docker.com/get-docker/)\*\*\*\*
+docker是一个基于linux container技术的虚拟执行环境。启动deltaboard需要先安装docker,可以 **\*\*\[**访问docker官网安装Docker Desktop_\*\]\(_[https://docs.docker.com/get-docker/\)\](https://docs.docker.com/get-docker/%29\)\*\*\*
 
 ## 下载镜像
 
@@ -22,15 +22,13 @@ $ docker pull deltampc/deltaboard:dev
 
 ### 点击run并配置
 
-
-
- ![](../.gitbook/assets/deltaboard_config.png) 
+![](../.gitbook/assets/deltaboard_config.png)
 
 点击Run
 
-访问http://localhost:8090
+访问[http://localhost:8090](http://localhost:8090)
 
-  ![](../.gitbook/assets/deltaboard_login.png) 
+![](../.gitbook/assets/deltaboard_login.png)
 
 ## **命令行启动**
 
@@ -45,6 +43,6 @@ $ docker run -d -p 8090:8090 deltampc/deltaboard:dev
 使用命令行运行docker
 
 ```text
-docker run -d -p 8090:8090 -e CONNECTOR="${你自己的mysql连接connect_string}" -v ${本地用于存储jupyter data的folder}:/home deltampc/deltaboard 
+docker run -d -p 8090:8090 -e CONNECTOR="${你自己的mysql连接connect_string}" -v ${本地用于存储jupyter data的folder}:/home deltampc/deltaboard
 ```
 

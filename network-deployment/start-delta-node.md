@@ -52,8 +52,8 @@ log:
 db: "sqlite:///db/delta.db"
 
 # 区块链节点连接配置
-blockchain:
-  # 区块链节点地址
+chain_connector:
+  # 区块链的Chain Connector地址
   address: "http://127.0.0.1:4500"
 
 # 本节点对外的公开地址，将会公开到区块链上，供其他Delta Node节点连接
