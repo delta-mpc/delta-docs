@@ -22,13 +22,17 @@
 
 ## 网络结构
 
-![Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](.gitbook/assets/e89124f814c043299c1494ed9e1e277.png)
+![](.gitbook/assets/1628501482-1-.png)
 
-Delta隐私计算网络由Delta Node节点和区块链节点共同组成。每一家加入网络的数据持有者，都需要启动一个区块链节点以及一个Delta Node节点。
+Delta隐私计算网络是一个点对点的对等网络。多家数据持有者各自搭建节点，连接自家的数据。多个节点连接起来形成网络结构。在这个网络中每个节点都是完全一样的（对等的），具备完全相同的功能，也具有完全相同的权限。每个节点都可以自由的加入网络，也可以随时退出网络，而不会影响整个网络的功能。
+
+![Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x7ED3;&#x6784;](.gitbook/assets/6757fef6c4a75a599821c5383811b7a.png)
+
+
+
+网络中的每个节点，又由两部分组成：区块链节点和Delta Node计算节点。每一家加入网络的数据持有者，都需要启动一个区块链节点以及一个Delta Node节点。
 
 隐私计算网络首先由区块链节点完成P2P组网。Delta Node通过Chain Connector抽象层连接到区块链节点，在区块链上注册身份，获取待执行的计算任务，并上报计算过程和计算结果数据。Delta Node之间也会形成一个网络，用于计算任务的内容下发、结果上报，以及安全多方计算、PSI等隐私计算技术涉及到的多方秘密共享。
-
-Delta Node的数据连接层连接到数据持有者的本地数据，可通过不同的适配器连接多种数据格式，比如文件、MySQL关系型数据库以及HDFS大数据存储等。Delta Node提供API供外部调用，完成任务注册、任务状态查询、计算结果下载等任务相关的功能，以及任务列表查询、节点状态查询、节点配置等节点管理的功能。
 
 Deltaboard用于对于Delta Node的可视化管理，同时嵌入JupyterLab做为IDE，实现在线的任务编写和调试。Deltaboard提供多用户管理的功能，支持多人同时使用同一个Delta Node。
 
@@ -60,13 +64,19 @@ Delta也提供了Solidity语言的[智能合约](https://github.com/delta-mpc/de
 
 使用区块链系统进行任务协调会导致任务执行速度大大降低，在一些科研使用、测试使用，或者是对于计算结果的可信性要求不那么高的场景中，我们可以移除区块链系统，用[Delta Node Coordinator](https://github.com/delta-mpc/delta-node-coordinator)替代区块链，搭建一个中心化的隐私计算网络。
 
-Delta Node Coordinator实现了计算任务协调需要的相关功能，可以替代掉区块链的作用。启动一个Delta Node Coordinator，然后配置各个Delta Node直接连接到Coordinator，即可形成一个完整的隐私计算网络，开始执行隐私计算任务。
+![&#x4F7F;&#x7528;Coordinator&#x7EC4;&#x5EFA;&#x7684;Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](.gitbook/assets/60f4f5e57ca32c8f3cd6fc1df9fe52e.png)
+
+Delta Node Coordinator实现了组网和计算任务协调需要的相关功能，可以替代掉区块链的作用。启动一个Delta Node Coordinator，然后配置各个Delta Node直接连接到Coordinator，即可形成一个完整的隐私计算网络，开始执行隐私计算任务。
 
 ## Delta Node
 
 [Delta Node](https://github.com/delta-mpc/delta-node)是整个隐私计算网络的核心，负责计算任务的整个生命周期的管理，包括任务注册、多节点间任务协调、任务本地执行、结果上报、结果聚合等整个任务执行流程，在整个生命周期中保证本地数据的隐私安全，同时对外提供API，供IDE或者其他系统接入。
 
-Delta Node的功能可以分为Server和Client两部分。Server端是任务的发起方，数据需求方编写的[Delta Task](https://github.com/delta-mpc/delta-task)通过Delta Node的Server端API提交到系统中，由Server端注册到区块链上开始执行，执行过程中其他节点的Client端会从Server端获取Delta Task代码，并上报本节点的计算结果片段，由Server端进行最终的聚合，得到计算结果。在需要多轮计算的任务中，Server端会多次在链上发起计算请求，并综合多轮的计算得到最终结果。出于安全和隐私的考虑，最终计算结果仅有发起任务的Server端可以获取到，不会在链上公开。
+![Delta Node&#x67B6;&#x6784;](.gitbook/assets/image.png)
+
+Delta Node的数据连接层连接到数据持有者的本地数据，可通过不同的适配器连接多种数据格式，比如文件、MySQL关系型数据库以及HDFS大数据存储等。Delta Node提供API供外部调用，完成任务注册、任务状态查询、计算结果下载等任务相关的功能，以及任务列表查询、节点状态查询、节点配置等节点管理的功能。
+
+Delta Node的核心是完成Delta Task的注册、全网分发和计算，按照功能可以分为Server和Client两部分。Server端是任务的发起方，数据需求方编写的[Delta Task](https://github.com/delta-mpc/delta-task)通过Delta Node的Server端API提交到系统中，由Server端注册到区块链上开始执行，执行过程中其他节点的Client端会从Server端获取Delta Task代码，并上报本节点的计算结果片段，由Server端进行最终的聚合，得到计算结果。在需要多轮计算的任务中，Server端会多次在链上发起计算请求，并综合多轮的计算得到最终结果。出于安全和隐私的考虑，最终计算结果仅有发起任务的Server端可以获取到，不会在链上公开。
 
 Client端是计算任务的实际执行环境。Client端监测链上的任务，获取到任务后，从发起方Delta Node的Server端获取执行代码（Delta Task），在本地的安全执行环境中通过Data Connector获取数据并执行计算。在需要MPC（安全多方计算）时，Client端会和其他Delta Node节点的Client端进行通信并进行一些加密数据的交换（此交换不会泄露原始数据）。在横向联邦计算的场景中，计算结果会经过安全聚合加密，只有在任务发起的Server端拿到全部的加密结果片段后，进行累加，才能得到最终的平均数据，单个Client端的计算结果，不会有任何形式的暴露。
 
@@ -77,6 +87,8 @@ Delta Node的安全执行环境是保证原始数据不对外泄露的核心。�
 然后是对于Delta Task代码的安全性检查，包括静态代码扫描以及动态影响范围检查两种方式，防止Delta Task中嵌入除了数据计算以外的恶意代码，造成数据泄露。比如在Delta Task的数据预处理阶段，拿到原始数据后，直接调用http库上传原始数据到目标服务器。
 
 最后是对于Python执行环境的安全隔离，包括运行环境隔离和网络环境隔离等。防止Delta Task利用运行环境中的工具和漏洞渗透进数据所有者的机器，进一步获取并上传原始数据。
+
+
 
 ## Delta Task
 
