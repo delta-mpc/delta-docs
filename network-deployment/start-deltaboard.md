@@ -35,22 +35,16 @@ $ docker pull deltampc/deltaboard:dev
 ## **命令行启动**
 
 ```text
-$ docker run -d -p 8090:8090 deltampc/deltaboard
+$ docker run -d -p 8090:8090 deltampc/deltaboard:dev
 ```
 
 ## 使用mysql并持久化jupyterhub data
 
 使用无配置启动的deltaboard会将所有的改动都会保存在镜像里。如果当前镜像重新build后保存数据将丢失。您可以配置自身的数据库以将内容持久化
 
-### 创建环境变量文件 env
+使用命令行运行docker
 
 ```text
-CONNECTOR={你自己的mysql连接connect_string}
-```
-
-### 使用命令行运行docker
-
-```text
-docker run -d -p 8090:8090 --env-file=env -v ${本地用于存储jupyter data的folder}:/homedeltampc/deltaboard 
+docker run -d -p 8090:8090 -e CONNECTOR="${你自己的mysql连接connect_string}" -v ${本地用于存储jupyter data的folder}:/home deltampc/deltaboard 
 ```
 
