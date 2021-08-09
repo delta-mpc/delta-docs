@@ -2,11 +2,11 @@
 
 ## 通过Docker镜像启动Delta Node
 
-推荐使用Delta Node的Docker镜像来进行部署
+推荐使用Delta Node的Docker镜像来进行部署。需要先在机器上安装Docker，Windows可直接在Docker官网下载安装包，Linux可在包管理器中直接安装。以下我们使用Linux环境，假设Docker已经安装完成，我们在命令行中完成Delta Node的镜像创建和启动。Windows可使用Docker的图形化界面直接完成创建。
 
 ### 下载镜像
 
-目前Delta框架还处于开发阶段，后续会发布正式的release版本。在现阶段，我们可以下载开发版本的docker镜像，开发版本镜像的tag名称是`dev`：
+目前Delta框架还处于开发阶段，后续会发布正式的release版本。在现阶段，我们可以下载开发版本的Docker镜像，开发版本镜像的tag名称是`dev`：
 
 ```text
 $ docker pull deltampc/delta-node:dev
@@ -14,7 +14,7 @@ $ docker pull deltampc/delta-node:dev
 
 ### 创建本地数据文件夹
 
-delta-node节点保存的数据包括配置文件、保存的用户数据、系统运行日志等，在启动节点服务之前，需要先创建好文件夹的结构，并创建配置文件：
+Delta Node节点保存的数据包括配置文件、用户数据、系统运行日志等，在启动节点服务之前，需要先创建好文件夹的结构，并创建配置文件：
 
 首先，新建文件夹delta\_node，作为节点启动的根目录：
 
@@ -73,7 +73,7 @@ data_dir: "data"
 
 ### 连接区块链节点
 
-在config.yaml文件中需要配置Delta Node连接到我们在上一节中配置好的区块链节点，以完成组网以及任务获取、提交的功能。在config文件的contract章节填入配置好的区块链节点IP地址和端口号即可。如果还没有完成区块链节点的搭建，可参考：
+在config.yaml文件中需要配置Delta Node连接到我们在上一节中配置好的区块链节点，以完成组网以及任务获取、提交的功能。在config文件的contract章节填入配置好的Chain Connector的IP地址和端口号即可。如果还没有完成区块链节点的搭建，可参考：
 
 {% page-ref page="start-blockchain-node.md" %}
 
@@ -95,7 +95,7 @@ $ docker run -d --name=delta_node_1 --rm -v ${PWD}:/app -p 6800:6800 -p 6700:670
 $ docker logs -f delta_node_1
 ```
 
-Delta Node也会将log同时输出到本地数据文件夹中的log目录，可以在log目录中查看节点运行日志。
+Delta Node也会将log同时输出到本地数据文件夹中的`logs`目录，可以在`logs`目录中查看节点运行日志。
 
 至此Delta Node启动完成，下一步我们将启动Deltaboard的服务，用于对Delta Node的可视化管理，以及计算任务的在线编辑和运行：
 
