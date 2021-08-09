@@ -4,7 +4,7 @@ description: 开箱即用的区块链隐私计算框架
 
 # Delta开发文档
 
-### 功能介绍
+## 功能介绍
 
 Delta可以联合分散在各处的数据，进行统计计算以及机器学习，数据全程不会离开本地，实现了数据的可用不可见，可应用于金融、医疗、政府、知识产权等领域，实现联合风控、联合科研、政企数据连接等需求，充分发挥数据的价值。
 
@@ -12,11 +12,9 @@ Delta通过封装整合联邦学习、安全多方计算、差分隐私等最新
 
 Delta保证了计算结果的可信性，在用户无法获取原始数据的前提下，通过集成的区块链和零知识证明技术验证计算结果的正确性。
 
-{% embed url="https://deltampc.com/" %}
+{% embed url="https://deltampc.com/" caption="" %}
 
-{% embed url="https://github.com/delta-mpc" %}
+{% embed url="https://github.com/delta-mpc" caption="" %}
 
-{% embed url="https://docs.deltampc.com/" %}
-
-
+{% embed url="https://docs.deltampc.com/" caption="" %}
 
