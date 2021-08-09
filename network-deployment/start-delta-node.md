@@ -6,30 +6,33 @@
 
 ### 下载镜像
 
+目前Delta框架还处于开发阶段，后续会发布正式的release版本。在现阶段，我们可以下载开发版本的docker镜像，开发版本镜像的tag名称是`dev`：
+
 ```text
-docker pull deltampc/delta-node:dev
+$ docker pull deltampc/delta-node:dev
 ```
 
 ### 启动节点
 
-首先，新建文件夹delta\_node，作为节点启动的根目录，节点的数据都保存在根目录中
+首先，新建文件夹delta\_node，作为节点启动的根目录。节点的数据，包括配置文件、保存的用户数据、系统运行日志等，都保存在根目录中：
 
 ```text
-mkdir delta_node
-cd delta_node
+$ mkdir delta_node
+$ cd delta_node
 ```
 
-新建文件夹config\_files，并在config\_files文件夹下新建配置文件config.yaml
+在根目录中新建文件夹config\_files，并在config\_files文件夹下新建配置文件config.yaml：
 
 ```text
-mkdir config_files
-cd config_files
-touch config.yaml
+$ mkdir config_files
+$ cd config_files
+$ touch config.yaml
 ```
 
-配置文件内容如下
+config.yaml配置文件的配置项和说明如下：
 
 ```text
+---
 # 日志配置
 log:  
   # 日志级别
@@ -50,34 +53,31 @@ contract:
 # 本节点对外的连接地址，用于节点之间互相通信
 url: "127.0.0.1:6800"
 
-# 本节点的http服务地址，用于向dashboard提供服务
+# 本节点的http服务地址，用于向deltaboard提供服务
 server:
   host: "0.0.0.0"
   port: 6700
 
-# 本节点的储存地址，用于保存任务执行的中间结果，本例中存放在delta_node/storage1文件夹下
-storage_dir: "storage1"
+# 本节点的储存地址，用于保存任务执行的中间结果，本例中存放在delta_node/task文件夹下
+storage_dir: "task"
 
-# 本节点的数据地址，用于存放节点提供的数据，本例中存放在delta_node/data1文件夹下
-data_dir: "data1"
+# 本节点的数据地址，用于存放节点提供的数据，本例中存放在delta_node/data文件夹下
+data_dir: "data"
 ```
 
-新建数据文件夹data1（与配置文件中的data\_dir项对应），在文件夹下放入节点提供的数据
+新建数据文件夹`data`（与配置文件中的`data_dir`项对应）和任务文件夹`task`，在文件夹下放入节点提供的数据：
 
 ```text
-cd ..
-mkdir data1
+$ cd ..
+$ mkdir data
+$ mkdir task
 ```
 
-启动节点
+启动节点：
 
 ```text
-docker run -d --name=delta_node1 --rm -v ${PWD}:/app -p 6800:6800 -p 6700:6700 deltampc/delta-node:dev 
+$ docker run -d --name=delta_node1 --rm -v ${PWD}:/app -p 6800:6800 -p 6700:6700 deltampc/delta-node:dev
 ```
-
-
-
-
 
 
 
