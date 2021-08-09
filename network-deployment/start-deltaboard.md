@@ -51,6 +51,6 @@ CONNECTOR={你自己的mysql连接connect_string}
 ### 使用命令行运行docker
 
 ```text
-docker run -d -p 8090:8090 --env-file=env deltampc/deltaboard
+docker run -d -p 8090:8090 --env-file=env -v ${本地用于存储jupyter data的folder}:/homedeltampc/deltaboard 
 ```
 
