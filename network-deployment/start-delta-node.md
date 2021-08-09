@@ -1,6 +1,6 @@
 # 启动Delta Node
 
-## 通过Docker部署Delta Node
+## 通过Docker镜像启动Delta Node
 
 推荐使用Delta Node的Docker镜像来进行部署
 
@@ -12,24 +12,32 @@
 $ docker pull deltampc/delta-node:dev
 ```
 
-### 启动节点
+### 创建本地数据文件夹
 
-首先，新建文件夹delta\_node，作为节点启动的根目录。节点的数据，包括配置文件、保存的用户数据、系统运行日志等，都保存在根目录中：
+delta-node节点保存的数据包括配置文件、保存的用户数据、系统运行日志等，在启动节点服务之前，需要先创建好文件夹的结构，并创建配置文件：
+
+首先，新建文件夹delta\_node，作为节点启动的根目录：
 
 ```text
 $ mkdir delta_node
-$ cd delta_node
 ```
 
-在根目录中新建文件夹config\_files，并在config\_files文件夹下新建配置文件config.yaml：
+在根目录中新建文件夹`config`，`data`和`task`，分别用于存放配置文件、数据文件和task执行记录：
 
 ```text
-$ mkdir config_files
-$ cd config_files
+$ mkdir delta_node/config
+$ mkdir delta_node/data
+$ mkdir delta_node/task
+```
+
+### 创建配置文件
+
+```text
+$ cd delta_node/config
 $ touch config.yaml
 ```
 
-config.yaml配置文件的配置项和说明如下：
+在`config.yaml`配置文件中放入下面的内容：
 
 ```text
 ---
@@ -40,8 +48,8 @@ log:
   # 是否将日志存放在数据库中
   enable_db: True
 
-# 本地数据库地址，这里使用sqlite数据库，数据库文件保存在文件delta_node/db/delta1.db中
-db: "sqlite:///db/delta1.db"
+# 本地数据库地址，这里使用sqlite数据库，数据库文件保存在文件delta_node/db/delta.db中
+db: "sqlite:///db/delta.db"
 
 # 区块链节点连接配置
 contract:
@@ -65,19 +73,31 @@ storage_dir: "task"
 data_dir: "data"
 ```
 
-新建数据文件夹`data`（与配置文件中的`data_dir`项对应）和任务文件夹`task`，在文件夹下放入节点提供的数据：
+### 连接区块链节点
 
-```text
-$ cd ..
-$ mkdir data
-$ mkdir task
-```
+在config.yaml文件中需要配置Delta Node连接到我们在上一节中配置好的区块链节点，以完成组网以及任务获取、提交的功能。在config文件的contract章节填入配置好的区块链节点IP地址和端口号即可。如果还没有完成区块链节点的搭建，可参考：
 
-启动节点：
+{% page-ref page="start-blockchain-node.md" %}
+
+Delta提供了另一种简化的组网方式，在不需要构建P2P网络，也不需要计算可信性保障时，可使用Delta Node Coordinator替代区块链完成组网。此时，需要配置Delta Node连接到Coordinator服务。详情可参考：
+
+{% page-ref page="replace-blockchain-with-coordinator.md" %}
+
+### 启动节点服务
+
+使用docker命令行创建并启动节点的container，将上一步创建的文件夹绑定到container内部的`app`文件夹。另外Delta Node需要对外暴露两个端口`6700`和`6800`，用于对外的API以及节点间通信：
 
 ```text
 $ docker run -d --name=delta_node1 --rm -v ${PWD}:/app -p 6800:6800 -p 6700:6700 deltampc/delta-node:dev
 ```
 
+通过docker命令查看Delta Node的状态，确认Delta Node的container已经在正常运行：
 
+```text
+$ docker ps
+```
+
+至此Delta Node启动完成，下一步我们将启动Deltaboard的服务，用于对Delta Node的可视化管理，以及计算任务的在线编辑和运行：
+
+{% page-ref page="start-deltaboard.md" %}
 
