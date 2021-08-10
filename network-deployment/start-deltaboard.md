@@ -14,37 +14,57 @@ docker是一个基于linux container技术的虚拟执行环境。启动deltaboa
 $ docker pull deltampc/deltaboard:dev
 ```
 
-## **使用docker Desktop界面启动board**
-
-### 打开docker desktop找到deltampc/deltaboard 镜像
-
-![](../.gitbook/assets/docker_desktop.png)
-
-### 点击run并配置
-
-
-
- ![](../.gitbook/assets/deltaboard_config.png) 
-
-点击Run
-
-访问http://localhost:8090
-
-  ![](../.gitbook/assets/deltaboard_login.png) 
-
-## **命令行启动**
+## **初始化配置**
 
 ```text
-$ docker run -d -p 8090:8090 deltampc/deltaboard:dev
+$ docker run docker run -d -v "E:/delta-board/delta-board-server/config:/app/app_config" deltampc/deltaboard:dev init
 ```
+
+执行完后将会在  E:/delta-board/delta-board-server/config 下生成config.yaml文件
+
+```text
+db:
+  connection: ''
+  driver: ''
+web_host: localhost
+web_port: '8090'
+```
+
+## 命令行执行
+
+
+
+```text
+docker run -d -p 8090:8090 -v "E:\delta-board\delta-board-server/config:/app/app_config" dashboard_in_all
+```
+
+\*\*\*\*
+
+## **打开Deltaboard**
+
+浏览器访问 http://localhost:8090
+
+![](../.gitbook/assets/image.png)
 
 ## 使用mysql并持久化jupyterhub data
 
-使用无配置启动的deltaboard会将所有的改动都会保存在镜像里。如果当前镜像重新build后保存数据将丢失。您可以配置自身的数据库以将内容持久化
+默认情况下deltaboard 会使用自带的sqlite作为数据存储。用户也可以根据自己的情况配置mysql数据库
 
-使用命令行运行docker
+启动并配置mysql 
+
+修改之前的config.yaml
 
 ```text
-docker run -d -p 8090:8090 -e CONNECTOR="${你自己的mysql连接connect_string}" -v ${本地用于存储jupyter data的folder}:/home deltampc/deltaboard 
+db:
+  connection: 'mysql_user:my_sqlpassword@(mysql_host:mysql_port)/my_sql_database'
+  driver: 'mysql'
+web_host: localhost
+web_port: '8090'
+```
+
+重新使用命令行运行docker
+
+```text
+docker run -d -p 8090:8090 -v "E:\delta-board\delta-board-server/config:/app/app_config" dashboard_in_all
 ```
 
