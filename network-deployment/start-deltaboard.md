@@ -17,7 +17,7 @@ $ docker pull deltampc/deltaboard:dev
 ## **初始化配置**
 
 ```text
-$ docker run docker run -d -v "E:/delta-board/delta-board-server/config:/app/app_config" deltampc/deltaboard:dev init
+$docker run --rm -d -v "E:/delta-board/delta-board-server/config:/app/app_config" deltampc/deltaboard:dev init
 ```
 
 执行完后将会在  E:/delta-board/delta-board-server/config 下生成config.yaml文件
@@ -35,7 +35,7 @@ web_port: '8090'
 
 
 ```text
-docker run -d -p 8090:8090 -v "E:\delta-board\delta-board-server/config:/app/app_config" dashboard_in_all
+docker run --rm -d -p 8090:8090 -v "E:\delta-board\delta-board-server/config:/app/app_config" dashboard_in_all
 ```
 
 \*\*\*\*
@@ -65,6 +65,8 @@ web_port: '8090'
 重新使用命令行运行docker
 
 ```text
-docker run -d -p 8090:8090 -v "E:\delta-board\delta-board-server/config:/app/app_config" dashboard_in_all
+docker run -d -p 8090:8090 -v "E:\delta-board\delta-board-server/config:/app/app_config" -v "E:\delta-board\delta-board-server/home:/home" dashboard_in_all
 ```
+
+-v ”E:/delta-board/delta-board-server/home:/home“ 这会将jupyter的用户数据映射至本地的文件系统
 
