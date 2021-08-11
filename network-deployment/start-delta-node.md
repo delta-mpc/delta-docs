@@ -31,55 +31,26 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:dev init
 
 运行命令后，会在根目录`delta_node`中，新建文件夹`config,task,data`，其中，`config`文件夹用来存放节点的配置文件，`task`文件夹用来存放节点任务执行的中间结果，`data`用来存放节点提供的数据。
 
-### 配置文件
+### 修改配置文件
 
-在`config`文件夹中，会有一个预先生成的配置文件`config.yaml`:
+在`config`文件夹中，会有一个预先生成的配置文件`config.yaml`。在首次启动时，必须修改的项目一个是Chain Connector的地址，修改为在上一节中配置好的Chain Connector的IP地址，另一个是需要配置Delta Node自身的IP地址，用于在链上进行本节点的身份注册，使得其他节点能够和本节点通讯。需要找到本节点的公网IP地址，填入配置文件中：
 
 ```text
 ---
-# 日志配置
-log:  
-  # 日志级别
-  level: "INFO"
-  # 日志输出的目录
-  dir: "logs"
-
-# 本地数据库地址，这里使用sqlite数据库，数据库文件保存在文件delta_node/db/delta.db中
-db: "sqlite:///db/delta.db"
-
-# 区块链节点连接配置
+# 区块链节点地址
 chain_connector:
   # 区块链节点地址，必填
-  address: ""
+  host: "192.168.1.20"
 
 # 本节点对外的公开地址，将会公开到区块链上，供其他Delta Node节点连接
 node_address:
   # 节点的公网地址，必填
-  host: ""
+  host: "202.120.24.5"
   # 节点公开地址的端口
   port: 6800
-
-# 本节点的http服务监听地址，用于Deltaboard的连接以及Delta Task的注册等
-api_port: 6700
-
-# 本节点的储存地址，用于保存任务执行的中间结果，本例中存放在delta_node/task文件夹下
-task_dir: "task"
-
-# 本节点的数据地址，用于存放节点提供的数据，本例中存放在delta_node/data文件夹下
-data_dir: "data"
 ```
 
-用户必须填写配置文件中的必填项（区块链节点地址、节点公网地址），完成配置之后，即可启动`Delta Node` 节点。
-
-### 连接区块链节点
-
-在config.yaml文件中需要配置Delta Node连接到我们在上一节中配置好的区块链节点，以完成组网以及任务获取、提交的功能。在config文件的contract章节填入配置好的区块链节点IP地址和端口号即可。如果还没有完成区块链节点的搭建，可参考：
-
-{% page-ref page="start-blockchain-node.md" %}
-
-Delta提供了另一种简化的组网方式，在不需要构建P2P网络，也不需要计算可信性保障时，可使用Delta Node Coordinator替代区块链完成组网。此时，需要配置Delta Node连接到Coordinator服务。详情可参考：
-
-{% page-ref page="start-chain-connector.md" %}
+完成配置之后，即可启动`Delta Node` 节点。
 
 ### 启动节点服务
 
