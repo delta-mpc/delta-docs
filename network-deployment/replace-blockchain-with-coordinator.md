@@ -56,7 +56,6 @@ port: 4500
 substrate:
   # subtrate区块链节点地址
   address: ""
-
 ```
 
 用户可以按需修改配置文件中的内容，完成配置之后，就可以启动Coordinator。

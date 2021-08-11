@@ -60,13 +60,11 @@ Delta网络中的区块链节点可以使用Delta提供的[Delta Chain](https://
 
 Delta也提供了Solidity语言的[智能合约](https://github.com/delta-mpc/delta-contracts)，可直接部署在以太坊上。为了方便多种区块链系统的切换，以及安全的管理区块链账号涉及到的密钥，Delta抽象出了[Chain Connector](https://github.com/delta-mpc/delta-node-chain-connector)组件，用于管理Delta Node和区块链节点之间的连接。在Chain Connector中可以方便的切换不同的区块链系统，Chain Connector也支持配置一个额外的离线签名机用于密钥托管，实现密钥的离线保存和使用。
 
-## Delta Node Coordinator
+## 无区块链网络
 
-使用区块链系统进行任务协调会导致任务执行速度大大降低，在一些科研使用、测试使用，或者是对于计算结果的可信性要求不那么高的场景中，我们可以移除区块链系统，用[Delta Node Coordinator](https://github.com/delta-mpc/delta-node-coordinator)替代区块链，搭建一个中心化的隐私计算网络。
+使用区块链系统进行任务协调会导致任务执行速度大大降低，在一些科研使用、测试使用，或者是对于计算结果的可信性要求不那么高的场景中，我们可以移除区块链系统，将Chain Connector设置为Coordinator模式，在此模式下的Chain Connector无需区块链，可以做为网络中心节点，连接多个Delta Node直接完成组网和计算任务协调的功能。
 
-![&#x4F7F;&#x7528;Coordinator&#x7EC4;&#x5EFA;&#x7684;Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](.gitbook/assets/60f4f5e57ca32c8f3cd6fc1df9fe52e.png)
-
-Delta Node Coordinator实现了组网和计算任务协调需要的相关功能，可以替代掉区块链的作用。启动一个Delta Node Coordinator，然后配置各个Delta Node直接连接到Coordinator，即可形成一个完整的隐私计算网络，开始执行隐私计算任务。
+![](.gitbook/assets/53635fc89ddea878178709dd8e55ba9%20%281%29.png)
 
 ## Delta Node
 
@@ -87,8 +85,6 @@ Delta Node的安全执行环境是保证原始数据不对外泄露的核心。�
 然后是对于Delta Task代码的安全性检查，包括静态代码扫描以及动态影响范围检查两种方式，防止Delta Task中嵌入除了数据计算以外的恶意代码，造成数据泄露。比如在Delta Task的数据预处理阶段，拿到原始数据后，直接调用http库上传原始数据到目标服务器。
 
 最后是对于Python执行环境的安全隔离，包括运行环境隔离和网络环境隔离等。防止Delta Task利用运行环境中的工具和漏洞渗透进数据所有者的机器，进一步获取并上传原始数据。
-
-
 
 ## Delta Task
 
