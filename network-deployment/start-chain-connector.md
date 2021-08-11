@@ -37,28 +37,18 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta_chain_connector:dev init
 
 ### 修改配置文件
 
-在`config`文件夹中，会有一个预先生成的配置文件`config.yaml`:
+在`config`文件夹中，会有一个预先生成的配置文件`config.yaml`:。在首次启动前，我们必须要配置的项目包括Chain Connector的运行模式。如果运行模式配置为Blockchain，那么还需要配置区块链节点的IP地址。
+
+在这里我们将mode设置为`coordinator`：
 
 ```text
-# 日志配置
-log:
-  # 日志级别
-  level: "INFO"
-
+---
 # Chain Connector运行模式
 mode: "coordinator"
 
-# 数据库连接地址
-db: "sqlite:///db/chain.db"
-
-# 服务域名
-host: "0.0.0.0"
-# 服务端口
-port: 4500
-
 ```
 
-用户可以按需修改配置文件中的内容，完成配置之后，就可以启动Chain Connector。
+完成配置之后，就可以启动Chain Connector。
 
 ### 启动Chain Connector服务
 
