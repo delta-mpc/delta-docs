@@ -79,7 +79,7 @@ data_dir: "data"
 
 Delta提供了另一种简化的组网方式，在不需要构建P2P网络，也不需要计算可信性保障时，可使用Delta Node Coordinator替代区块链完成组网。此时，需要配置Delta Node连接到Coordinator服务。详情可参考：
 
-{% page-ref page="replace-blockchain-with-coordinator.md" %}
+{% page-ref page="start-chain-connector.md" %}
 
 ### 启动节点服务
 

@@ -9,7 +9,7 @@
 
 * [启动区块链节点](network-deployment/start-blockchain-node.md)
 * [部署智能合约](network-deployment/deploy-smart-contracts.md)
-* [启动Chain Connector](network-deployment/replace-blockchain-with-coordinator.md)
+* [启动Chain Connector](network-deployment/start-chain-connector.md)
 * [启动Delta Node](network-deployment/start-delta-node.md)
 * [启动Deltaboard](network-deployment/start-deltaboard.md)
 * [准备节点数据](network-deployment/prepare-data.md)
