@@ -1,4 +1,4 @@
-# 用Coordinator替代区块链
+# 启动Chain Connector
 
 ## 通过Docker启动Coordinator
 
