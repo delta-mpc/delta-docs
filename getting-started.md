@@ -10,6 +10,10 @@ Delta隐私计算网络由多个组件构成，可根据需要进行选择和组
 
 ![&#x6700;&#x5C0F;Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#xFF08;&#x65E0;&#x533A;&#x5757;&#x94FE;&#xFF09;](.gitbook/assets/88fbc43f76d794b066889a7cac4d4f4.png)
 
+### 使用All-in-One镜像启动整个网络
+
+Delta提供了一个docker-compose文件，用于一次启动整个网络。
+
 ### 使用各个组件的Docker镜像搭建
 
 1.参照启动Chain Connector的教程启动Chain Connector，并配置为Coordinator模式：
