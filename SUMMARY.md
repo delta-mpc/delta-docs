@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Delta开发文档](README.md)
-* [快速搭建指南](getting-started.md)
 * [系统架构说明](delta-architecture.md)
+* [快速搭建指南](getting-started.md)
 * [Delta在线Demo](delta-online.md)
 
 ## 系统搭建和部署 <a id="network-deployment"></a>
