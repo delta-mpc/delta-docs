@@ -20,7 +20,7 @@ $ docker pull deltampc/deltaboard:dev
 $docker run --rm -d -v ${PWD}:/app/app_config deltampc/deltaboard:dev init
 ```
 
-执行完后将会在  E:/delta-board/delta-board-server/config 下生成config.yaml文件
+执行完后将会在  当前路径下生成config.yaml文件
 
 ```text
 db:
@@ -68,5 +68,9 @@ web_port: '8090'
 docker run -d -p 8090:8090 -v ${PWD}:/app/app_config dashboard_in_all
 ```
 
--v ${PWD}:/app/app\_config 这会将jupyter的用户数据和config.yaml文件映射到本地的文件
+-v ${PWD}:/app/app\_config 这会将jupyter的用户数据和config.yaml文件映射到本地的文件系统
+
+启动jupyter后用户的ipynb文件将会在当前路径的notebook\_dir目录下
+
+
 
