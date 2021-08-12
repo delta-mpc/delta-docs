@@ -6,7 +6,7 @@ Delta Task的开发可以在任意支持Python语言的IDE中进行。为了方�
 
 Deltaboard的JupyterLab中放置了一个已经写好的Delta Task，启动Deltaboard的界面，进入JupyterLab的Tab，打开HelloWorld.ipynb文件，可以看到这个示例Delta Task的代码：
 
-示例代码是一个通过神经网络进行手写数字识别的模型训练定义。在运行代码之前，需要确认Delta Node中已经放置了示例代码需要的公开数据集[MNIST](http://yann.lecun.com/exdb/mnist)，具体的放置方法可以参考文档的对应章节：
+示例代码是一个通过神经网络进行手写数字识别的模型训练。在运行代码之前，需要确认Delta Node中已经放置了示例代码需要的公开数据集[MNIST](http://yann.lecun.com/exdb/mnist)，具体的放置方法可以参考文档的对应章节：
 
 {% page-ref page="prepare-data.md" %}
 
