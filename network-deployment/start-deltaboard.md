@@ -6,7 +6,7 @@ description: Deltaboard 是deltanode的用户界面和开发环境。支持在�
 
 ## 安装Docker
 
-docker是一个基于linux container技术的虚拟执行环境。启动deltaboard需要先安装docker,可以 **\*\*\[**访问docker官网安装Docker Desktop_\*\]\(_[https://docs.docker.com/get-docker/\)\](https://docs.docker.com/get-docker/%29\)\*\*\*
+docker是一个基于linux container技术的虚拟执行环境。启动deltaboard需要先安装docker,可以 ****[**访问docker官网安装Docker Desktop**](https://docs.docker.com/get-docker/)\*\*\*\*
 
 ## 下载镜像
 
@@ -14,35 +14,60 @@ docker是一个基于linux container技术的虚拟执行环境。启动deltaboa
 $ docker pull deltampc/deltaboard:dev
 ```
 
-## **使用docker Desktop界面启动board**
+## **初始化配置**
 
-### 打开docker desktop找到deltampc/deltaboard 镜像
+```text
+$docker run --rm -d -v ${PWD}:/app/app_config deltampc/deltaboard:dev init
+```
 
-![](../.gitbook/assets/docker_desktop.png)
+执行完后将会在  当前路径下生成config.yaml文件
 
-### 点击run并配置
+```text
+db:
+  connection: ''
+  driver: ''
+web_host: localhost
+web_port: '8090'
+```
 
-![](../.gitbook/assets/deltaboard_config.png)
+## 命令行执行
 
-点击Run
 
-访问[http://localhost:8090](http://localhost:8090)
+
+```text
+docker run --rm -d -p 8090:8090 -v ${PWD}:/app/app_config dashboard_in_all
+```
+
+
+
+## **打开Deltaboard**
+
+浏览器访问 http://localhost:8090
 
 ![](../.gitbook/assets/deltaboard_login.png)
 
-## **命令行启动**
-
-```text
-$ docker run -d -p 8090:8090 deltampc/deltaboard:dev
-```
-
 ## 使用mysql并持久化jupyterhub data
 
-使用无配置启动的deltaboard会将所有的改动都会保存在镜像里。如果当前镜像重新build后保存数据将丢失。您可以配置自身的数据库以将内容持久化
+默认情况下deltaboard 会使用自带的sqlite作为数据存储。用户也可以根据自己的情况配置mysql数据库
 
-使用命令行运行docker
+启动并配置mysql 
+
+修改之前的config.yaml
 
 ```text
-docker run -d -p 8090:8090 -e CONNECTOR="${你自己的mysql连接connect_string}" -v ${本地用于存储jupyter data的folder}:/home deltampc/deltaboard
+db:
+  connection: 'mysql_user:my_sqlpassword@(mysql_host:mysql_port)/my_sql_database'
+  driver: 'mysql'
+web_host: localhost
+web_port: '8090'
 ```
 
+重新使用命令行运行docker
+
+```text
+docker run -d -p 8090:8090 -v ${PWD}:/app/app_config dashboard_in_all
+```
+
+-v ${PWD}:/app/app\_config 这会将jupyter的用户数据和config.yaml文件映射到本地的文件系统
+
+启动jupyter后用户的ipynb文件将会在当前路径的notebook\_dir目录下
