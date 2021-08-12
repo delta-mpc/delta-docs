@@ -71,6 +71,3 @@ docker run -d -p 8090:8090 -v ${PWD}:/app/app_config dashboard_in_all
 -v ${PWD}:/app/app\_config 这会将jupyter的用户数据和config.yaml文件映射到本地的文件系统
 
 启动jupyter后用户的ipynb文件将会在当前路径的notebook\_dir目录下
-
-
-
