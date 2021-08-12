@@ -4,6 +4,8 @@ Delta隐私计算网络的核心功能，就是在整个网络上完成计算任
 
 Delta中的计算任务被抽象成[Delta Task](https://github.com/delta-mpc/delta-task)。Delta Task使用Python语言编写，开发者需要先import进来Delta Task框架，实例化一个Delta Task，并在Delta Task中完成数据预处理、训练模型的定义，然后将Delta Task发送到Delta Node进行执行。
 
+Delta Node接收到Task后，在全网完成任务的分发，并根据任务定义，以及其他节点上报的数据情况，决定隐私计算的类型，将任务分类为横向联邦学习、纵向联邦学习和联邦统计中的一种，按照对应的隐私计算算法完成任务拆分、多节点协调和计算结果汇总，最终完成计算并得到计算结果。
+
 为了方便开发者的开发调试工作，Delta Task框架中集成了Delta Node的API，可以直接调用Delta Node注册Delta Task，开始计算过程，并可以实时从Log中看到Task在Delta Node上的执行状况。通过这样的设计，只要开发者本地有Python运行环境，Delta Task就可以从本地开发环境中直接启动，而无需先进入另一个"任务上传"的界面上传代码。开发者只需要在Delta Task框架初始化时指定Delta Node的地址即可。
 
 ![Delta Task&#x6846;&#x67B6;&#x7ED3;&#x6784;](../.gitbook/assets/7cdbc191533d0497b25fdceecda5f17.png)
