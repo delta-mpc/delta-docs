@@ -26,7 +26,6 @@ $docker run --rm -d -v ${PWD}:/app/app_config deltampc/deltaboard:dev init
 db:
   connection: ''
   driver: ''
-web_host: localhost
 web_port: '8090'
 ```
 
@@ -58,7 +57,6 @@ docker run --rm -d -p 8090:8090 -v ${PWD}:/app/app_config dashboard_in_all
 db:
   connection: 'mysql_user:my_sqlpassword@(mysql_host:mysql_port)/my_sql_database'
   driver: 'mysql'
-web_host: localhost
 web_port: '8090'
 ```
 
