@@ -4,65 +4,46 @@ description: Deltaboard 是deltanode的用户界面和开发环境。支持在�
 
 # 启动Deltaboard
 
-## 安装Docker
+## 通过Docker镜像启动Deltaboard
 
-docker是一个基于linux container技术的虚拟执行环境。启动deltaboard需要先安装docker,可以 **\*\*\[**访问docker官网安装Docker Desktop_\*\]\(_[https://docs.docker.com/get-docker/\)\](https://docs.docker.com/get-docker/%29\)\*\*\*
+推荐使用Deltaboard的Docker镜像来进行部署
 
-## 下载镜像
+### 下载镜像
 
 ```text
 $ docker pull deltampc/deltaboard:dev
 ```
 
-## **初始化配置**
+### 初始化配置
+
+deltaboard节点保存的数据包括配置文件、保存的用户数据、系统运行日志等，在启动节点服务之前，需要先初始化配置：
+
+首先，新建文件夹deltaboard，作为节点启动的根目录：
 
 ```text
-$docker run --rm -d -v ${PWD}:/app/app_config deltampc/deltaboard:dev init
+$ mkdir deltaboard
 ```
 
-执行完后将会在 当前路径下生成config.yaml文件
+在节点根目录中，输入命令：
 
 ```text
-db:
-  connection: ''
-  driver: ''
-web_port: '8090'
+$ cd deltaboard
+$ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:dev init
 ```
 
-## 命令行执行
+运行命令后，会在根目录`deltaboard`中，新建文件夹`config, data`，其中，`config`文件夹用来存放节点的配置文件，data文件夹用来存放节点保存的用户数据，比如JupyterLab中的代码和数据等。
+
+### 启动节点服务
 
 ```text
-docker run --rm -d -p 8090:8090 -v ${PWD}:/app/app_config dashboard_in_all
+$ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboard:dev
 ```
 
-## **打开Deltaboard**
+### **访问Deltaboard**
 
 浏览器访问 [http://localhost:8090](http://localhost:8090)
 
 ![](../.gitbook/assets/deltaboard_login.png)
 
-## 使用mysql并持久化jupyterhub data
-
-默认情况下deltaboard 会使用自带的sqlite作为数据存储。用户也可以根据自己的情况配置mysql数据库
-
-启动并配置mysql
-
-修改之前的config.yaml
-
-```text
-db:
-  connection: 'mysql_user:my_sqlpassword@(mysql_host:mysql_port)/my_sql_database'
-  driver: 'mysql'
-web_port: '8090'
-```
-
-重新使用命令行运行docker
-
-```text
-docker run -d -p 8090:8090 -v ${PWD}:/app/app_config dashboard_in_all
-```
-
-使用 -v ${PWD}:/app/app\_config 将jupyter的用户数据和镜像的配置文件config.yaml映射到本地的文件系统
-
-启动镜像后用户的ipynb文件将会保存当前路径的notebook\_dir目录下
+看到这个界面，说明Deltaboard已经启动完成。
 
