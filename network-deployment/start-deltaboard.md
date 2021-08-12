@@ -31,7 +31,7 @@ $ cd deltaboard
 $ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:dev init
 ```
 
-运行命令后，会在根目录`deltaboard`中，新建文件夹`config, data`，其中，`config`文件夹用来存放节点的配置文件，data文件夹用来存放节点保存的用户数据，比如JupyterLab中的代码和数据等。
+运行命令后，会在根目录`deltaboard`中，新建文件夹`config, data，db`，其中，`config`文件夹用来存放节点的配置文件，data文件夹用来存放节点保存的用户数据，比如JupyterLab中的代码和数据等，db文件夹用来存放deltaboard使用的sqlite数据库文件。
 
 ### 启动节点服务
 
