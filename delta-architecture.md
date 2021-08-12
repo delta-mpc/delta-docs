@@ -92,9 +92,15 @@ Delta隐私计算框架的设计思想是对隐私计算进行封装隔离，降
 
 隐私计算任务是Delta框架的核心功能，[Delta Task](https://github.com/delta-mpc/delta-task)就是对隐私计算任务的封装。从Delta Task的开发者角度，开发者在开发Delta Task时，无需了解隐私计算，只需按照自己以前的方法，在Delta Task框架下编写计算逻辑即可。
 
-Delta Task通过Delta Node的Server端API注册到隐私计算网络，通过网络协商后确定为横向联邦学习、纵向联邦学习、联邦统计等类型中的一种，并且由Server端发起协调过程，在多个节点的参与下完成隐私计算，由Server端汇总计算结果，返回给开发者。
+Delta Task使用Python语言编写，开发者需要先引入Delta Task框架，实例化一个Delta Task，并在Delta Task中完成数据预处理、训练模型的定义，然后将Delta Task发送到Delta Node进行执行。
 
-由于Delta Task在网络中执行的耗时较长，而开发者编写Delta Task少不了一个不断尝试修改的调试过程，因此Delta Task和Delta Node的交互被设计为Delta Task主动调用Delta Node的Client端API完成多方计算的方式。通过这样的设计，开发者可以在Delta Node的安全隔离环境外执行Delta Task任务，比如本地的普通Python环境，或者JupyterLab中，只要提供一个Dev模式的Delta Node用于测试即可。
+Delta Node接收到Task后，在全网完成任务的分发，并根据任务定义，以及其他节点上报的数据情况，决定隐私计算的类型，将任务分类为横向联邦学习、纵向联邦学习和联邦统计中的一种，按照对应的隐私计算算法完成任务拆分、多节点协调和计算结果汇总，最终完成计算并得到计算结果。
+
+为了方便开发者的开发调试工作，Delta Task框架中集成了Delta Node的API，可以直接调用Delta Node注册Delta Task，开始计算过程，并可以实时从Log中看到Task在Delta Node上的执行状况。通过这样的设计，只要开发者本地有Python运行环境，Delta Task就可以从本地开发环境中直接启动，而无需先进入另一个"任务上传"的界面上传代码。开发者只需要在Delta Task框架初始化时指定Delta Node的地址即可。
+
+![Delta Task&#x6846;&#x67B6;&#x7ED3;&#x6784;](.gitbook/assets/7cdbc191533d0497b25fdceecda5f17.png)
+
+由于进行全网计算的任务耗时一般较长，而开发者在真正进行大规模数据计算之前往往有一个小规模数据的调试过程，以确认代码正确。Delta Task框架这样的设计，可以让我们很方便的实现一个本地调试专用的Delta Node，在本地放置小的数据集，让Delta Task连接这个本地Delta Node，在本地数据上快速测试代码逻辑的正确性，无需网络通信。本地调试专用的Delta Node已包含在Delta Task框架中，开发者可以直接使用。
 
 ## Deltaboard
 
