@@ -26,7 +26,7 @@ Delta网络可以使用Docker镜像快速完成搭建，详情请参考：
 
 **Github：**代码使用过程中出现的问题，可以在Github中对应的仓库提Issue，为方便其他人查询，请将Issue标题写为问题的大致描述：
 
-{% embed url="https://github.com/delta-mpc" %}
+{% embed url="https://github.com/delta-mpc" caption="" %}
 
 **微信交流群：**请扫码加好友，并备注"Delta社区"：
 
@@ -44,5 +44,5 @@ Github源代码仓库：
 
 隐私计算技术专栏：
 
-{% embed url="https://www.zhihu.com/column/blocktech" %}
+{% embed url="https://www.zhihu.com/column/blocktech" caption="" %}
 

@@ -45,7 +45,6 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta_chain_connector:dev init
 ---
 # Chain Connector运行模式
 mode: "coordinator"
-
 ```
 
 完成配置之后，就可以启动Chain Connector。
