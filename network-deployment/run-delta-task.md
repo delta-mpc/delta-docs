@@ -6,9 +6,11 @@ Delta Task的开发可以在任意支持Python语言的IDE中进行。为了方�
 
 Deltaboard的JupyterLab中放置了一个已经写好的Delta Task，启动Deltaboard的界面，进入JupyterLab的Tab，打开HelloWorld.ipynb文件，可以看到这个示例Delta Task的代码：
 
-示例代码是一个通过神经网络进行手写数字识别的模型训练。为了方便开发者上手，在Delta Node启动时，已经预先下载了示例代码需要的公开数据集[MNIST](http://yann.lecun.com/exdb/mnist)，并且仅随机选取了1/3的样本保存下来，以供横向联邦学习和纵向联邦学习使用。
+示例代码是一个通过神经网络进行手写数字识别的模型训练。需要用到手写数字的公开数据集[MNIST](http://yann.lecun.com/exdb/mnist)，Delta Node的Docker镜像提供了下载MNIST数据集的功能，并且仅随机保留1/3的样本数据以模拟多节点拥有不同数据的隐私计算场景，详情可参考：
 
-点击JupyterLab中的运行按钮，可以开始Delta Task的执行，并查看执行结果。开发者也可以尝试自行修改Delta Task的代码，并运行查看结果。
+{% page-ref page="prepare-data.md" %}
+
+在准备好MIST数据后，点击JupyterLab中的运行按钮，可以开始Delta Task的执行，并查看执行结果。开发者也可以尝试自行修改Delta Task的代码，并运行查看结果。
 
 从执行Log可以看出，这个任务以横向联邦学习的方式，被分发给了网络中的全部节点并完成了多轮的训练。每轮训练中，各个节点完成本地计算后，上报了经过安全聚合处理的梯度向量，而我们的发起方Delta Node收到全部节点的统计结果后，求和得到了最终的训练模型。至此我们已经完成了第一个Delta Task的编写和全网运行。
 
