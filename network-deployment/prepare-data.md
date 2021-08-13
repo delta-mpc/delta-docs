@@ -8,7 +8,11 @@ Delta Node的Data Connector组件的开发工作量较大，目前仍在开发�
 
 在现阶段，Delta Task支持几种固定的数据格式，比如文件夹、csv文件等。对于同一个训练任务，其需要用到的数据，必须在各个节点上以同样的格式放置。开发者在Delta Task中指定数据的文件名或者文件夹名，当这个Delta Task在网络中的其他节点上运行时，就会从这个节点的data文件夹中寻找同名文件来加载数据。
 
-为了
+为了方便开发者上手使用，Delta Node的Docker镜像中包含了下载MNIST数据集的命令，运行下面的命令，Delta会自动下载MNIST数据集，并且随机选取1/3保留下来，删掉其他的，以模拟隐私计算网络中，多个不同的节点各自拥有不同的数据的场景：
+
+```text
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:dev get-mnist
+```
 
 ## Delta Node支持的数据格式
 
