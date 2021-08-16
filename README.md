@@ -32,6 +32,10 @@ Delta网络可以使用Docker镜像快速完成搭建，详情请参考：
 
 ![&#x626B;&#x7801;&#x52A0;&#x597D;&#x53CB;&#xFF0C;&#x5E76;&#x5907;&#x6CE8;&quot;Delta&#x793E;&#x533A;&quot;](.gitbook/assets/9db164bd4d5d449ddb9da507085d925.png)
 
+**Slack：**点击下面的邀请链接加入Slack：
+
+[https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw](https://join.slack.com/t/delta-mpc/shared_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw)
+
 ## 相关链接
 
 Delta官网：
