@@ -33,8 +33,6 @@ This command will create three new directories in the root directory, called `co
 
 ### Edit Configuration File
 
-在`config`文件夹中，会有一个预先生成的配置文件`config.yaml`。在首次启动时，必须修改的项目一个是Chain Connector的地址，修改为在上一节中配置好的Chain Connector的IP地址，另一个是需要配置Delta Node自身的IP地址，用于在链上进行本节点的身份注册，使得其他节点能够和本节点通讯。需要找到本节点的公网IP地址，填入配置文件中：
-
 There is a pre-generated configuration file `config.yaml` in the config directory. Before first start, we must edit some configuration item in the configuration file. The first is the `chain_connector.host` which means the address of the Chain Connector described in last section. And the second is the `node_address.host` which means the address of the node itself, and delta node will use this address to register itself in the block chain and other nodes will connect to this address for communication. For example, we can set `node_address.host` to the public ip address of the machine:
 
 ```text
