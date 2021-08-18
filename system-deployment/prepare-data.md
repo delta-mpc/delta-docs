@@ -22,17 +22,29 @@ Every single file or sub-folder inside `data` folder represents a whole dataset.
 
 All the samples of the dataset are stored in a same file. Delta Node reads the file and then pass each sample to the `preprocess` function one-by-one before running the computation logic. Supported file formats are listed below:
 
-| File suffix | Content format | Input argument type of `preprocess` function |
+| File suffix | File content format | Input argument type of `preprocess` function |
 | :--- | :--- | :--- |
-| `npy` | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据 |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| `npy` | `numpy.ndarray` the first axis represents the sample, which means `data[0]` is the first sample | `numpy.ndarray` the data of a single sample |
+| `npz` | `numpy.ndarray` the first axis represents the sample, which means `data[0]` is the first sample | `numpy.ndarray` the data of a single sample |
+| `pt` | `torch.Tensor`第0维为样本的维度 | `torch.Tensor` the data of a single sample |
+| `csv` | `,`separated table, no title row, each row represents a sample | `pandas.DataFrame`the data of a single sample |
+| `tsv` | `\t`separated table, no title row, each row represents a sample | `pandas.DataFrame`the data of a single sample |
+| `txt` | `\t`separated table, no title row, each row represents a sample | `pandas.DataFrame`the data of a single sample |
+| `xls/xlsx` | Excel table, no title row, each row represents a sample | `pandas.DataFrame`the data of a single sample |
 
 ### Dataset represented by a sub folder
 
+If a sub folder is placed under `data` folder, the whole sub folder represents a single dataset, thus we call the sub folder the "dataset folder". The content of the dataset folder could be:
 
+#### Sub folders under the dataset folder
+
+In this scenario, every sub folder under the dataset folder represents a class of the samples, we call it the "class folder". the folder's name is recognized as the class name, and all the files under the class folder are the samples of the same class. Each file represents a **single** sample.
+
+#### Files under the dataset folder
+
+Each file under the dataset folder represents the data of a **single** sample.
+
+The file under both the dataset folder and the class folder contains the data for a **single** sample. Supported file formats are the same as the table listed above, except the content format inside the file should be the corresponding format for a single sample\(remove the sample axis\).
+
+Beside the formats supported above, the files put under a folder, both dataset folder and class folder, could also be images. Most of the [common image formats](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html) are supported. When the file is an image, Delta Node loads it using `PIL.Image.open` and pass the result to `preprocess`function.
 
