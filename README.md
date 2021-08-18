@@ -2,6 +2,8 @@
 
 Out-of-the-Box Blockchain-powered MPC network
 
+[Homepage](https://deltampc.com) | [Development Documentation](https://docs.deltampc.com/v/en)
+
 ## Overview
 
 Delta performs statistical and machine learning computations jointly on data possessed by a group of data holders while keeping the data private for each of them. Delta is useful in a lot of cases such as risk assessment model training using private data from different banks, or health condition prediction for patients using data from different hospitals.
