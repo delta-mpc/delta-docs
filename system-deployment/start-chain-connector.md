@@ -6,7 +6,7 @@ Chain Connector could be configured to run at "coordinator" mode. At coordinator
 
 ## Start Chain Connector at Coordinator mode
 
-![Delta network structure in coordinator mode](../.gitbook/assets/image%20%281%29.png)
+![Delta network structure in coordinator mode](../.gitbook/assets/image%20%282%29.png)
 
 ### Get Docker image
 
@@ -17,8 +17,6 @@ $ docker pull deltampc/delta-chain-connector:dev
 ```
 
 ### Initialization
-
-Before starting the container, some initialization steps should be performed:
 
 Create a directory named `delta_chain_connector` for data and config persistence:
 
@@ -37,3 +35,24 @@ After successful running of the command, a sub directory named `config` should b
 
 ### Configuration
 
+There is a generated config file `config.yaml` inside the config folder after initialization. Before starting the container, we must set the running mode of Chain Connector to coordinator:
+
+```text
+---
+# Running mode
+mode: "coordinator"
+```
+
+### Start Docker container
+
+We use the command line to start Chain Connector Docker container. The directory we created above must be mounted to the `app` folder inside the container, and `4500` port must be exposed for API connections:
+
+```text
+$ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delta-chain-connector:dev run
+```
+
+Now that the container has started, we could use the Docker logs command to check the running status of the container:
+
+```text
+$ docker logs -f chain_connector
+```

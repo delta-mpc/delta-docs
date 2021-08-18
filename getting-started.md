@@ -8,7 +8,7 @@ Delta network is composed of several components. Based on the functions required
 
 A minimum Delta network requires a Chain Connector running in coordinator mode, 2 Delta Nodes, and a Deltaboard connected to one of the Delta Nodes, as shown in the image below:
 
-![](.gitbook/assets/image%20%282%29.png)
+![](.gitbook/assets/image%20%283%29.png)
 
 ### Start the network using All-in-One Docker image
 
