@@ -6,7 +6,7 @@ Chain Connector could be configured to run at "coordinator" mode. At coordinator
 
 ## Start Chain Connector at Coordinator mode
 
-![Delta network structure in coordinator mode](../.gitbook/assets/image%20%281%29.png)
+![Delta network structure in coordinator mode](../.gitbook/assets/image%20%282%29.png)
 
 ### Get Docker image
 
