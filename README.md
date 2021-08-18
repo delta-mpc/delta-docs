@@ -14,6 +14,8 @@ Delta network determines the task type by checking the distribution status of th
 
 The original data is never accessible to the developers. Delta integrates Blockchain and Zero Knowledge Proof so that the developer could verify that the computation is actually performed as designed on the required data.
 
+## Getting Started
+
 Delta network is composed of several components, and all of them could be easily deployed with Docker. Before choosing the required components and starting the network, take a look at the [System Overview](https://docs.deltampc.com/v/en/system-overview) and get a basic understanding about the network components.
 
 To get your hands dirty and start to play with the network, check the [Getting Started](https://docs.deltampc.com/v/en/getting-started) guide for a quick deployment of the network.
