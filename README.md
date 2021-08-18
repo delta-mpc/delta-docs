@@ -12,7 +12,7 @@ By encapsulating modern privacy-preserving computation techniques inside, Delta 
 
 Delta network determines the task type by checking the distribution status of the data required by the task, and transforms the task into horizontal/vertical federated learning, or federated analytics task and executes it on the network.
 
-The original data is never accessible to the developers. Delta integrates Blockchain and Zero Knowledge Proof so that the developer could believe that the computation is actually performed as designed on the required data.
+The original data is never accessible to the developers. Delta integrates Blockchain and Zero Knowledge Proof so that the developer could verify that the computation is actually performed as designed on the required data.
 
 Delta network is composed of several components, and all of them could be easily deployed with Docker. Before choosing the required components and starting the network, take a look at the system architecture and get a basic understanding about the network components:
 
