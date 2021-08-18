@@ -26,7 +26,7 @@ All the samples of the dataset are stored in a same file. Delta Node reads the f
 | :--- | :--- | :--- |
 | `npy` | `numpy.ndarray` the first axis represents the sample, which means `data[0]` is the first sample | `numpy.ndarray` the data of a single sample |
 | `npz` | `numpy.ndarray` the first axis represents the sample, which means `data[0]` is the first sample | `numpy.ndarray` the data of a single sample |
-| `pt` | `torch.Tensor`第0维为样本的维度 | `torch.Tensor` the data of a single sample |
+| `pt` | `torch.Tensor`the first axis represents the sample | `torch.Tensor` the data of a single sample |
 | `csv` | `,`separated table, no title row, each row represents a sample | `pandas.DataFrame`the data of a single sample |
 | `tsv` | `\t`separated table, no title row, each row represents a sample | `pandas.DataFrame`the data of a single sample |
 | `txt` | `\t`separated table, no title row, each row represents a sample | `pandas.DataFrame`the data of a single sample |
