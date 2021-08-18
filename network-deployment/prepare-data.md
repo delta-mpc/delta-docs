@@ -25,12 +25,12 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:dev get-mnist
 | 文件后缀 | 文件内容 | Delta Task读取后传入Preprocess函数的参数类型 |
 | :--- | :--- | :--- |
 | `npy` | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据 |
-| npz | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据 |
-| pt | torch.Tensor第0维为样本的维度 | torch.Tensor 包含单个样本的数据 |
-| csv | 逗号分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
-| tsv | `\t`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
-| txt | `\t`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
-| xls/xlsx | Excel表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
+| `npz` | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据 |
+| `pt` | torch.Tensor第0维为样本的维度 | `torch.Tensor` 包含单个样本的数据 |
+| `csv` | `,`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
+| `tsv` | `\t`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
+| `txt` | `\t`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
+| `xls/xlsx` | Excel表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
 
 ### 使用文件夹存储的全部样本
 
