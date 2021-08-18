@@ -37,9 +37,9 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:dev init
 
 ```text
 ---
-# 区块链节点地址
+# Chain Connector 地址
 chain_connector:
-  # 区块链节点地址，必填
+  # Chain Connector 地址，必填
   host: "192.168.1.20"
 
 # 本节点对外的公开地址，将会公开到区块链上，供其他Delta Node节点连接
