@@ -62,7 +62,7 @@ Delta也提供了Solidity语言的[智能合约](https://github.com/delta-mpc/de
 
 使用区块链系统进行任务协调会导致任务执行速度大大降低，在一些科研使用、测试使用，或者是对于计算结果的可信性要求不那么高的场景中，我们可以移除区块链系统，将Chain Connector设置为Coordinator模式，在此模式下的Chain Connector无需区块链，可以做为网络中心节点，连接多个Delta Node直接完成组网和计算任务协调的功能。
 
-![](.gitbook/assets/53635fc89ddea878178709dd8e55ba9%20%282%29%20%282%29%20%283%29%20%281%29.png)
+![](.gitbook/assets/53635fc89ddea878178709dd8e55ba9%20%282%29%20%282%29%20%283%29%20%281%29%20%284%29%20%284%29.png)
 
 ## Delta Node
 
