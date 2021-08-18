@@ -6,7 +6,7 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 
 ## 使用Coordinator模式启动Chain Connector
 
-![Coordinator&#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x65E0;&#x533A;&#x5757;&#x94FE;Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](../.gitbook/assets/53635fc89ddea878178709dd8e55ba9%20%282%29%20%281%29.png)
+![Coordinator&#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x65E0;&#x533A;&#x5757;&#x94FE;Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](../.gitbook/assets/53635fc89ddea878178709dd8e55ba9%20%282%29%20%282%29%20%283%29%20%281%29%20%282%29.png)
 
 ### 下载镜像
 
