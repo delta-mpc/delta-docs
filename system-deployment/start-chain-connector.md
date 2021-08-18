@@ -37,5 +37,3 @@ After successful running of the command, a sub directory named `config` should b
 
 ### Configuration
 
-
-
