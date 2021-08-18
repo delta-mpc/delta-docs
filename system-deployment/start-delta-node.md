@@ -69,9 +69,9 @@ We can use `docker logs` command to watch logs of the node to ensure the node is
 $ docker logs -f delta_node_1
 ```
 
-Delta Node will also write logs to the local directory `log`, and we can watch logs in the `log` directory. 
+Delta Node will also write logs to the local directory `log`, and we can watch logs in the `log` directory.
 
-Now the delta node is started, in the next step, we will start the Deltaboard which can manage the node, edit and run the task in GUI: 
+Now the delta node is started, in the next step, we will start the Deltaboard which can manage the node, edit and run the task in GUI:
 
 {% page-ref page="start-deltaboard.md" %}
 
