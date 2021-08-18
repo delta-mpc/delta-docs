@@ -56,4 +56,3 @@ Now that the container has started, we could use the Docker logs command to chec
 ```text
 $ docker logs -f chain_connector
 ```
-

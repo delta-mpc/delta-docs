@@ -26,11 +26,9 @@ To get your hands dirty and start to play with the network, check the getting st
 
 If you have any questions using the source code, submit issues on Github:
 
-{% embed url="https://github.com/delta-mpc" %}
+{% embed url="https://github.com/delta-mpc" caption="" %}
 
 To get connected to other developers or want to know more about privacy-preserving computation techniques, join Delta's Slack:
 
-{% embed url="https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw" %}
-
-
+{% embed url="https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw" caption="" %}
 
