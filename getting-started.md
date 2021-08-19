@@ -12,7 +12,24 @@ A minimum Delta network requires a Chain Connector running in coordinator mode, 
 
 ### Start the network using All-in-One Docker image
 
-// Coming soon...
+Delta has an All-in-One startup scripts using docker-compose to start the whole network at once.
+
+1.Clone the Github repo:
+
+```text
+$ git clone https://github.com/delta-mpc/delta-all-in-one.git
+```
+
+2.Start all the container using docker-composer:
+
+```text
+$ cd delta-all-in-one
+$ docker-compose up -d
+```
+
+After the downloading of all the Docker images, the service should be started normally. The network now is fully up and running. We can go to Deltaboard to run our first Delta Task:
+
+{% page-ref page="system-deployment/run-delta-task.md" %}
 
 ### Start the network using Docker images of the components
 

@@ -1,5 +1,7 @@
 ---
-description: Deltaboard is a user interface and development environment for deltanode. It can support for editing deltanode task code online.
+description: >-
+  Deltaboard is a user interface and development environment for deltanode. It
+  can support for editing deltanode task code online.
 ---
 
 # Start Deltaboard
@@ -46,3 +48,4 @@ Visit [http://localhost:8090](http://localhost:8090) in the browser
 ![](../.gitbook/assets/deltaboard_login.png)
 
 This interface means that deltaboard has started.
+
