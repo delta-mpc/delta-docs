@@ -14,7 +14,22 @@ Delta隐私计算网络由多个组件构成，可根据需要进行选择和组
 
 Delta提供了一个docker-compose文件，用于一次启动整个网络。
 
-// Coming soon...
+1.克隆delta-all-in-one的github仓库
+
+```text
+$ git clone https://github.com/delta-mpc/delta-all-in-one.git
+```
+
+2.使用docker-compose命令启动全部的服务
+
+```text
+$ cd delta-all-in-one
+$ docker-compose up -d
+```
+
+等待Docker镜像全部下载后，服务会自动全部启动起来。等服务全部启动后，就可以开始访问Deltaboard的界面，执行计算任务了：
+
+{% page-ref page="network-deployment/run-delta-task.md" %}
 
 ### 使用各个组件的Docker镜像搭建
 
