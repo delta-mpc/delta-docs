@@ -1,10 +1,10 @@
 # Delta
 
+![Delta Architecture](./assets/arch.png)
+
 Out-of-the-Box Blockchain-powered MPC network
 
 [Homepage](https://deltampc.com) | [Documentation](https://docs.deltampc.com/v/en)
-
-![Delta Architecture](./assets/arch.png)
 
 ## Overview
 
