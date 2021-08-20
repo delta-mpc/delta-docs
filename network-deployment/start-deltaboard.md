@@ -43,7 +43,11 @@ $ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboar
 
 浏览器访问 [http://localhost:8090](http://localhost:8090)
 
-![](../.gitbook/assets/deltaboard_login.png)
+![](../.gitbook/assets/login.png)
+
+
 
 看到这个界面，说明Deltaboard已经启动完成。
+
+Deltaboard的默认账号，用户名admin，密码也是admin。登录进去后，可在个人中心修改密码。
 
