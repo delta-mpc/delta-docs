@@ -10,7 +10,11 @@ Deltaboard的JupyterLab中放置了一个已经写好的Delta Task，启动Delta
 
 {% page-ref page="prepare-data.md" %}
 
-在准备好MIST数据后，点击JupyterLab中的运行按钮，可以开始Delta Task的执行，并查看执行结果。开发者也可以尝试自行修改Delta Task的代码，并运行查看结果。
+在准备好MIST数据后，可以开始运行Deltaboard中的示例代码，首先进入Playground，打开`delta_example.ipynb`:
+
+![](../.gitbook/assets/playground.png)
+
+点击JupyterLab中的运行按钮，在代码块下方会出现任务成功提交的提示信息：
 
 从执行Log可以看出，这个任务以横向联邦学习的方式，被分发给了网络中的全部节点并完成了多轮的训练。每轮训练中，各个节点完成本地计算后，上报了经过安全聚合处理的梯度向量，而我们的发起方Delta Node收到全部节点的统计结果后，求和得到了最终的训练模型。至此我们已经完成了第一个Delta Task的编写和全网运行。
 
