@@ -4,15 +4,15 @@
 
 Delta Task的开发可以在任意支持Python语言的IDE中进行。为了方便使用，Deltaboard中已经集成了JupyterHub，也就是支持多用户同时使用的JupyterLab，是在数据分析领域非常广泛使用的IDE，可以直接在线编辑代码，并实时显示执行结果。
 
-Deltaboard的JupyterLab中放置了一个已经写好的Delta Task，启动Deltaboard的界面，进入JupyterLab的Tab，打开HelloWorld.ipynb文件，可以看到这个示例Delta Task的代码：
+Deltaboard的JupyterLab中放置了一个已经写好的Delta Task，启动Deltaboard的界面，进入JupyterLab的Tab，打开`delta_example.ipynb`文件，可以看到这个示例Delta Task的代码：
+
+![](../.gitbook/assets/playground.png)
 
 示例代码是一个通过神经网络进行手写数字识别的模型训练。需要用到手写数字的公开数据集[MNIST](http://yann.lecun.com/exdb/mnist)，Delta Node的Docker镜像提供了下载MNIST数据集的功能，并且仅随机保留1/3的样本数据以模拟多节点拥有不同数据的隐私计算场景，详情可参考：
 
 {% page-ref page="prepare-data.md" %}
 
-在准备好MIST数据后，可以开始运行Deltaboard中的示例代码，首先进入Playground，打开`delta_example.ipynb`:
-
-![](../.gitbook/assets/playground.png)
+在准备好MIST数据后，可以开始运行Deltaboard中的示例代码。
 
 点击JupyterLab中的运行按钮，在代码块下方会出现任务成功提交的提示信息：
 
