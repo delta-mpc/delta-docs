@@ -45,7 +45,15 @@ $ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboar
 
 Visit [http://localhost:8090](http://localhost:8090) in the browser
 
-![](../.gitbook/assets/deltaboard_login.png)
+![](../.gitbook/assets/login.png)
 
-This interface means that deltaboard has started.
+When you see this login page of Deltaboard, it means the service has successfully started.
+
+The default account for Deltaboard is:
+
+**username: admin**
+
+**password: admin**
+
+Please change the password immediately after the first login.
 
