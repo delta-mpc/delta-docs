@@ -40,3 +40,31 @@ Deltaboard is the user interface of Delta Node, which gives users the ability to
 
 ## Delta Chain
 
+The core and the only function of Blockchain is to ensure the execution of some pre-defined rules among multiple parties. Blockchain is useful in building decentralized systems, where no single party should have the decision rights above others. 
+
+In the scenario of the privacy-preserving computation network, every data owner is equal, no one should make decisions that others should follow. But there's these pre-defined rules to distribute tasks, executing them and submit results. This is a perfect fit for a decentralized network built with Blockchain, where every data owner has his own decision of joining and quitting the network at any time. As long as there are requirements for data, and there are someone willing to provide it, the network could just operate normally.
+
+There're two main concerns in the designing of a decentralized system. The incentivization mechanism and the cheating prevention.
+
+In a decentralized system, the system service is provided by a group of nodes. each node could join or quit the system at any time. There're costs running a server node for the system. There must be some profit for the node to make them join the system willingly.
+
+As for the privacy-preserving computation network, the profit of the data owners should come from the task developers. Task developers pay for the usage of the data, and get computation results. Data owners provide the data **and** the computation power, and get payment in return. System could charge a little transaction fee in each task execution, and use it as rewards for early users and system maintainers. This is a basic incentivization mechanism. Blockchain is used to enforce the execution of these rules among system users.
+
+With great incentivization comes great cheating attempts. If data owners could return random computation results to the network without been discovered and punished, they will do so to accept more computation tasks than their **hardware** and **data** is capable of, just to get more profit. One thing to be emphasized is that there're two ways to cheat the system: fake execution, and fake data.
+
+**Fake execution:** return random results to the task.
+
+**Fake data:** perform the real computation task, but on some randomly generated data.
+
+If the cheating can't be discovered, the task developers will be hurt, since they can't get meaningful results. Then they will simply stop using this system. And the system crashes.
+
+The fake execution problem could be solved using Zero Knowledge Proofs\(ZKP\) theoretically, and the fake data problem could be partially solved by a mechanism design including ZKP and third-party auditions. We will explain this part in a separated document in detail later.
+
+Delta assumes that incentivization is achieved by the network deployers externally, and focuses only on the technical part of functions and performance of privacy-preserving computation tasks.
+
+The functions of Blockchain in Delta framework is mainly:
+
+
+
+
+
