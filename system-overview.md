@@ -76,5 +76,11 @@ Delta provides [smart contracts written in Solidity](https://github.com/delta-mp
 
 ## Delta Network without Blockchain
 
+The block intervals of the Blockchain system will cause a dramatic slow down on the execution of computation tasks. In the scenarios where computation verification is not required, Delta Network could be started without Blockchain node.
 
+To start Delta Network in this mode. Just set a Chain Connector to coordinator mode. And connect all the Delta Nodes to it. Chain Connector in coordinator mode doesn't need Blockchain. Acting as a center node of the network, Chain Connector could handle the network establishment and task coordination itself.
+
+![Delta Network in Coordinator Mode](.gitbook/assets/60f4f5e57ca32c8f3cd6fc1df9fe52e.png)
+
+## Delta Node
 
