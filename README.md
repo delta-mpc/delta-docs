@@ -8,7 +8,7 @@ Out-of-the-Box Blockchain-powered MPC network
 
 ## Overview
 
-Delta is a decentraized network to perform statistical and machine learning computations jointly on data possessed by a group of data holders. The data never leaves its original position so that nobody else other than the original holder could see it.
+Delta is a decentralized network to perform statistical and machine learning computations jointly on data possessed by a group of data holders. The data never leaves its original position so that nobody else other than the original holder could see it.
 
 Delta is useful in a lot of cases such as risk assessment model training using private data from several banks, or health condition prediction for patients using data from several hospitals.
 
