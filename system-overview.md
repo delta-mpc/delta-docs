@@ -86,7 +86,17 @@ To start Delta Network in this mode. Just set a Chain Connector to coordinator m
 
 [Delta Node](https://github.com/delta-mpc/delta-node) is the core of the Delta framework. It is in charge of the whole life cycle of a computation task including task registration, task coordination across multiple nodes, local task execution, result submission, result aggregation, etc. Delta Node is also responsible for keeping local private data safe while providing APIs for IDEs and other systems.
 
+The Data Connector of Delta Node connects Delta Node to the private local data sources. By using different adapters, various types of data sources could be supported, such as files, relational database like MySQL, and HDFS.
+
 ![Delta Node Architecture](.gitbook/assets/image.png)
+
+Delta Node could be divided into 2 parts: the server and the client.
+
+The server is where Delta Task starts. After task developer finishes the coding of task logic. The task is sent to the network through the server's API. The server registers the task on Blockchain to start the execution of the task. The client of other Delta Nodes will get the task code from the server. After the task is executed on the clients of other Delta Nodes, Other clients will send the encrypted fragments of their computation results to the server. It's the server's duty to aggregate all the fragments to get the final clear text computation result. In a multi-round model training task, the server will register rounds separately on-chain and sums up all the results from multiple rounds to get a final result. The final clear text computation results could only be collected and decrypted by the server to keep the final result private.
+
+The client is the actual place where Delta Task executes.
+
+
 
 
 
