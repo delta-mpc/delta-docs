@@ -84,3 +84,9 @@ To start Delta Network in this mode. Just set a Chain Connector to coordinator m
 
 ## Delta Node
 
+[Delta Node](https://github.com/delta-mpc/delta-node) is the core of the Delta framework. It is in charge of the whole life cycle of a computation task including task registration, task coordination across multiple nodes, local task execution, result submission, result aggregation, etc. Delta Node is also responsible for keeping local private data safe while providing APIs for IDEs and other systems.
+
+![Delta Node Architecture](.gitbook/assets/image.png)
+
+
+
