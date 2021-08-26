@@ -58,13 +58,23 @@ With great incentivization comes great cheating attempts. If data owners could r
 
 If the cheating can't be discovered, the task developers will be hurt, since they can't get meaningful results. Then they will simply stop using this system. And the system crashes.
 
-The fake execution problem could be solved using Zero Knowledge Proofs\(ZKP\) theoretically, and the fake data problem could be partially solved by a mechanism design including ZKP and third-party auditions. We will explain this part in a separated document in detail later.
+The fake execution problem could be solved using Zero Knowledge Proofs\(ZKP\) theoretically, and the fake data problem could be partially solved by a mechanism design including ZKP and third-party audits. We will explain this part in a separated document in detail later.
 
 Delta assumes that incentivization is achieved by the network deployers externally, and focuses only on the technical part of functions and performance of privacy-preserving computation tasks.
 
 The functions of Blockchain in Delta framework is mainly:
 
+**P2P network establishment**: node discovery, communication routes, digital identity, etc.
 
+**Task distribution and coordination**: the rules of distributing tasks, monitoring for tasks, multi-round calculation coordination, result submission, etc.
+
+**Proof of computation and data**: routinely zero-knowledge data check in, ZKP verification and recording of the computation tasks.
+
+Delta Network provides [Delta Chain](https://github.com/delta-mpc/delta-chain) to start the required Blockchain node. Beside that, Delta also supports other Blockchain systems as long as that Blockchain has smart contract runtime, and the [Delta Smart Contracts](https://github.com/delta-mpc/delta-contracts) are successfully deployed on it. The only requirements on the Blockchain is that it supports [EC-Pairing](https://medium.com/@VitalikButerin/exploring-elliptic-curve-pairings-c73c1864e627) which is required by the ZKP algorithm.
+
+Delta provides [smart contracts written in Solidity](https://github.com/delta-mpc/delta-contracts), which could be used on Ethereum directly. To support multiple chain systems, Delta has an abstract layer called [Chain Connector](https://github.com/delta-mpc/delta-chain-connector), in which switching to different chain system is quite simple. Chain Connector also supports cold wallet, to safely keep the private key in an isolated network environment where does not accept incoming connections. Deployers could use a separated signing service installed inside the isolated network,  fetches transactions from Chain Connector, signs them and sends only the signed transactions back.
+
+## Delta Network without Blockchain
 
 
 
