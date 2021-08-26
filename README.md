@@ -8,7 +8,9 @@ Out-of-the-Box Blockchain-powered MPC network
 
 ## Overview
 
-Delta performs statistical and machine learning computations jointly on data possessed by a group of data holders while keeping the data private for each of them. Delta is useful in a lot of cases such as risk assessment model training using private data from different banks, or health condition prediction for patients using data from different hospitals.
+Delta is a decentraized network to perform statistical and machine learning computations jointly on data possessed by a group of data holders. The data never leaves its original position so that nobody else other than the original holder could see it.
+
+Delta is useful in a lot of cases such as risk assessment model training using private data from several banks, or health condition prediction for patients using data from several hospitals.
 
 By encapsulating modern privacy-preserving computation techniques inside, Delta doesn't require users to have any knowledge about privacy-preserving computation. Developers just write computation task using PyTorch and send it to the Delta network. And the rest parts are taken care of by Delta.
 
