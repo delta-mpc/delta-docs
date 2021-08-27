@@ -74,7 +74,7 @@ Delta Network provides [Delta Chain](https://github.com/delta-mpc/delta-chain) t
 
 Delta provides [smart contracts written in Solidity](https://github.com/delta-mpc/delta-contracts), which could be used on Ethereum directly. To support multiple chain systems, Delta has an abstract layer called [Chain Connector](https://github.com/delta-mpc/delta-chain-connector), in which switching to different chain system is quite simple. Chain Connector also supports cold wallet, to safely keep the private key in an isolated network environment where does not accept incoming connections. Deployers could use a separated signing service installed inside the isolated network,  fetches transactions from Chain Connector, signs them and sends only the signed transactions back.
 
-## Delta Network without Blockchain
+### Delta Network without Blockchain
 
 The block intervals of the Blockchain system will cause a dramatic slow down on the execution of computation tasks. In the scenarios where computation verification is not required, Delta Network could be started without Blockchain node.
 
@@ -108,9 +108,23 @@ When performing computation tasks, the client needs access to the original data,
 
 This's where the data standard plays an important role. The data standard describes what kinds of data the network, as a whole, possesses. If the data is a table, what columns does the data have, what is the data type of each column, are all included in the data standard. The developers use the data standard in their code to claim what dataset the task needs, and the code performs the computation based on the data type in the data standard. Each data owner connects its original data to the Delta Node using an adapter to convert the data to the format defined in the standard so that the Delta Tasks could run smoothly.
 
+## Delta Task
+
+The idea behind Delta is to isolate the complex privacy-preserving computation techniques from task developers and data owners. So that everyone could start using the tech while knowing no details about them.
+
+[Delta Task](https://github.com/delta-mpc/delta-task) is the abstraction to isolate task developers from PPC. Delta Task is a Python framework. Developers implements the required functions in it, such as how the data should be pre-processed, in a machine learning task, and how the train step should be performed, using traditional machine learning framework [PyTorch](https://github.com/pytorch/pytorch), and the framework will do the rest.
+
+According to the data the Delta Task requires and how the data is distributed on the network,  Delta Node transforms the task into one of the horizontal federated learning task, vertical federated learning task, and federated analytics task,  and executes it using the specific logic of different PPC tasks.
+
+To make the debugging easier in the local development environment, Delta Task framework has the ability to invoke Delta Node API directly, and display the execution logs locally. By this design, Delta Task could be  started locally as long as a Python runtime exists, comparing to the other scenario where an "upload task" button must be clicked in a webpage.
+
+![Delta Task Structure](.gitbook/assets/fb84e7c7d4999a143fad03398ed8adb.png)
 
 
 
+Another benefit of this design is that we could easily implement a mock Delta Node to run the task as a normal computation task on the local debug data, which is already included in the Delta Task framework. The developers usually need some time to design and test the computation logic locally on some smaller dataset before actually putting the task to run on the whole network, where the computation takes much longer time. The mock node will speed up the debugging progress and save the developer a lot of time.
+
+## Deltaboard
 
 
 
