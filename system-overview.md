@@ -94,7 +94,7 @@ Delta Node could be divided into 2 parts: the server and the client.
 
 The server is where Delta Task starts. After task developer finishes the coding of task logic. The task is sent to the network through the server's API. The server registers the task on Blockchain to start the execution of the task. The client of other Delta Nodes will get the task code from the server. After the task is executed on the clients of other Delta Nodes, Other clients will send the encrypted fragments of their computation results to the server. It's the server's duty to aggregate all the fragments to get the final clear text computation result. In a multi-round model training task, the server will register rounds separately on-chain and sums up all the results from multiple rounds to get a final result. The final clear text computation results could only be collected and decrypted by the server to keep the final result private.
 
-The client is the actual place where Delta Task executes. The client monitors the Blockchain for tasks regularly, and execute it in the local Secure Execution Environment. Note that this is not Trusted Execution Environment, a.k.a. TEE, which is another kind of confidential computing tech using CPU-level encryption. SEE ensures the Delta Task, whatever execution logic it contains, when executing, has no impact on the host server, and can do nothing else other than performing computation logic on the given data. There're 3 aspects to take into consideration:
+The client is the actual place where Delta Task executes. The client monitors the Blockchain for tasks regularly, and execute it in the local Secure Execution Environment. Note that this is not Trusted Execution Environment, a.k.a. TEE, which is another kind of confidential computing technology using CPU-level encryption. SEE ensures the Delta Task, whatever execution logic it contains, when executing, has no impact on the host server, and can do nothing else other than performing computation logic on the given data. There're 3 aspects to take into consideration:
 
 **Privacy-Preserving Algorithms.** The first layer of protection, is of course the privacy-preserving algorithms. SEE ensures that all the network outbound traffic of the Delta Task should either go through the Secure Aggregation layer, or go through the Secret Sharing mechanism of the MPC algorithm. So that no clear text original data and original computation result could be sent to the network.
 
@@ -103,6 +103,12 @@ The client is the actual place where Delta Task executes. The client monitors th
 **Execution Environment Isolation.** Including runtime isolation and network isolation. In case that some vulnerabilities on the host machine are exploit to execute codes that are not allowed. The codes might further get access to the original data, and leak it to the network.
 
 The client will have network communications with other Delta Nodes to fetch the Delta Task content, send results back to the task initiator, and exchange secret sharing messages when performing MPC.
+
+When performing computation tasks, the client needs access to the original data. The access is provided by the Data Connector.
+
+A standard about how data is structured is critical to the network. Since the task developer is designing the computation task without knowing what the data is actually like, while they have to know it to write the code. On the data owners side, every data owner has its own way of storing data in its own structure, but the computation task must be performed exactly the same on every data owner's machine.
+
+That's where the data standard plays an important role. The data standard describes what kinds of data the network, as a whole, possesses. If the data is a table, what columns does the data have, what is the data type of each column, are all included in the data standard. 
 
 
 
