@@ -104,11 +104,9 @@ The client is the actual place where Delta Task executes. The client monitors th
 
 The client will have network communications with other Delta Nodes to fetch the Delta Task content, send results back to the task initiator, and exchange secret sharing messages when performing MPC.
 
-When performing computation tasks, the client needs access to the original data. The access is provided by the Data Connector.
+When performing computation tasks, the client needs access to the original data, which is provided by the Data Connector. A standard defining how data is structured is critical to the network. Since the task developer is designing the computation task without knowing what the data is actually like, while they have to know it to write the code. On the data owners side, every data owner has its own way of storing data in its own structure, but the computation task must be performed exactly the same way on every data owner's machine.
 
-A standard about how data is structured is critical to the network. Since the task developer is designing the computation task without knowing what the data is actually like, while they have to know it to write the code. On the data owners side, every data owner has its own way of storing data in its own structure, but the computation task must be performed exactly the same on every data owner's machine.
-
-That's where the data standard plays an important role. The data standard describes what kinds of data the network, as a whole, possesses. If the data is a table, what columns does the data have, what is the data type of each column, are all included in the data standard. 
+This's where the data standard plays an important role. The data standard describes what kinds of data the network, as a whole, possesses. If the data is a table, what columns does the data have, what is the data type of each column, are all included in the data standard. The developers use the data standard in their code to claim what dataset the task needs, and the code performs the computation based on the data type in the data standard. Each data owner connects its original data to the Delta Node using an adapter to convert the data to the format defined in the standard so that the Delta Tasks could run smoothly.
 
 
 
