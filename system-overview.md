@@ -126,5 +126,13 @@ Another benefit of this design is that we could easily implement a mock Delta No
 
 ## Deltaboard
 
+Deltaboard is a graphical user interface to manage Delta Node. Deltaboard supports task listing, task logs, task result downloading and network nodes visualization.
 
+There's a[ JupyterHub](https://jupyter.org/hub), which is basically a multi-user version of the [JupyterLab](https://jupyter.org/), embedded in Deltaboard, so that the development and execution of Delta Task could be all done online.
+
+Deltaboard has multi-user access management function which gives each user a separate Delta Node API so that multiple users could share a single Delta Node instance, each user could edit and submit his own Delta Task, and watches its running status online.
+
+We have deployed an online demonstration network with 3 Delta Nodes and a Deltaboard connected to one of them. Check the live version of the Deltaboard here:
+
+{% page-ref page="delta-online.md" %}
 
