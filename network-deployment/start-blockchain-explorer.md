@@ -36,13 +36,13 @@ $ docker pull deltampc/delta-chain-explorer:dev
 
 ### 初始化配置
 
-新建文件夹delta-explorer，作为节点启动的根目录
+新建文件夹delta-explorer，作为节点启动的根目录：
 
 ```bash
 $ mkdir delta-explorer
 ```
 
-然后进入根目录，创建环境变量文件
+然后进入根目录，创建环境变量文件：
 
 ```bash
 $ cd delta-explorer && touch .env
