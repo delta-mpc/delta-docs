@@ -21,10 +21,10 @@ $ mkdir delta-node
 然后进入根目录
 
 ```
-$ cd delta-node
+$ cd delta-nodex
 ```
 
-### 启动节点
+### 启动单节点
 
 ```
 $ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoint ./node --name delta-chain deltampc/delta-chain:dev --dev --ws-external
@@ -99,3 +99,8 @@ $ docker start delta-chain // 启动节点
 $ docker rm delta-chain // 彻底删除容器
 ```
 
+
+
+## 启动多节点网络
+
+...
