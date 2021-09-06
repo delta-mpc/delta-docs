@@ -14,19 +14,19 @@ $ docker pull deltampc/delta-chain:dev
 
 新建文件夹delta-node，作为节点启动的根目录
 
-```
+```text
 $ mkdir delta-node
 ```
 
 然后进入根目录
 
-```
+```text
 $ cd delta-node
 ```
 
 ### 启动节点
 
-```
+```text
 $ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoint ./node --name delta-chain deltampc/delta-chain:dev --dev --ws-external
 ```
 
@@ -40,34 +40,29 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 
 在web浏览器中打开 [Polkadot-JS Apps](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer)，等待页面加载完成后，可以看到本地启动的节点的状态信息。
 
-![](C:\Users\A\Books\delta-docs\.gitbook\assets\deltachain-polkadot-info.png)
-
-
+![](https://github.com/delta-mpc/delta-docs/tree/209497731c2f50fe52027fe2382caa51e926bb75/network-deployment/C:/Users/A/Books/delta-docs/.gitbook/assets/deltachain-polkadot-info.png)
 
 #### RPC调用
 
 **查看余额**
 
-1. 在Polkadot-JS Apps页面进入：开发者-->RPC calls
-2. 选择功能模块：eth-->getBalance
+1. 在Polkadot-JS Apps页面进入：开发者--&gt;RPC calls
+2. 选择功能模块：eth--&gt;getBalance
 3. 输入参数address: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
 4. 点击“提交RPC调用”
 
-![](C:\Users\A\Books\delta-docs\.gitbook\assets\delta-chain-getBalance.png)
+![](https://github.com/delta-mpc/delta-docs/tree/209497731c2f50fe52027fe2382caa51e926bb75/network-deployment/C:/Users/A/Books/delta-docs/.gitbook/assets/delta-chain-getBalance.png)
 
 可以看到在0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1这个地址有预先设定好的以太余额
 
 **转账**
 
-1. 在Polkadot-JS Apps页面进入：开发者-->RPC 交易
-
+1. 在Polkadot-JS Apps页面进入：开发者--&gt;RPC 交易
 2. 选择账号：Alice
-
-3. 选择功能模块：evm-->call
-
+3. 选择功能模块：evm--&gt;call
 4. 输入参数
 
-   ```
+   ```text
    source: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
    target: <Any eth address>
    input: 0x
@@ -79,21 +74,17 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 
 5. 点击“提交交易”
 
-![](C:\Users\A\Books\delta-docs\.gitbook\assets\detachain-transfer.png)
-
-
+![](https://github.com/delta-mpc/delta-docs/tree/209497731c2f50fe52027fe2382caa51e926bb75/network-deployment/C:/Users/A/Books/delta-docs/.gitbook/assets/detachain-transfer.png)
 
 #### 查看节点log
 
-```
+```text
 $ docker logs -f delta-chain
 ```
 
-
-
 #### 停止 & 重启节点
 
-```
+```text
 $ docker stop delta-chain // 停止节点
 $ docker start delta-chain // 启动节点
 $ docker rm delta-chain // 彻底删除容器

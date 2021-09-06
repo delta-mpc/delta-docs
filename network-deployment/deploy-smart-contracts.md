@@ -6,7 +6,7 @@
 
 ## 下载镜像
 
-```
+```text
 $ docker pull deltampc/delta-contracts:dev
 ```
 
@@ -14,36 +14,34 @@ $ docker pull deltampc/delta-contracts:dev
 
 新建文件夹delta-contracts，作为节点启动的根目录
 
-```
+```text
 $ mkdir delta-contracts
 ```
 
 然后进入根目录，创建环境变量文件
 
-```
+```text
 $ cd delta-contracts && touch .env
 ```
 
 环境变量文件示例如下：
 
-```
+```text
 ADDRESS=<your eth address>
 PRIVATE_KEY=<your eth private key>
 WS_URL=<websocket endpoit>
 ```
 
-P.S. 
+P.S.
 
 1. 需要保证ADDRESS变量代表的账户地址中有足够多的以太余额
 2. 如果区块链节点启动在本地，那么容器中访问宿主机的ip地址不是127.0.0.1，具体取决于操作系统
    * 对于windows和Mac系统，请使用域名host.docker.internal
    * 对于linux系统，请使用ifcongfig查看网卡docker0的ip地址（默认为172.17.0.1）
 
-
-
 ## 运行容器
 
-```
+```text
 $ docker run --rm -v ${PWD}/compile:/app/compile --env-file ./.env deltampc/delta-contracts:dev deploy
 ```
 

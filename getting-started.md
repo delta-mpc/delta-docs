@@ -55,3 +55,32 @@ $ docker-compose up -d
 
 ## 完整网络搭建（有区块链）
 
+一个最小的包含区块链的Delta网络，需要两个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。为了简化网络，Deltaboard可以只搭建一个，如下图所示：
+
+![](.gitbook/assets/a0e729d8bbb97c5ff8c80e5149c81aa.png)
+
+### 使用All-in-One镜像启动整个网络
+
+Delta提供了一个docker-compose文件，用于一次启动整个网络。
+
+1.克隆delta-all-in-one的github仓库
+
+```text
+$ git clone https://github.com/delta-mpc/delta-all-in-one.git
+```
+
+2.使用docker-compose命令启动全部的服务
+
+```text
+$ cd delta-all-in-one
+$ docker-compose up -d
+```
+
+等待Docker镜像全部下载后，服务会自动全部启动起来。等服务全部启动后，就可以开始访问Deltaboard的界面，执行计算任务了：
+
+{% page-ref page="network-deployment/run-delta-task.md" %}
+
+### 使用各个组件的Docker镜像搭建
+
+
+
