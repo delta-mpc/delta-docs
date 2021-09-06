@@ -21,7 +21,7 @@ $ mkdir delta-node
 然后进入根目录
 
 ```
-$ cd delta-nodex
+$ cd delta-node
 ```
 
 ### 启动单节点
