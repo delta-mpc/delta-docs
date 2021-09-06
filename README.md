@@ -1,5 +1,5 @@
 ---
-description: Out-of-the-Box Blockchain-powered MPC network
+description: Out-of-the-Box Blockchain-powered Verifiable PPC network
 ---
 
 # Delta Framework
