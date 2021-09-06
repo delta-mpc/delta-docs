@@ -40,8 +40,7 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 
 在web浏览器中打开 [Polkadot-JS Apps](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer)，等待页面加载完成后，可以看到本地启动的节点的状态信息。
 
-![](../.gitbook/assets/deltachain-polkadot-info.png)
-
+![](../.gitbook/assets/polkadot-js-app.png)
 
 #### RPC调用
 
@@ -52,7 +51,7 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 3. 输入参数address: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
 4. 点击“提交RPC调用”
 
-![](../.gitbook/assets/delta-chain-getBalance.png)
+![](../.gitbook/assets/c6a000b38b07dcf523f32b1422b8c03.png)
 
 可以看到在0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1这个地址有预先设定好的以太余额
 
@@ -75,8 +74,7 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 
 5. 点击“提交交易”
 
-![](../.gitbook/assets/detachain-transfer.png)
-
+![](../.gitbook/assets/de775550fb0fa25b4eb390c87681a06.png)
 
 #### 查看节点log
 
@@ -92,8 +90,7 @@ $ docker start delta-chain // 启动节点
 $ docker rm delta-chain // 彻底删除容器
 ```
 
-
-
 ## 启动多节点网络
 
 ...
+
