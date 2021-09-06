@@ -14,19 +14,19 @@ $ docker pull deltampc/delta-chain:dev
 
 新建文件夹delta-node，作为节点启动的根目录
 
-```
+```text
 $ mkdir delta-node
 ```
 
 然后进入根目录
 
-```
+```text
 $ cd delta-node
 ```
 
 ### 启动单节点
 
-```
+```text
 $ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoint ./node --name delta-chain deltampc/delta-chain:dev --dev --ws-external
 ```
 
@@ -43,13 +43,12 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 ![](../.gitbook/assets/deltachain-polkadot-info.png)
 
 
-
 #### RPC调用
 
 **查看余额**
 
-1. 在Polkadot-JS Apps页面进入：开发者-->RPC calls
-2. 选择功能模块：eth-->getBalance
+1. 在Polkadot-JS Apps页面进入：开发者--&gt;RPC calls
+2. 选择功能模块：eth--&gt;getBalance
 3. 输入参数address: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
 4. 点击“提交RPC调用”
 
@@ -59,15 +58,12 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 
 **转账**
 
-1. 在Polkadot-JS Apps页面进入：开发者-->RPC 交易
-
+1. 在Polkadot-JS Apps页面进入：开发者--&gt;RPC 交易
 2. 选择账号：Alice
-
-3. 选择功能模块：evm-->call
-
+3. 选择功能模块：evm--&gt;call
 4. 输入参数
 
-   ```
+   ```text
    source: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
    target: <Any eth address>
    input: 0x
@@ -82,18 +78,15 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 ![](../.gitbook/assets/detachain-transfer.png)
 
 
-
 #### 查看节点log
 
-```
+```text
 $ docker logs -f delta-chain
 ```
 
-
-
 #### 停止 & 重启节点
 
-```
+```text
 $ docker stop delta-chain // 停止节点
 $ docker start delta-chain // 启动节点
 $ docker rm delta-chain // 彻底删除容器

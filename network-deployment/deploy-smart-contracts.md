@@ -21,7 +21,6 @@ $ yarn
 1. 删除compile目录下的所有文件
 
 2. 设置环境变量
-
    ```
    ADDRESS=<your eth address>
    PRIVATE_KEY=<your eth private key>
