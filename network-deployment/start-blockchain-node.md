@@ -24,7 +24,7 @@ $ mkdir delta-node
 $ cd delta-node
 ```
 
-### 启动节点
+### 启动单节点
 
 ```text
 $ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoint ./node --name delta-chain deltampc/delta-chain:dev --dev --ws-external
@@ -40,7 +40,8 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 
 在web浏览器中打开 [Polkadot-JS Apps](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer)，等待页面加载完成后，可以看到本地启动的节点的状态信息。
 
-![](https://github.com/delta-mpc/delta-docs/tree/209497731c2f50fe52027fe2382caa51e926bb75/network-deployment/C:/Users/A/Books/delta-docs/.gitbook/assets/deltachain-polkadot-info.png)
+![](../.gitbook/assets/deltachain-polkadot-info.png)
+
 
 #### RPC调用
 
@@ -51,7 +52,7 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 3. 输入参数address: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
 4. 点击“提交RPC调用”
 
-![](https://github.com/delta-mpc/delta-docs/tree/209497731c2f50fe52027fe2382caa51e926bb75/network-deployment/C:/Users/A/Books/delta-docs/.gitbook/assets/delta-chain-getBalance.png)
+![](../.gitbook/assets/delta-chain-getBalance.png)
 
 可以看到在0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1这个地址有预先设定好的以太余额
 
@@ -74,7 +75,8 @@ Delta Chain节点兼容以太坊web3标准的RPC调用
 
 5. 点击“提交交易”
 
-![](https://github.com/delta-mpc/delta-docs/tree/209497731c2f50fe52027fe2382caa51e926bb75/network-deployment/C:/Users/A/Books/delta-docs/.gitbook/assets/detachain-transfer.png)
+![](../.gitbook/assets/detachain-transfer.png)
+
 
 #### 查看节点log
 
@@ -90,3 +92,8 @@ $ docker start delta-chain // 启动节点
 $ docker rm delta-chain // 彻底删除容器
 ```
 
+
+
+## 启动多节点网络
+
+...
