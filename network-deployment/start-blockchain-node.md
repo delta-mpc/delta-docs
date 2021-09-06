@@ -1,8 +1,10 @@
 # 启动区块链节点
 
-## 通过Docker镜像启动Delta Chain Node
+## 启动单节点测试网络
 
-推荐通过Delta Chain Node的Docker镜像来进行部署
+区块链网络是一个P2P的对等网络，网络中的每个节点完全相同。在一个部署了多个Delta Node的Delta网络中，多个Chain Connector也可以连接到同一个区块链节点，而不影响整个网络的功能。因此在本地进行开发测试时，为方便操作，可以只启动一个区块链节点。其功能和多节点网络完全一致。
+
+推荐通过Delta Chain Node的Docker镜像来启动单个节点的测试网络：
 
 ### 下载镜像
 
@@ -91,6 +93,4 @@ $ docker rm delta-chain // 彻底删除容器
 ```
 
 ## 启动多节点网络
-
-...
 
