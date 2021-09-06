@@ -4,7 +4,7 @@ Delta隐私计算网络由多个组件构成，可根据需要进行选择和组
 
 {% page-ref page="delta-architecture.md" %}
 
-## 最小网络搭建（无区块链）
+## 最小无区块链网络搭建
 
 最小化的Delta隐私计算网络，需要搭建一个Chain Connector（运行于Coordinator模式），两个Delta Node，一个Deltaboard，如下图所示：
 
@@ -14,16 +14,21 @@ Delta隐私计算网络由多个组件构成，可根据需要进行选择和组
 
 Delta提供了一个docker-compose文件，用于一次启动整个网络。
 
-1.克隆delta-all-in-one的github仓库
+1.克隆delta-all-in-one的github仓库：
 
 ```text
 $ git clone https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-2.使用docker-compose命令启动全部的服务
+2.进入无区块链网络的配置文件夹：
 
 ```text
-$ cd delta-all-in-one
+$ cd delta-all-in-one/no-blockchain
+```
+
+3.使用docker-compose命令启动全部的服务：
+
+```text
 $ docker-compose up -d
 ```
 
@@ -53,26 +58,35 @@ $ docker-compose up -d
 
 {% page-ref page="network-deployment/run-delta-task.md" %}
 
-## 完整网络搭建（有区块链）
+## 最小完整网络搭建
 
-一个最小的包含区块链的Delta网络，需要两个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。为了简化网络，Deltaboard可以只搭建一个，如下图所示：
+一个最小的包含区块链的Delta网络，需要两个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
 
-![](.gitbook/assets/a0e729d8bbb97c5ff8c80e5149c81aa.png)
+![](.gitbook/assets/8335ad117f19018e3a7e593fb07e03d.png)
+
+为了简化网络，Deltaboard可以只搭建一个，区块链节点也可以只搭一个，如下图所示：
+
+![](.gitbook/assets/2bbe2a3fae4b39c39119405e786e4df.png)
 
 ### 使用All-in-One镜像启动整个网络
 
 Delta提供了一个docker-compose文件，用于一次启动整个网络。
 
-1.克隆delta-all-in-one的github仓库
+1.克隆delta-all-in-one的github仓库：
 
 ```text
 $ git clone https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-2.使用docker-compose命令启动全部的服务
+2.进入有区块链网络的配置文件夹：
 
 ```text
-$ cd delta-all-in-one
+$ cd delta-all-in-one/with-blockchain
+```
+
+3.使用docker-compose命令启动全部的服务：
+
+```text
 $ docker-compose up -d
 ```
 
@@ -82,5 +96,21 @@ $ docker-compose up -d
 
 ### 使用各个组件的Docker镜像搭建
 
+1.启动区块链节点，可以启动一个区块链节点，让两个Chain Connector连接到这一个节点，也可以启动两个区块链节点组成网络，两个Chain Connector各自连接一个节点：
 
+{% page-ref page="network-deployment/start-blockchain-node.md" %}
+
+2.为了方便查看区块链节点的数据，可以再启动一个图形化界面的区块链浏览器，这一步可选：
+
+{% page-ref page="network-deployment/start-blockchain-explorer.md" %}
+
+3.在区块链上部署Delta智能合约：
+
+{% page-ref page="network-deployment/deploy-smart-contracts.md" %}
+
+4.启动Chain Connector，并配置为Blockchain模式：
+
+{% page-ref page="network-deployment/start-chain-connector.md" %}
+
+接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
 
