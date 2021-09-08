@@ -34,7 +34,13 @@ The Delta Chain Node will start its RPC service on port 9933, and WebSocket serv
 
 ### Interacting with the Delta Chain Node
 
+Delta Chain is built with Substrate Frontier, which is compatible with the Ethereum Web3 standard RPC protocol. So the Block explorers, the wallets of Ethereum could all be used directly.
 
+Open [Polkadot JS App](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer) inside a web browser, after page loading, which might take a long time, the Blockchain status will be displayed:
+
+![](../.gitbook/assets/polkadot-js-app.png)
+
+ 
 
 ## Start the Multiple Node Network
 
