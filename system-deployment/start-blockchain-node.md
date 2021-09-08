@@ -14,33 +14,36 @@ $ docker pull deltampc/delta-chain:dev
 
 ### Initializing
 
-Create a new folder as the root folder for Delta Chain Node and a sub folder for Blockchain data:
+Create a new folder as the root folder for Delta Chain Node:
 
 ```bash
-$ mkdir delta-chain-node
-$ mkdir delta-chain-node/data
+$ mkdir delta-chain
 ```
 
 ### Start the Container
 
 ```bash
-$ cd delta-chain-node
+$ cd delta-chain
 $ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoint ./node --name delta-chain deltampc/delta-chain:dev --dev --ws-external
 ```
 
-The Delta Chain Node will start its RPC service on port 9933, and WebSocket service on port 9944. and the \`\`\`data\`\`\` folder is used to store block data.
+The Delta Chain Node will start its RPC service on port 9933, and WebSocket service on port 9944. and the \`\`\`data\`\`\` folder will be created to store block data.
 
 > If you're using Windows, the above commands should be run inside Powershell otherwise the environment variable `${PWD}` can not be recognized.
 
 ### Interacting with the Delta Chain Node
 
-Delta Chain is built with Substrate Frontier, which is compatible with the Ethereum Web3 standard RPC protocol. So the Block explorers, the wallets of Ethereum could all be used directly.
+Delta Chain is built with [Substrate Frontier](https://github.com/paritytech/frontier), which is compatible with the Ethereum Web3 standard RPC protocol. So the block explorers and the wallets of Ethereum could all be used directly.
 
 Open [Polkadot JS App](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer) inside a web browser, after page loading, which might take a long time, the Blockchain status will be displayed:
 
-![](../.gitbook/assets/polkadot-js-app.png)
+![](../.gitbook/assets/670a9b0e687fee19bc0667a0d4a5e53.png)
 
- 
+This is a Block explorer running purely inside the browser, with no backend to store data. Every time the explorer starts, it subscribes to the Blockchain node, and displays data of newly generated blocks, there will be no displaying for old blocks. If you need a fully functional Blockchain explorer displaying all the blocks, use [Delta Chain Explorer](https://github.com/delta-mpc/delta-chain-explorer) which is built with [Blockscout](https://github.com/blockscout/blockscout), or any other explorers with a backend data storage:
+
+{% page-ref page="start-blockchain-explorer.md" %}
+
+
 
 ## Start the Multiple Node Network
 
