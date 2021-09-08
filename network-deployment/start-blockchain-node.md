@@ -34,17 +34,19 @@ $ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoi
 
 节点启动后，将在本机的9933端口启动rpc服务，9944端口启动websocket服务，并在根目录自动创建文件夹data，用来保存区块数据。
 
-P.S. 如果使用Windows系统，建议使用Powershell运行上述命令，否则可能无法识别命令中的`${PWD}`变量。
+> 如果使用Windows系统，建议使用Powershell运行上述命令，否则可能无法识别命令中的`${PWD}`变量。
 
 ### 节点交互
 
-Delta Chain节点兼容以太坊web3标准的RPC调用
+Delta Chain基于[Substrate Frontier](https://github.com/paritytech/frontier)项目开发，节点兼容以太坊web3标准的RPC调用，因此适用于以太坊的区块链浏览器和钱包等应用，都可以直接应用于Delta Chain。
 
-在web浏览器中打开 [Polkadot-JS Apps](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer)，等待页面加载完成后，可以看到本地启动的节点的状态信息。
+在web浏览器中打开 [Polkadot JS App](https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer)，等待页面加载完成后，可以看到本地启动的节点的状态信息。
 
 ![](../.gitbook/assets/polkadot-js-app.png)
 
-#### RPC调用
+Polkadot的这个区块链浏览器完全运行于浏览器中，没有后端来存储数据。每次打开页面后，浏览器连接到区块链节点订阅区块更新，然后之后的新区块数据，会被显示出来。但是开始订阅之前的旧区块数据，是无法看到的。如果需要一个全功能的区块链浏览器，可以使用我们基于[Blockscout](https://github.com/blockscout/blockscout)开发的[Delta区块链浏览器](https://github.com/delta-mpc/delta-chain-explorer)，或者其他具有数据存储功能的以太坊浏览器：
+
+{% page-ref page="start-blockchain-explorer.md" %}
 
 **查看余额**
 
