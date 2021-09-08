@@ -211,7 +211,7 @@ if __name__ == "__main__":
     delta_node.create_task(task)
 ```
 
-### 6. Check the running status
+### 6. Check the Running Status
 
 After hitting the run button, some logs are printed showing that the task is submitted to the Delta Node successfully.
 
