@@ -94,3 +94,21 @@ After the downloading of all the Docker images, the service should be started no
 
 ### Start the network using Docker images of the components
 
+1.Start the Delta Chain Node. We can start only one node running in test mode, and make both Chain Connectors connect to the same node. Or we can start 2 nodes to run a more complete network:
+
+{% page-ref page="system-deployment/start-blockchain-node.md" %}
+
+2.To check the Blockchain data more intuitively, we could start a Blockchain explorer. This step is optional:
+
+{% page-ref page="system-deployment/start-blockchain-explorer.md" %}
+
+3.Deploy the Delta Smart Contracts on Blockchain:
+
+{% page-ref page="system-deployment/deploy-smart-contracts.md" %}
+
+4.Start the Chain Connectors in Blockchain mode:
+
+{% page-ref page="system-deployment/start-chain-connector.md" %}
+
+Then, we could following the steps in the previous section of running no-blockchain network, from step 2 to step 5, to start Delta Node and prepare the data, and finally run a Delta Task.
+
