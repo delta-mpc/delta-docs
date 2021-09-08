@@ -45,6 +45,16 @@ This is a Block explorer running purely inside the browser, with no backend to s
 
 #### Check Account Balance
 
+Go to Developer tab in the navigation panel, and choose "RPC calls".
+
+In the endpoint selection choose "eth" and "getBalance"
+
+Input the address: `0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1`, which has pre-allocated tokens when system starting. Then click "Submit RPC call":
+
+![](../.gitbook/assets/567bb00d3af9255ebf0d82c838a9304.png)
+
+The balance number will be returned.
+
 #### Transfer Tokens
 
 #### Check Logs
