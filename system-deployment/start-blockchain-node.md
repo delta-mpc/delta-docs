@@ -57,6 +57,22 @@ The balance number will be returned.
 
 #### Transfer Tokens
 
+Go to "Extrinsics" and select "Submission". Choose Alice in the account selection. And choose "evm" and "call" as the endpoint. Input the following data:
+
+```text
+source: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
+target: <Any eth address>
+input: 0x
+value: 1000000000000000000000 // 1000 Ether
+gas_limit: 4294967295
+gas_price: 1
+nonce: <empty>
+```
+
+Click "Submit Transaction":
+
+![](../.gitbook/assets/d2c703190740341b8b5ba1bd219299f.png)
+
 #### Check Logs
 
 #### Start & Stop the Node
