@@ -75,9 +75,21 @@ Click "Submit Transaction":
 
 #### Check Logs
 
+Logs could be viewed using Docker command:
+
+```bash
+$ docker logs -f delta-chain
+```
+
 #### Start & Stop the Node
 
+Using Docker commands to control the Blockchain node:
 
+```bash
+$ docker stop delta-chain // Stop the node
+$ docker start delta-chain // Start the node
+$ docker rm delta-chain // Remove the node container
+```
 
 ## Start the Multiple Node Network
 
