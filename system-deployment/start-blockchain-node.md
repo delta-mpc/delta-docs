@@ -43,6 +43,14 @@ This is a Block explorer running purely inside the browser, with no backend to s
 
 {% page-ref page="start-blockchain-explorer.md" %}
 
+#### Check Account Balance
+
+#### Transfer Tokens
+
+#### Check Logs
+
+#### Start & Stop the Node
+
 
 
 ## Start the Multiple Node Network
