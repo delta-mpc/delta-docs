@@ -7,8 +7,8 @@
 
 ## system deployment
 
-* [Start Blockchain Node](system-deployment/start-blockchain-node.md)
-* [Start Blockchain Explorer](system-deployment/start-blockchain-explorer.md)
+* [Start Delta Chain Node](system-deployment/start-delta-chain-node.md)
+* [Start Delta Chain Explorer](system-deployment/start-delta-chain-explorer.md)
 * [Deploy Smart Contracts](system-deployment/deploy-smart-contracts.md)
 * [Start Chain Connector](system-deployment/start-chain-connector.md)
 * [Start Delta Node](system-deployment/start-delta-node.md)
