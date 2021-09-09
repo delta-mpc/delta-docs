@@ -201,11 +201,10 @@ DELTA_NODE_API = "http://127.0.0.1:6704"
 接下来我们可以开始运行这个模型了：
 
 ```python
-if __name__ == "__main__":
-    task = ExampleTask()
+task = ExampleTask()
 
-    delta_node = DeltaNode(DELTA_NODE_API)
-    delta_node.create_task(task)
+delta_node = DeltaNode(DELTA_NODE_API)
+delta_node.create_task(task)
 ```
 
 ### 6. 查看执行状态
