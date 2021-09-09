@@ -35,5 +35,41 @@ Note that we did three things in this command:
 
 ### Pull the Image for the Delta Chain Explorer
 
+```bash
+$ docker pull deltampc/delta-chain-explorer:dev
+```
+
+### Initialization
+
+Create the root folder for the Docker container:
+
+```bash
+$ mkdir delta-chain-explorer
+```
+
+Create an file for environment variables inside:
+
+```bash
+$ cd delta-chain-explorer
+$ touch .env
+```
+
+And put the following lines in the file:
+
+```bash
+DATABASE_URL=postgresql://<db user>:<db password>@<db host>:<db port>/explorer?ssl=false
+ETHEREUM_JSONRPC_VARIANT=ganache
+ETHEREUM_JSONRPC_HTTP_URL=<RPC endponit url>
+ETHEREUM_JSONRPC_TRACE_URL=<RPC endponit url>
+ETHEREUM_JSONRPC_WS_URL=<Websocket endponit url>
+COIN=DAI
+```
+
+Remember to replace the values with the real ones in your environment.
+
+For the database configuration, type in the username, password, hostname and port. If the database is started using the instructions above, the username is `postgres` , and the password is `1234qwer`, the hostname is the IP of the machine running docker, and the port is `5432`.
+
+Note that IP address cannot be `127.0.0.1`, if the OS is Windows or Mac, use `host.docker.internal`. And if the OS is Linux, find the IP address of the `docker0` interface using `ifconfig` command, which is by default `172.17.0.1`.
+
 
 
