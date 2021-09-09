@@ -69,7 +69,9 @@ Remember to replace the values with the real ones in your environment.
 
 For the database configuration, type in the username, password, hostname and port. If the database is started using the instructions above, the username is `postgres` , and the password is `1234qwer`, the hostname is the IP of the machine running docker, and the port is `5432`.
 
-Note that IP address cannot be `127.0.0.1`, if the OS is Windows or Mac, use `host.docker.internal`. And if the OS is Linux, find the IP address of the `docker0` interface using `ifconfig` command, which is by default `172.17.0.1`.
+Note that IP address cannot be `127.0.0.1`, if the OS is Windows or Mac, use `host.docker.internal`. And if the OS is Linux, find the IP address of the `docker0` ethernet interface using `ifconfig` command, which is by default `172.17.0.1`.
+
+The endpoints of the Delta Chain Node should also be configured. The hostname is as above. The port for RPC is `9933`, and the port for WebSocket is `9944`.
 
 
 
