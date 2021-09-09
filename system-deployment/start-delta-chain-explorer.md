@@ -73,5 +73,19 @@ Note that IP address cannot be `127.0.0.1`, if the OS is Windows or Mac, use `ho
 
 The endpoints of the Delta Chain Node should also be configured. The hostname is as above. The port for RPC is `9933`, and the port for WebSocket is `9944`.
 
+### Start the Docker Container
 
+```bash
+$ docker run -d -p 4000:4000 --env-file ./.env deltampc/delta-chain-explorer:dev
+```
+
+As the container successfully started, we could visit the explorer's GUI in the browser:
+
+```bash
+http://localhost:4000
+```
+
+And here's a screenshot:
+
+![](../.gitbook/assets/8aeda9264bfe68184d52f6baf7049e0.png)
 
