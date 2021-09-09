@@ -62,10 +62,10 @@ COIN=DAI
 
 另外，需要将`<RPC endpoint url>`和`<Websocket endpoint url>`地址设置为区块链节点的地址。如果使用了上一章的教程启动区块链节点，则服务的IP都是宿主机IP，RPC服务的端口是`9933`，Websocket服务的端口是`9944`。
 
-注意上面两步中，宿主机的ip地址不是127.0.0.1，具体取决于操作系统：
+注意上面两步中，宿主机的IP地址不是`127.0.0.1`，具体取决于操作系统：
 
-* 对于windows和Mac系统，请使用域名host.docker.internal
-* 对于linux系统，请使用ifcongfig查看网卡docker0的ip地址（默认为172.17.0.1）
+* 对于Windows和Mac系统，请使用域名`host.docker.internal`
+* 对于Linux系统，请使用`ifconfig`查看网卡`docker0`的IP地址（默认为`172.17.0.1`）
 
 ### 启动区块链浏览器的容器
 
