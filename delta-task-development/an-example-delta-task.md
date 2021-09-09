@@ -204,11 +204,10 @@ DELTA_NODE_API = "http://127.0.0.1:6704"
 Finally we can start the task:
 
 ```python
-if __name__ == "__main__":
-    task = ExampleTask()
+task = ExampleTask()
 
-    delta_node = DeltaNode(DELTA_NODE_API)
-    delta_node.create_task(task)
+delta_node = DeltaNode(DELTA_NODE_API)
+delta_node.create_task(task)
 ```
 
 ### 6. Check the Running Status
