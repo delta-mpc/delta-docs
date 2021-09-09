@@ -12,11 +12,10 @@
 
 我们可以通过Postgres的Docker镜像来启动一个Postgres数据库供区块链浏览器使用。为了防止数据丢失，最好将持久化存储的数据放到Docker容器外部的持久化卷上保存。
 
-在本地新建一个文件夹，做为启动数据库的跟目录，并在启动新建一个子文件夹，用于防止数据库文件：
+在本地新建一个文件夹，做为启动数据库的跟目录：
 
 ```bash
 $ mkdir postgres
-$ mkdir postgres/data
 ```
 
 然后用下面的命令启动postgres的镜像：
@@ -26,7 +25,7 @@ $ cd postgres
 $ docker run -d -v ${PWD}/data:/var/lib/postgresql/data -e PGDATA=/var/lib/postgresql/data/pgdata -e POSTGRES_PASSWORD='1234qwer' postgres:alpine3.14
 ```
 
-注意这行启动命令干了三件事情，第一个是将data文件夹绑定到容器中去，第二个是通过环境变量设置了Postgres使用的数据文件位置，第三个是通过环境变量设置了postgres默认用户的密码。
+注意这行启动命令干了三件事情，第一个是创建`data`子文件夹，并将其绑定到容器中去，第二个是通过环境变量设置了Postgres使用的数据文件位置，第三个是通过环境变量设置了postgres默认用户的密码。
 
 ### 下载Delta区块链浏览器镜像
 
