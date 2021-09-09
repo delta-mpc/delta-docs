@@ -98,11 +98,11 @@ $ docker-compose up -d
 
 1.启动区块链节点，可以启动一个区块链节点，让两个Chain Connector连接到这一个节点，也可以启动两个区块链节点组成网络，两个Chain Connector各自连接一个节点：
 
-{% page-ref page="network-deployment/start-blockchain-node.md" %}
+{% page-ref page="network-deployment/start-delta-chain-node.md" %}
 
 2.为了方便查看区块链节点的数据，可以再启动一个图形化界面的区块链浏览器，这一步可选：
 
-{% page-ref page="network-deployment/start-blockchain-explorer.md" %}
+{% page-ref page="network-deployment/start-delta-chain-explorer.md" %}
 
 3.在区块链上部署Delta智能合约：
 

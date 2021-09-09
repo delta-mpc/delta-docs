@@ -7,8 +7,8 @@
 
 ## 系统搭建和部署 <a id="network-deployment"></a>
 
-* [启动区块链节点](network-deployment/start-blockchain-node.md)
-* [启动区块链浏览器](network-deployment/start-blockchain-explorer.md)
+* [启动Delta区块链节点](network-deployment/start-delta-chain-node.md)
+* [启动Delta区块链浏览器](network-deployment/start-delta-chain-explorer.md)
 * [部署智能合约](network-deployment/deploy-smart-contracts.md)
 * [启动Chain Connector](network-deployment/start-chain-connector.md)
 * [启动Delta Node](network-deployment/start-delta-node.md)
