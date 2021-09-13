@@ -185,6 +185,28 @@ class ExampleTask(HorizontalTask):
 
 ```
 
+We defined a class for the `DeltaTask`,which inherits from `HorizontalTask`, which is a virtual base class. Some methods must be implemented by the developer before it can be executed on Delta Node.
+
+The first method we need to implement is the constructor `__init__`. The parent's constructor must be called first, in which we could configure the task name, the dataset to be used, the number of total rounds to be executed, the validation interval, and the fraction of samples to be used as the validation set.
+
+After the invocation of the parent's constructor, we could define the model's parameters, such as the loss function and optimizer to be used. 
+
+Then there're 4 more methods to be implemented, as listed below:
+
+* `preprocess`：Data preprocessing before the training step.
+* `train`：The training step.
+* `validate`：Definition of the validation metrics.
+* `get_params`：The parameters to be trained in the training step.
+
+And there're 2 optional methods to be overloaded:
+
+* `algorithm`：The secure aggregation algorithm to be used.
+* `dataloader_config`：The `dataloader` config for the training set and the validation set.
+
+The  `algorithm` method is used to define the secure aggregation algorithm. The algorithm candidates to be chosen from resides in the `delta.algorithm.horizontal` package.  2 options are provided for now: `FedAvg` and `FaultTolerantFedAvg`. If `algorithm` method is not overloaded, `FedAvg` is chosen by default.
+
+The other method `dataloader_config` is used to configure the `dataloader` for the data of the training set and the validation set. The configurable items are the same as `PyTorch`, which could be found in its [official document](https://pytorch.org/docs/stable/data.html). The default config is to use the same configuration for both the training set and the validation set `(shuffle:True, batch_size:64, drop_last:True)`.
+
 ### 4. Set the API Address of the Delta Node
 
 After defining the task details, we're ready to run the task on the Delta Nodes.
