@@ -182,6 +182,28 @@ class ExampleTask(HorizontalTask):
 
 ```
 
+定义横向联邦学习时，我们需要定义一个`DeltaTask`的类，继承自`HorizontalTask`类。`HorizontalTask`类是一个虚基类，我们需要实现其中的一些方法，完成横向联邦学习的定义。
+
+首先是构造函数`__init__`，我们需要首先调用父类的`__init__`方法，在构造函数中，我们可以配置任务的名称、使用的数据集、训练的总轮次数、以及进行验证的间隔和验证集的比例。 调用父类的构造函数之后，我们可以在构造函数中定义任务所需的属性，比如需要训练的模型、损失函数、优化器等。
+
+之后，我们有4个必须要定义的方法，分别是：
+
+* `preprocess`：用于预处理训练数据
+* `train`：定义模型的训练过程
+* `validate`：定义模型的验证过程，返回验证得到的指标值
+* `get_params`：定义任务中，需要的训练的模型参数
+
+这些方法，定义了模型训练、验证以及数据的预处理，这与在本地训练一个神经网络的写法没有任何区别，并不需要了解横向联邦学习的知识。 这些方法，对应了横向联邦学习中的训练阶段，会在各个参与训练的Delta Node中执行。
+
+除了上述4个必须要定义的方法外，我们还有两个可选方法，可以进行重载，分别是：
+
+* `algorithm`：定义横向联邦学习中的安全聚合算法
+* `dataloader_config`：定义训练集和验证集的dataloader配置
+
+在`algorithm`方法中，我们可以定义横向联邦学习中的安全聚合算法。这并不需要用户自己来实现安全聚合算法，在Delta框架中，已经预先定义好了几个安全集合算法， 在`delta.algorithm.horizontal`包中，现在包含`FedAvg`与`FaultTolerantFedAvg`。用户只需要在`algorithm`中配置所需的安全聚合算法，返回对应的算法对象即可。 如果没有重载`algorithm`方法，那么就会使用默认的安全聚合算法`FedAvg`。
+
+在`dataloader_config`方法中，我们可以定义训练集和验证集的dataloader的配置。具体的配置项，可以参考pytorch中的[**dataloader**](https://pytorch.org/docs/stable/data.html)。 如果没有重载`dataloader_config`方法，那么会对训练集和验证集，会使用相同的默认配置`(shuffle: True, batch_size: 64, drop_last: True)`。
+
 ### 4. 指定执行任务用的Delta Node的API
 
 定义好了任务，我们就可以开始准备在Delta Node上执行任务了。
