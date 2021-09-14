@@ -8,3 +8,9 @@ Since the capacity of the system is limited, and now we don't yet have a robust 
 
 We have put some common open datasets on the Delta Nodes, the datasets are split on both samples and features and put on different nodes to simulate the split of data in privacy-preserving computation. Please find the details on the docs in JupyterLab after login to Deltaboard.
 
+### Delta Chain Explorer
+
+The Delta Chain used by the online system could be viewed with the Delta Chain Explorer deployed at the following address:
+
+{% embed url="https://explorer.deltampc.com" %}
+
