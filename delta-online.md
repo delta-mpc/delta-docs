@@ -8,3 +8,13 @@ Delta官网部署了一个三节点的Delta隐私计算网络，在其中一个�
 
 线上系统的Delta Node中放置了一些常用的公开数据集，模拟了各种多节点数据划分的情况，供大家测试使用。详情请登录Deltaboard后，在JupyterLab中查看数据说明文档。
 
+### Delta区块链浏览器
+
+线上系统的Delta区块链可以通过Delta区块链浏览器查看，地址如下：
+
+{% embed url="https://explorer.deltampc.com" %}
+
+
+
+
+
