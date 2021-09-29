@@ -91,3 +91,9 @@ The server waits for all the client to submit their results, and verifies the co
 
 ![Delta - HFL - Secure Aggregation](../.gitbook/assets/3fe8d87364983671a0076fe414a1ea8.png)
 
+The handling of clients offline is integrated into the secure aggregation process so that an extra round of error handling is not required. The smart contracts counts the numbers of the online and offline clients. If the number of online clients is enough, the smart contract will trigger `Start Aggregation` event to start the progress.
+
+For each online node, after receiving the event, send an array of secret sharing parts to the server, the length of the array equals the number of participants in the round. If the participant is online, i.e. submitted computation result commitment on-chain, the node puts the secret sharing of its random seed in the array, for the server to remove the random string applied. If the participant is offline, the node puts the secret sharing of its `SK2` to remove its mask value in the final result.
+
+The server receives all the arrays, and sums them up together with the results from last step, to get the final computation result.
+
