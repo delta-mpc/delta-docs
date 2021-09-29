@@ -65,7 +65,11 @@ To start a round, the Delta Node server initiates the contract with the sequence
 
 ![Delta - HFL - Private Key Exchange &amp; Secret Sharing](../.gitbook/assets/c74879a461e392e9fee072bb1595421.png)
 
-### 
+In the HFL algorithm of Google, a keypair is used to establish the encrypted communication channel between computation nodes. And another keypair is used to generate the mask, the private key is then secret shared to other clients to deal with offline of this node. A random number is generated and applied to the partial results, the seed is also secret shared to others to prevent the server from getting plaintext result of the node by cheating about the online status of it.
+
+In the original design, this step is performed after the training of local data. However, in Delta, since the data holder is trading computation power for money, the wasting of computation should be avoid. If the round is failed due to offline of many nodes, the computation is wasted. Thus we apply an early stop strategy here, to do the heavy training computation as late as possible, so that if any other steps fail earlier, we don't have to consume the computation power.
+
+The secret sharing is executed between each pair of clients. Since the connections between mobile clients are not always available, the channel is established through Delta Node server. The communication is encrypted so that the server can not discover the plaintext content.
 
 ### Local Training
 
