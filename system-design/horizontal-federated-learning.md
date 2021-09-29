@@ -49,7 +49,7 @@ The data holders run Delta Node to subscribe to the `Create Task` channel for ne
 
 Note that when decided to join a task, the Delta Node doesn't have to send the application to the Blockchain, instead just silently waits for the next event to occur. This is specifically designed for large scale HFL scenarios, where the computation clients will be mobile phones/edge devices. In these cases the computation clients can not be kept online for a long period. So we use the round as the minimum unit  for participation. The clients only need to keep online for a single round, and can go offline right after it. The next round can be successfully executed without it online.
 
-This design is applicable in Enterprise Delta Node cases as well, where the number of nodes will be much less, with each node holding large amount of samples.
+This design is applicable in the case of Enterprise Delta Node as well, where the number of nodes will be much smaller, with each node holding larger amount of samples.
 
 ### Candidate Selection for a Round
 
@@ -65,7 +65,7 @@ To start a round, the Delta Node server initiates the contract with the sequence
 
 ![Delta - HFL - Private Key Exchange &amp; Secret Sharing](../.gitbook/assets/c74879a461e392e9fee072bb1595421.png)
 
-In the HFL algorithm of Google, a keypair is used to establish the encrypted communication channel between computation nodes. And another keypair is used to generate the mask, the private key is then secret shared to other clients to deal with offline of this node. A random number is generated and applied to the partial results, the seed is also secret shared to others to prevent the server from getting plaintext result of the node by cheating about the online status of it.
+In the HFL algorithm of Google, a keypair is used to establish the encrypted communication channel between computation nodes. And another keypair is used to generate the mask, the private key is then secret shared to other clients to deal with offline of this node. A random number is generated and applied to the partial results, the seed is also secret shared to others to prevent the server from getting plaintext result of the node by cheating about the online status of it to others.
 
 In the original design, this step is performed after the training of local data. However, in Delta, since the data holder is trading computation power for money, the wasting of computation should be avoid. If the round is failed due to offline of many nodes, the computation is wasted. Thus we apply an early stop strategy here, to do the heavy training computation as late as possible, so that if any other steps fail earlier, we don't have to consume the computation power.
 
@@ -75,7 +75,17 @@ The secret sharing is executed between each pair of clients. Since the connectio
 
 ![Delta - HFL - Local Training](../.gitbook/assets/76b2d1951085e78124648d4d254477e.png)
 
-### 
+Now the client starts to do the actual model training on its local data. Since the code and initial model params are not recorded on-chain, the client must connect to the server to get the code and initial params. The client must validate the task code with the corresponding crypto commitment on-chain in case the server is cheating.
+
+Note that the client retrieves 2 things from the server: the computation logic, and the initial model params. The computation logic is in the form of a serialized Python object of the Delta Task, whose corresponding commitment should have already been submitted on-chain when the server created the task, which could now be used to verify the correctness of the code.
+
+Delta Node client doesn't have to verify the model params. And it can not do it even if it wants to since the server does not generate commitment for the params after each round of training. The correctness of initial params is not relevant to the successful execution of the computation logic, and thus is not the concern of the client. The clients just need to follow the instructions to perform the execution, and send back the results.
+
+> In the future, if the server provides inferencing service to others using the model, it may want to proof to others the robustness of its model and the correctness of the inference result. Then the commitment of the training results should be recorded on-chain, which connects the proof of training and inferencing, so that the users could be convinced that the inferencing result is actually from the model, which is trained from a large amount of samples.
+
+After the local training is finished, the commitment for the masked model incremental is generated and sent to the Blockchain by the client as the evidence of the computation.
+
+The server waits for all the client to submit their results, and verifies the correctness using commitments on-chain. After all the results are collected, or a timeout reached in case of clients going offline, the server initiates the secure aggregation step.
 
 ### Secure Aggregation
 
