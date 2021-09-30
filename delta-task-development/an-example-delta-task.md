@@ -238,3 +238,7 @@ After hitting the run button, some logs are printed showing that the task is sub
 
 To see the details of the execution, go to "My Tasks" on the sidebar of Deltaboard, the task should be listed. Click the item to view the execution logs.
 
+In the System Design sections of this document, there're more detailed explanations about the task execution process. For the execution process of the above horizontal federated learning task, please read the following document:
+
+{% page-ref page="../system-design/horizontal-federated-learning.md" %}
+
