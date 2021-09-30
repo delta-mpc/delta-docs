@@ -29,7 +29,3 @@
 * [纵向联邦学习](system-design/vertical-federated-learning.md)
 * [联邦统计](system-design/federated-analytics.md)
 
-## API文档 <a id="api-docs"></a>
-
-* [智能合约](api-docs/smart-contracts.md)
-
