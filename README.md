@@ -4,7 +4,7 @@
 
 Out-of-the-Box Blockchain-powered MPC network
 
-[Homepage](https://deltampc.com) | [Documentation](https://docs.deltampc.com/v/en)
+[Homepage](https://deltampc.com/en) | [Documentation](https://docs.deltampc.com/v/en)
 
 ## Overview
 
