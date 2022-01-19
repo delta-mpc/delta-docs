@@ -41,13 +41,35 @@ WS_URL=<websocket endpoit>
 * 对于windows和Mac系统，请使用域名host.docker.internal
 * 对于linux系统，请使用ifcongfig查看网卡docker0的ip地址（默认为172.17.0.1）
 
-然后运行下面的命令，命令会先编译智能合约，然后使用上面的配置自动完成部署：
+然后先运行下面的命令，命令会编译并部署IdentityContract合约：
 
 ```bash
-$ yarn deploy
+$ yarn deploy IdentityContract
 ```
 
-运行完成后，在`compile`目录下可以看到一个`Mpc.json`文件，其中包含合约的部署信息。至此智能合约已经部署完成。
+IdentityContract是用来进行节点身份管理的合约。
+部署完IdentityContract合约后，我们可以看到如下输出，其中包含了IdentityContract的合约地址：
+
+```
+IdentityContract 合约已成功部署，地址为: 0x2ec88204a540f506D661f8281d6f7C29e9A949ef
+```
+
+（合约地址不是固定的，以实际部署时的输出为准）。
+
+然后我们部署HFLContract：
+
+```bash
+yarn deploy HFLContract 0x2ec88204a540f506D661f8281d6f7C29e9A949ef
+```
+
+HFLContract是用来进行横向联邦学习的合约。需要注意的是，在部署HFLContract时，我们需要添加IdentityContract的合约地址，作为HFLContract的构造参数。
+部署成功后，我们可以看到如下输出：
+
+```
+HFLContract 合约已成功部署，地址为: 0x97F109BE334Db4300B20C927838707241Bb46676
+```
+
+运行完成后，在`compile`目录下可以看到`IdentityContract.json`文件和`HFLContract.json`，分别为IdentityContract和HFLContract的abi文件。至此智能合约已经部署完成。
 
 ### 在区块链浏览器中添加合约信息
 
