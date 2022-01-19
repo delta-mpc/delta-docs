@@ -235,3 +235,7 @@ delta_node.create_task(task)
 
 接下来，可以从左侧的导航栏中，前往“任务列表”，找到刚刚提交的任务，点击进去查看具体的执行日志了。
 
+在系统详细设计的章节中，有隐私计算任务从发送到Delta Node开始，到执行完毕的详细流程说明，在上文中执行的横向联邦学习任务，可以在下面的文章中详细了解其执行过程：
+
+{% page-ref page="../system-design/horizontal-federated-learning.md" %}
+

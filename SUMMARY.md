@@ -19,7 +19,6 @@
 ## 计算任务开发 <a id="delta-task-development"></a>
 
 * [一个示例任务](delta-task-development/delta-task-example.md)
-* [计算任务执行过程](delta-task-development/delta-task-workflow.md)
 
 ## 系统详细设计 <a id="system-design"></a>
 
