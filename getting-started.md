@@ -60,7 +60,7 @@ $ docker-compose up -d
 
 ## 最小完整网络搭建
 
-一个最小的包含区块链的Delta网络，需要两个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
+一个最小的包含区块链的Delta网络，需要三个个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
 
 ![](.gitbook/assets/delta-with-multi-chain.png)
 
