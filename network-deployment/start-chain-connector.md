@@ -13,7 +13,7 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 目前Delta框架还处于开发阶段，后续会发布正式的release版本。在现阶段，我们可以下载开发版本的docker镜像，开发版本镜像的tag名称是`dev`：
 
 ```text
-$ docker pull deltampc/delta-chain-connector:dev
+$ docker pull deltampc/delta-chain-connector:0.3.0
 ```
 
 ### 初始化配置
@@ -37,14 +37,13 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta_chain_connector:dev init
 
 ### 修改配置文件
 
-在`config`文件夹中，会有一个预先生成的配置文件`config.yaml`:。在首次启动前，我们必须要配置的项目包括Chain Connector的运行模式。如果运行模式配置为Blockchain，那么还需要配置区块链节点的IP地址。
+在`config`文件夹中，会有一个预先生成的配置文件`config.json`:。在首次启动前，我们必须要配置的项目包括Chain Connector的运行模式。如果运行模式配置为Blockchain，那么还需要配置区块链节点的IP地址。
 
-在这里我们将mode设置为`coordinator`：
+在这里我们将impl设置为`monkey`，即为coordinator模式：
 
 ```text
----
 # Chain Connector运行模式
-mode: "coordinator"
+impl: "monkey"
 ```
 
 完成配置之后，就可以启动Chain Connector。
@@ -54,7 +53,7 @@ mode: "coordinator"
 使用Docker命令启动Chain Connector，将上一步创建的文件夹绑定到Container内部的`app`文件夹。另外Chain Connector需要对外暴露端口`4500`，作为对外的API端口：
 
 ```text
-$ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delta-chain-connector:dev run
+$ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delta-chain-connector:0.3.0 run
 ```
 
 通过Docker的log命令查看Container的执行状态，确认节点已经正常启动：
@@ -63,3 +62,28 @@ $ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delt
 $ docker logs -f chain_connector
 ```
 
+
+## 使用Chain模式启动Chain Connector
+
+使用Chain模式启动Chain Connector 与使用Coordinator 模式启动差别不大，唯一需要修改的就是配置文件。
+
+### 修改配置文件
+
+要以Chain模式启动Chain Connector，我们需要将impl改为chain：
+
+```text
+# Chain Connector运行模式
+impl: "chain"
+```
+
+接下来，我们需要修改`chain.nodeAddress`、`chain.privateKey`、`chain.provider`、`chain.identity.contractAddress`以及`chain.hfl.contractAddress`这几项配置。
+
+其中，`chain.nodeAddress`和`chain.privateKey`分别代表用户的区块链钱包地址和私钥。用户可以使用任意与以太坊兼容的钱包（比如Metamask），来生成钱包地址和私钥。
+
+`chain.provider`代表区块链节点的地址，这里需要使用WebSocket的链接地址。`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
+
+{% page-ref page="network-deployment/deploy-smart-contracts.md" %}
+
+### 启动Chain Connector服务
+
+使用Chain模式启动Chain Connector服务的方式与使用Coordinator模式的方式完全一致。
