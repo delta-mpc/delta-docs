@@ -49,12 +49,12 @@ $ cd delta-explorer && touch .env
 
 环境变量文件示例如下：
 
-```text
+```
 DATABASE_URL=postgresql://<db user>:<db password>@<db host>:<db port>/explorer?ssl=false
 ETHEREUM_JSONRPC_VARIANT=ganache
-ETHEREUM_JSONRPC_HTTP_URL=<RPC endponit url>
-ETHEREUM_JSONRPC_TRACE_URL=<RPC endponit url>
-ETHEREUM_JSONRPC_WS_URL=<Websocket endponit url>
+ETHEREUM_JSONRPC_HTTP_URL=<RPC endponit url(http://172.17.0.1:9933)>
+ETHEREUM_JSONRPC_TRACE_URL=<RPC endponit url(http://172.17.0.1:9933)>
+ETHEREUM_JSONRPC_WS_URL=<Websocket endponit url(ws://172.17.0.1:9944)>
 COIN=DAI
 ```
 
@@ -76,6 +76,4 @@ $ docker run -d -p 4000:4000 --env-file ./.env deltampc/delta-chain-explorer:dev
 在浏览器中访问地址[http://localhost:4000](http://localhost:4000)，可以看到区块链浏览器已经启动起来了：
 
 ![](../.gitbook/assets/8aeda9264bfe68184d52f6baf7049e0.png)
-
-
 
