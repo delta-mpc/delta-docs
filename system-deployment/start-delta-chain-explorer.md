@@ -20,7 +20,7 @@ Create root folder for the docker container:
 $ mkdir postgres
 ```
 
- Start the container using the following command:
+&#x20;Start the container using the following command:
 
 ```bash
 $ cd postgres
@@ -59,9 +59,9 @@ And put the following lines in the file:
 ```bash
 DATABASE_URL=postgresql://<db user>:<db password>@<db host>:<db port>/explorer?ssl=false
 ETHEREUM_JSONRPC_VARIANT=ganache
-ETHEREUM_JSONRPC_HTTP_URL=<RPC endponit url>
-ETHEREUM_JSONRPC_TRACE_URL=<RPC endponit url>
-ETHEREUM_JSONRPC_WS_URL=<Websocket endponit url>
+ETHEREUM_JSONRPC_HTTP_URL=<RPC endponit url(http://172.17.0.1:9933)>
+ETHEREUM_JSONRPC_TRACE_URL=<RPC endponit url(http://172.17.0.1:9933)>
+ETHEREUM_JSONRPC_WS_URL=<Websocket endponit url(ws://172.17.0.1:9944)>
 COIN=DAI
 ```
 
@@ -88,4 +88,3 @@ http://localhost:4000
 And here's a screenshot:
 
 ![](../.gitbook/assets/8aeda9264bfe68184d52f6baf7049e0.png)
-
