@@ -17,7 +17,7 @@ Delta has an All-in-One startup scripts using docker-compose to start the whole 
 1.Clone the Github repo:
 
 ```text
-$ git clone https://github.com/delta-mpc/delta-all-in-one.git
+$ git clone --depth 1 --branch v0.3.0 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
 2.Go to the config folder for no-blockchain network:
@@ -60,29 +60,86 @@ After the downloading of all the Docker images, the service should be started no
 
 ## Minimum Network with Blockchain
 
-A minimum network with Blockchain consists of 2 parties deploying the same set of network components: Delta Chain Node with Delta Contracts deployed, Chain Connector running in Blockchain mode,  Delta Node, and the GUI Deltaboard, the structure is as following:
+A minimum network with Blockchain consists of 3 parties deploying the same set of network components: Delta Chain Node with Delta Contracts deployed, Chain Connector running in Blockchain mode,  Delta Node, and the GUI Deltaboard, the structure is as following:
 
-![](.gitbook/assets/8335ad117f19018e3a7e593fb07e03d.png)
+![](.gitbook/assets/delta-with-multi-chain.png)
 
-The network could be further minimized if started by a single developer. We need only one instance of Deltaboard to control the network. And the Blockchain node could be shared between the 2 Chain Connectors:
+The network could be further minimized if started by a single developer. We need only one instance of Deltaboard to control the network. And the Blockchain node could be shared among the 3 Chain Connectors:
 
-![](.gitbook/assets/2bbe2a3fae4b39c39119405e786e4df.png)
+![](.gitbook/assets/delta-with-single-chain.png)
 
 ### Start the network using All-in-One Docker image
 
-1.Clone the Github repo:
+1. Clone the Github repo:
 
 ```text
-$ git clone https://github.com/delta-mpc/delta-all-in-one.git
+$ git clone --depth 1 --branch v0.3.0 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-2.Go to the config folder for blockchain network:
+2. Go to the folder for blockchain network:
 
 ```text
-$ cd delta-all-in-one/with-blockchain
+$ cd delta-all-in-one/with-deltachain
 ```
 
-3.Start all the container using docker-composer:
+3. Edit config files
+
+In the folder for blockchain network, we can see some sub directories:
+
+```bash
+$ ls
+connector1  connector2  connector3  deltaboard  delta-node1  delta-node2  delta-node3  docker-compose.yml
+```
+
+The directories `connector1`, `connector2` and `connector3` store config files for delta-chain-connector.
+The config file looks like:
+
+```json
+$ cat connector1/config/config.json
+{
+  "log": {
+    "level": "info"
+  },
+  "impl": "chain",
+  "host": "0.0.0.0",
+  "port": 4500,
+  "monkey": {
+    "db": {
+      "type": "sqlite",
+      "url": "db/chain.db"
+    }
+  },
+  "chain": {
+    "nodeAddress": "",
+    "privateKey": "",
+    "provider": "wss://apus.chain.deltampc.com",
+    "gasPrice": 1,
+    "gasLimit": 4294967294,
+    "chainParam": {
+      "chainId": 42,
+      "name": "delta"
+    },
+
+    "identity": {
+      "contractAddress": "0x43A6feb218F0a1Bc3Ad9d9045ee6528349572E42"
+    },
+    "hfl": {
+      "contractAddress": "0x3830C82700B050dA87F1D1A60104Fb667227B686"
+    }
+  }
+}
+```
+
+In the config file, `chain.provider`, `chain.identity.contractAddress` and `chain.hfl.contractAddress` represent the blockchain node address, the address of Identity Contract and HFL Contract which support for the delta framework, respectively. For convenience, we have created a blockchain node for our delta-chain, and deployed the Identity Contract and HFL Contract on it. You can keep these config items as they are, unless you want to deploy the contracts on another chain compatible with EVM.
+
+In the config file, `chain.nodeAddress` and `chain.privateKey` represent a wallet address compatible with Ethernet and its private key, respectively.
+You can a wallet you prefer to, such as Metamask, to generate the wallet address and private key.
+
+Since we need to start three parties, we need to generate three different wallet address and private key, and then set them to `chain.nodeAddress` and `chain.privateKey` in config files in `connector1`, `connector2` and `connector3`. As a wallet need to have some tokens to send transactions to blockchain, you need to query for some tokens for you three wallet. You can join in our [slack](https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw), and query for tokens in the `delta-chain-faucet` channel.
+
+4. Start all the container using docker-composer:
+
+After config files have been edited, you can start the network by:
 
 ```text
 $ docker-compose up -d
