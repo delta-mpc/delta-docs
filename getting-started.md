@@ -14,19 +14,19 @@ Delta隐私计算网络由多个组件构成，可根据需要进行选择和组
 
 Delta提供了一个docker-compose文件，用于一次启动整个网络。
 
-1.克隆delta-all-in-one的github仓库：
+1. 克隆delta-all-in-one的github仓库：
 
 ```text
-$ git clone https://github.com/delta-mpc/delta-all-in-one.git
+$ git clone --depth 1 --branch v0.3.0 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-2.进入无区块链网络的配置文件夹：
+2. 进入无区块链网络的配置文件夹：
 
 ```text
 $ cd delta-all-in-one/no-blockchain
 ```
 
-3.使用docker-compose命令启动全部的服务：
+3. 使用docker-compose命令启动全部的服务：
 
 ```text
 $ docker-compose up -d
@@ -60,7 +60,7 @@ $ docker-compose up -d
 
 ## 最小完整网络搭建
 
-一个最小的包含区块链的Delta网络，需要三个个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
+一个最小的包含区块链的Delta网络，需要三个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
 
 ![](.gitbook/assets/delta-with-multi-chain.png)
 
@@ -72,21 +72,20 @@ $ docker-compose up -d
 
 Delta采用Docker镜像进行快速部署。在Delta All-in-One仓库中，包含了快速启动一个Delta网络所需要的全部启动文件和配置。
 
-首先，我们git clone这个Delta All-in-One的仓库，目前的最新发布版本是v0.3.0：
+1. 克隆delta-all-in-one的github仓库：
 
 ```
 $ git clone --depth 1 --branch v0.3.0 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-执行完成后，我们进入克隆下来的文件夹。delta-all-in-one中包含了两个文件夹：no-blockchain和with-deltachain。其中，no-blockchain文件夹下，是启动一个无区块链节点的Delta网络的相关配置，而with-deltachain中，是启动使用Delta Chain区块链节点的网络的相关配置。关于无区块链的Delta网络，可参考文档中的介绍：
 
-[https://docs.deltampc.com/getting-started](https://docs.deltampc.com/getting-started)
-
-而这里我们要搭建有区块链的版本，因此进入delta-all-in-one/with-deltachain文件夹：
+2. 进入包含区块链网络的配置文件夹：
 
 ```
 $ cd delta-all-in-one/with-deltachain
 ```
+
+3. 修改配置文件
 
 在这个文件夹下，我们可以看到如下文件：
 
@@ -139,6 +138,8 @@ $ cat connector1/config/config.json
 
 生成了3个钱包地址和私钥后，分别将他们填入`connector1`、`connector2`和`connector3`中配置文件的`chain.nodeAddress`、`chain.privateKey`项。
 这时，我们生成的钱包中还没有Deltachain的token，我们需要加入Delta的微信群，向管理员提供钱包地址，申请token。微信群的二维码可以看文末的链接。
+
+4. 使用docker-compose命令启动全部的服务：
 
 接下来就可以启动Delta隐私计算网络了。输入命令：
 
