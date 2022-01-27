@@ -82,7 +82,7 @@ impl: "chain"
 
 `chain.provider`代表区块链节点的地址，这里需要使用WebSocket的链接地址。`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
 
-{% page-ref page="network-deployment/deploy-smart-contracts.md" %}
+{% page-ref page="deploy-smart-contracts.md" %}
 
 ### 启动Chain Connector服务
 

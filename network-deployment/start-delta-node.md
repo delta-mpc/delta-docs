@@ -60,10 +60,10 @@ api_port: 6700
 
 ### 启动节点服务
 
-使用Docker命令行创建并启动节点的container，将上一步创建的文件夹绑定到Container内部的`app`文件夹。另外Delta Node需要对外暴露两个端口`6700`和`6800`，用于对外的API以及节点间通信：
+使用Docker命令行创建并启动节点的container，将上一步创建的文件夹绑定到Container内部的`app`文件夹。另外Delta Node需要对外暴露端口`6700`，用于对外的API以及节点间通信：
 
 ```text
-$ docker run -d --name=delta_node_1 -v ${PWD}:/app -p 6800:6800 -p 6700:6700 deltampc/delta-node:0.3.0
+$ docker run -d --name=delta_node_1 -v ${PWD}:/app -p 6700:6700 deltampc/delta-node:0.3.0
 ```
 
 通过Docker的log命令查看Container的执行状态，确认节点已经正常启动：
