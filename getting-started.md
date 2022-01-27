@@ -14,19 +14,19 @@ A minimum Delta network without Blockchain requires a Chain Connector running in
 
 Delta has an All-in-One startup scripts using docker-compose to start the whole network at once.
 
-1.Clone the Github repo:
+1. Clone the Github repo:
 
 ```text
 $ git clone --depth 1 --branch v0.3.0 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-2.Go to the config folder for no-blockchain network:
+2. Go to the config folder for no-blockchain network:
 
 ```text
 $ cd delta-all-in-one/no-blockchain
 ```
 
-3.Start all the container using docker-composer:
+3. Start all the container using docker-composer:
 
 ```text
 $ docker-compose up -d
