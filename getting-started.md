@@ -149,7 +149,7 @@ $ cat connector1/config/config.json
 
 在这里，我们需要填写`chain.nodeAddress`以及`chain.privateKey`，这两项分别代表用户的区块链钱包地址和私钥。用户可以使用任意与以太坊兼容的钱包（比如Metamask），来生成钱包地址和私钥。
 
-生成了3个钱包地址和私钥后，分别将他们填入`connector1`、`connector2`和`connector3`中配置文件的`chain.nodeAddress`、`chain.privateKey`项。 这时，我们生成的钱包中还没有Deltachain的token，我们需要获取一些Deltachain的测试Token。在Delta的Slack中可以自动化获取测试Token，请加入Delta的Slack（链接在文档首页），加入delta-chain-faucet的channel，发送命令给Delta Bot来获取测试Token。
+生成了3个钱包地址和私钥后，分别将他们填入`connector1`、`connector2`和`connector3`中配置文件的`chain.nodeAddress`、`chain.privateKey`项。 这时，我们生成的钱包中还没有Deltachain的token，我们需要获取一些Deltachain的测试Token。在Delta的Slack中可以自动化获取测试Token，请加入[Delta的Slack](https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw)，在delta-chain-faucet的channel中，发送命令给Delta Bot来获取测试Token。
 
 1. 使用docker-compose命令启动全部的服务：
 
