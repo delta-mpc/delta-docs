@@ -5,6 +5,11 @@
 * [Getting Started](getting-started.md)
 * [Delta Online](delta-online.md)
 
+## Release Notes
+
+* [v0.3.5](release-notes/v0.3.5.md)
+* [v0.3.0](release-notes/v0.3.0.md)
+
 ## system deployment
 
 * [Start Delta Chain Node](system-deployment/start-delta-chain-node.md)
@@ -27,4 +32,3 @@
 * [Horizontal Federated Learning](system-design/horizontal-federated-learning.md)
 * [Vertical Federated Learning](system-design/vertical-federated-learning.md)
 * [Federated Analytics](system-design/federated-analytics.md)
-
