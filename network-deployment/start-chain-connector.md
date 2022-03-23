@@ -6,14 +6,14 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 
 ## 使用Coordinator模式启动Chain Connector
 
-![Coordinator&#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x65E0;&#x533A;&#x5757;&#x94FE;Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;](../.gitbook/assets/53635fc89ddea878178709dd8e55ba9%20%282%29%20%282%29%20%283%29%20%281%29%20%284%29%20%284%29%20%282%29%20%282%29.png)
+![Coordinator模式下的无区块链Delta隐私计算网络结构](<../.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (2).png>)
 
 ### 下载镜像
 
 目前Delta框架还处于开发阶段，后续会发布正式的release版本。在现阶段，我们可以下载开发版本的docker镜像，开发版本镜像的tag名称是`dev`：
 
-```text
-$ docker pull deltampc/delta-chain-connector:0.3.0
+```
+$ docker pull deltampc/delta-chain-connector:0.3.5
 ```
 
 ### 初始化配置
@@ -22,15 +22,15 @@ $ docker pull deltampc/delta-chain-connector:0.3.0
 
 首先，新建文件夹delta\_chain\_connector，作为节点启动的根目录：
 
-```text
+```
 $ mkdir delta_chain_connector
 ```
 
 在节点根目录中，输入命令：
 
-```text
+```
 $ cd delta_chain_connector
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta_chain_connector:dev init
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta_chain_connector:0.3.5 init
 ```
 
 运行命令后，会在根目录`delta_chain_connector`中，新建文件夹`config`，`config`文件夹用来存放节点的配置文件。
@@ -41,7 +41,7 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta_chain_connector:dev init
 
 在这里我们将impl设置为`monkey`，即为coordinator模式：
 
-```text
+```
 # Chain Connector运行模式
 impl: "monkey"
 ```
@@ -52,16 +52,15 @@ impl: "monkey"
 
 使用Docker命令启动Chain Connector，将上一步创建的文件夹绑定到Container内部的`app`文件夹。另外Chain Connector需要对外暴露端口`4500`，作为对外的API端口：
 
-```text
-$ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delta-chain-connector:0.3.0 run
+```
+$ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delta-chain-connector:0.3.5 run
 ```
 
 通过Docker的log命令查看Container的执行状态，确认节点已经正常启动：
 
-```text
+```
 $ docker logs -f chain_connector
 ```
-
 
 ## 使用Chain模式启动Chain Connector
 
@@ -71,7 +70,7 @@ $ docker logs -f chain_connector
 
 要以Chain模式启动Chain Connector，我们需要将impl改为chain：
 
-```text
+```
 # Chain Connector运行模式
 impl: "chain"
 ```
@@ -82,7 +81,9 @@ impl: "chain"
 
 `chain.provider`代表区块链节点的地址，这里需要使用WebSocket的链接地址。`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
 
-{% page-ref page="deploy-smart-contracts.md" %}
+{% content-ref url="deploy-smart-contracts.md" %}
+[deploy-smart-contracts.md](deploy-smart-contracts.md)
+{% endcontent-ref %}
 
 ### 启动Chain Connector服务
 

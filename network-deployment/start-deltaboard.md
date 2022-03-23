@@ -1,7 +1,3 @@
----
-description: Deltaboard 是deltanode的用户界面和开发环境。支持在线编写deltanode代码。
----
-
 # 启动Deltaboard
 
 ## 通过Docker镜像启动Deltaboard
@@ -10,8 +6,8 @@ description: Deltaboard 是deltanode的用户界面和开发环境。支持在�
 
 ### 下载镜像
 
-```text
-$ docker pull deltampc/deltaboard:dev
+```
+$ docker pull deltampc/deltaboard:0.3.5
 ```
 
 ### 初始化配置
@@ -20,23 +16,23 @@ deltaboard节点保存的数据包括配置文件、保存的用户数据、系�
 
 首先，新建文件夹deltaboard，作为节点启动的根目录：
 
-```text
+```
 $ mkdir deltaboard
 ```
 
 在节点根目录中，输入命令：
 
-```text
+```
 $ cd deltaboard
-$ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:dev init
+$ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:0.3.5 init
 ```
 
 运行命令后，会在根目录`deltaboard`中，新建文件夹`config, data，db`，其中，`config`文件夹用来存放节点的配置文件，data文件夹用来存放节点保存的用户数据，比如JupyterLab中的代码和数据等，db文件夹用来存放deltaboard使用的sqlite数据库文件。
 
 ### 启动节点服务
 
-```text
-$ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboard:dev
+```
+$ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboard:0.3.5
 ```
 
 ### **访问Deltaboard**
@@ -50,4 +46,3 @@ $ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboar
 看到这个界面，说明Deltaboard已经启动完成。
 
 Deltaboard的默认账号，用户名admin，密码也是admin。登录进去后，可在个人中心修改密码。
-
