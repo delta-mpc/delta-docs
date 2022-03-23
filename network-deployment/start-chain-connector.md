@@ -10,8 +10,6 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 
 ### 下载镜像
 
-目前Delta框架还处于开发阶段，后续会发布正式的release版本。在现阶段，我们可以下载开发版本的docker镜像，开发版本镜像的tag名称是`dev`：
-
 ```
 $ docker pull deltampc/delta-chain-connector:0.3.5
 ```
