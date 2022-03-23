@@ -11,7 +11,7 @@ At this moment, Delta Node supports several types of data structure inside `data
 To ease the first running of the example Delta Task, Delta Node has a built-in command to download the MNIST dataset and randomly delete 2/3 of the samples to simulate the data separation environment of privacy-preserving computation. To download the MNIST dataset, run the following command:
 
 ```text
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:dev get-mnist
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.3.5 get-mnist
 ```
 
 ## Supported Data Structure
