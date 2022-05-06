@@ -5,10 +5,11 @@
 * [快速搭建指南](getting-started.md)
 * [Delta在线Demo](delta-online.md)
 
-## 版本发布说明 <a href="#release-note" id="release-note"></a>
+## 版本发布说明 <a href="#release-notes" id="release-notes"></a>
 
-* [v0.3.5](release-note/v0.3.5.md)
-* [v0.3.0](release-note/v0.3.0.md)
+* [v0.5.0](release-notes/v0.5.0.md)
+* [v0.3.5](release-notes/v0.3.5.md)
+* [v0.3.0](release-notes/v0.3.0.md)
 
 ## 系统搭建和部署 <a href="#network-deployment" id="network-deployment"></a>
 
@@ -23,7 +24,8 @@
 
 ## 计算任务开发 <a href="#delta-task-development" id="delta-task-development"></a>
 
-* [一个示例任务](delta-task-development/delta-task-example.md)
+* [横向联邦学习任务](delta-task-development/hfl-task-example.md)
+* [横向联邦统计任务](delta-task-development/hfa-task-example.md)
 
 ## 系统详细设计 <a href="#system-design" id="system-design"></a>
 
@@ -31,4 +33,4 @@
 * [隐私计算任务生成](system-design/task-generation.md)
 * [横向联邦学习](system-design/horizontal-federated-learning.md)
 * [纵向联邦学习](system-design/vertical-federated-learning.md)
-* [联邦统计](system-design/federated-analytics.md)
+* [横向联邦统计](system-design/horizontal-federated-analytics.md)

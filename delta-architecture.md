@@ -26,7 +26,7 @@
 
 Delta隐私计算网络是一个点对点的对等网络。多家数据持有者各自搭建节点，连接自家的数据。多个节点连接起来形成网络结构。在这个网络中每个节点都是完全一样的（对等的），具备完全相同的功能，也具有完全相同的权限。每个节点都可以自由的加入网络，也可以随时退出网络，而不会影响整个网络的功能。
 
-![Delta&#x9690;&#x79C1;&#x8BA1;&#x7B97;&#x8282;&#x70B9;&#x7ED3;&#x6784;](.gitbook/assets/6757fef6c4a75a599821c5383811b7a.png)
+![Delta隐私计算节点结构](.gitbook/assets/6757fef6c4a75a599821c5383811b7a.png)
 
 网络中的每个节点，又由两部分组成：区块链节点和Delta Node计算节点。每一家加入网络的数据持有者，都需要启动一个区块链节点以及一个Delta Node节点。区块链节点和Delta Node节点之间通过Chain Connector进行连接。
 
@@ -62,13 +62,13 @@ Delta也提供了Solidity语言的[智能合约](https://github.com/delta-mpc/de
 
 使用区块链系统进行任务协调会导致任务执行速度大大降低，在一些科研使用、测试使用，或者是对于计算结果的可信性要求不那么高的场景中，我们可以移除区块链系统，将Chain Connector设置为Coordinator模式，在此模式下的Chain Connector无需区块链，可以做为网络中心节点，连接多个Delta Node直接完成组网和计算任务协调的功能。
 
-![](.gitbook/assets/53635fc89ddea878178709dd8e55ba9%20%282%29%20%282%29%20%283%29%20%281%29%20%284%29%20%284%29%20%282%29.png)
+![](<.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (2) (1).png>)
 
 ## Delta Node
 
 [Delta Node](https://github.com/delta-mpc/delta-node)是整个隐私计算网络的核心，负责计算任务的整个生命周期的管理，包括任务注册、多节点间任务协调、任务本地执行、结果上报、结果聚合等整个任务执行流程，在整个生命周期中保证本地数据的隐私安全，同时对外提供API，供IDE或者其他系统接入。
 
-![Delta Node&#x67B6;&#x6784;](.gitbook/assets/image.png)
+![Delta Node架构](.gitbook/assets/image.png)
 
 Delta Node的数据连接层连接到数据持有者的本地数据，可通过不同的适配器连接多种数据格式，比如文件、MySQL关系型数据库以及HDFS大数据存储等。Delta Node提供API供外部调用，完成任务注册、任务状态查询、计算结果下载等任务相关的功能，以及任务列表查询、节点状态查询、节点配置等节点管理的功能。
 
@@ -98,7 +98,7 @@ Delta Node接收到Task后，在全网完成任务的分发，并根据任务定
 
 为了方便开发者的开发调试工作，Delta Task框架中集成了Delta Node的API，可以直接调用Delta Node注册Delta Task，开始计算过程，并可以实时从Log中看到Task在Delta Node上的执行状况。通过这样的设计，只要开发者本地有Python运行环境，Delta Task就可以从本地开发环境中直接启动，而无需先进入另一个"任务上传"的界面上传代码。开发者只需要在Delta Task框架初始化时指定Delta Node的地址即可。
 
-![Delta Task&#x6846;&#x67B6;&#x7ED3;&#x6784;](.gitbook/assets/7cdbc191533d0497b25fdceecda5f17.png)
+![Delta Task框架结构](.gitbook/assets/7cdbc191533d0497b25fdceecda5f17.png)
 
 由于进行全网计算的任务耗时一般较长，而开发者在真正进行大规模数据计算之前往往有一个小规模数据的调试过程，以确认代码正确。Delta Task框架这样的设计，可以让我们很方便的实现一个本地调试专用的Delta Node，在本地放置小的数据集，让Delta Task连接这个本地Delta Node，在本地数据上快速测试代码逻辑的正确性，无需网络通信。本地调试专用的Delta Node已包含在Delta Task框架中，开发者可以直接使用。
 
@@ -111,4 +111,3 @@ Delta Node接收到Task后，在全网完成任务的分发，并根据任务定
 加入了Deltaboard后，同一个Delta Node可供多人使用，每个开发者在Deltaboard中都可以获得一个独立的API地址，可以在自己的Delta Task中通过这个API地址调用Delta Node。并且在Deltaboard的账号中查看自己的任务执行状态。
 
 Delta官网上提供的在线演示版本，就是直接搭建了一个Deltaboard的服务，详情请阅读对应章节的内容。
-

@@ -10,7 +10,9 @@ Deltaboard的JupyterLab中放置了一个已经写好的Delta Task，启动Delta
 
 示例代码是一个通过神经网络进行手写数字识别的模型训练。需要用到手写数字的公开数据集[MNIST](http://yann.lecun.com/exdb/mnist)，Delta Node的Docker镜像提供了下载MNIST数据集的功能，并且仅随机保留1/3的样本数据以模拟多节点拥有不同数据的隐私计算场景，详情可参考：
 
-{% page-ref page="prepare-data.md" %}
+{% content-ref url="prepare-data.md" %}
+[prepare-data.md](prepare-data.md)
+{% endcontent-ref %}
 
 在准备好MIST数据后，可以开始运行Deltaboard中的示例代码。
 
@@ -32,7 +34,8 @@ Deltaboard的JupyterLab中放置了一个已经写好的Delta Task，启动Delta
 
 在开始真正编写自己的计算任务以前，开发者还需要对Delta Task框架有更深入的了解。可以从详细了解这个示例任务开始：
 
-{% page-ref page="../delta-task-development/delta-task-example.md" %}
+{% content-ref url="../delta-task-development/hfl-task-example.md" %}
+[hfl-task-example.md](../delta-task-development/hfl-task-example.md)
+{% endcontent-ref %}
 
 在本文档的计算任务开发章节，也有更多的关于Delta Task框架的解释说明。
-

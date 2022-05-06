@@ -20,39 +20,42 @@ Delta对隐私计算底层技术进行了彻底的封装，编写隐私计算任
 
 关于Delta框架的详细架构说明，可以参考这篇文章：
 
-{% page-ref page="delta-architecture.md" %}
+{% content-ref url="delta-architecture.md" %}
+[delta-architecture.md](delta-architecture.md)
+{% endcontent-ref %}
 
 ## Delta网络快速搭建
 
 Delta网络可以使用Docker镜像快速完成搭建，详情请参考：
 
-{% page-ref page="getting-started.md" %}
+{% content-ref url="getting-started.md" %}
+[getting-started.md](getting-started.md)
+{% endcontent-ref %}
 
 ## Delta社区
 
 **Github：**代码使用过程中出现的问题，可以在Github中对应的仓库提Issue，为方便其他人查询，请将Issue标题写为问题的大致描述：
 
-{% embed url="https://github.com/delta-mpc" caption="" %}
+{% embed url="https://github.com/delta-mpc" %}
 
 **微信交流群：**请扫码加好友，并备注"Delta社区"：
 
-![&#x626B;&#x7801;&#x52A0;&#x597D;&#x53CB;&#xFF0C;&#x5E76;&#x5907;&#x6CE8;&quot;Delta&#x793E;&#x533A;&quot;](.gitbook/assets/9db164bd4d5d449ddb9da507085d925.png)
+![扫码加好友，并备注"Delta社区"](.gitbook/assets/9db164bd4d5d449ddb9da507085d925.png)
 
 **Slack：**点击下面的邀请链接加入Slack：
 
-{% embed url="https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw" %}
+{% embed url="https://join.slack.com/t/delta-mpc/shared_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw" %}
 
 ## 相关链接
 
 Delta官网：
 
-{% embed url="https://deltampc.com/" caption="" %}
+{% embed url="https://deltampc.com/" %}
 
 Github源代码仓库：
 
-{% embed url="https://github.com/delta-mpc" caption="" %}
+{% embed url="https://github.com/delta-mpc" %}
 
 隐私计算技术专栏：
 
-{% embed url="https://www.zhihu.com/column/blocktech" caption="" %}
-
+{% embed url="https://www.zhihu.com/column/blocktech" %}
