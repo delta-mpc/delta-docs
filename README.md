@@ -16,19 +16,22 @@ The original data is never accessible to the developers. Delta integrates Blockc
 
 Delta network is composed of several components, and all of them could be easily deployed with Docker. Before choosing the required components and starting the network, take a look at the system architecture and get a basic understanding about the network components:
 
-{% page-ref page="system-overview.md" %}
+{% content-ref url="system-overview.md" %}
+[system-overview.md](system-overview.md)
+{% endcontent-ref %}
 
 To get your hands dirty and start to play with the network, check the getting started guide for a quick deployment of the network:
 
-{% page-ref page="getting-started.md" %}
+{% content-ref url="getting-started.md" %}
+[getting-started.md](getting-started.md)
+{% endcontent-ref %}
 
 ## Join the Community
 
 If you have any questions using the source code, submit issues on Github:
 
-{% embed url="https://github.com/delta-mpc" caption="" %}
+{% embed url="https://github.com/delta-mpc" %}
 
 To get connected to other developers or want to know more about privacy-preserving computation techniques, join Delta's Slack:
 
-{% embed url="https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw" caption="" %}
-
+{% embed url="https://join.slack.com/t/delta-mpc/shared_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw" %}
