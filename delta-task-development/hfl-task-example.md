@@ -12,17 +12,20 @@
 
 ### 1. 引入需要的包
 
-我们的计算逻辑是用torch写的。所以首先引入`numpy`和`torch`，以及一些辅助的工具，然后从`delta-task`的包中，引入Delta框架的内容，包括`DeltaNode`节点，用于调用API发送任务，以及我们本示例中要执行的横向联邦学习任务`HorizontalTask`等等：
+我们的计算逻辑是用torch写的。所以首先引入```numpy```和```torch```，以及一些辅助的工具，然后从```delta-task```的包中，引入Delta框架的内容，包括```DeltaNode```节点，用于调用API发送任务，用于横向联邦学习任务```HorizontalLearning```，以及用于配置安全聚合策略的```FaultTolerantFedAvg```等：
 
 ```python
-from typing import Dict, Iterable, List, Tuple, Any, Union
+from typing import Any, Dict, Iterable, List, Tuple
 
+import logging
 import numpy as np
 import torch
+from PIL.Image import Image
+from torch.utils.data import DataLoader, Dataset
 
-from delta import DeltaNode
-from delta.task import HorizontalTask
-from delta.algorithm.horizontal import FedAvg
+from delta.delta_node import DeltaNode
+from delta.task.learning import HorizontalLearning, FaultTolerantFedAvg
+import delta.dataset
 ```
 
 ### 2. 定义神经网络模型
@@ -61,29 +64,48 @@ class LeNet(torch.nn.Module):
 
 在定义横向联邦学习任务时，有几部分内容是需要用户自己定义的：
 
-* _**模型训练方法**_：包括损失函数、优化器，以及训练步骤的定义
-* _**数据预处理方法**_：在执行训练步骤以前，对于加载的每个样本数据进行预处理的方法，具体的参数说明，可以参考[这篇文档](https://docs.deltampc.com/network-deployment/prepare-data)
-* _**模型验证方法**_：在每个节点上通过验证样本集，计算模型精确度的方法
-* _**横向联邦配置**_：每轮训练需要多少个节点，如何在节点上划分验证样本集合等等
+* ***任务配置***: 我们需要在 ```super().__init__()``` 方法中对任务进行配置。 
+* ***数据集***: 我们需要在```dataset```方法中定义任务所需要的数据集。 
+* ***训练集的Dataloader***: 我们需要在```make_train_dataloader```方法中定义训练集的Dataloader。
+* ***验证集的Dataloader***: 我们需要在```make_validate_dataloader```方法中定义验证集的Dataloader。 
+* ***模型训练***: 在该方法中，定义整个模型的训练过程，包含整个前向传播和后向传播的。该方法的输入是训练集的Dataloader。
+* ***模型验证***: 在该方法中，定义整个模型的验证过程。该方法的输入是验证集的Dataloader，输出是一个字典，字典的键是计算出的指标名称，值是对应的指标值。
+* ***模型参数***: 我们需要在```state_dict```方法中定义所有需要训练和更新的模型参数。
 
 ```python
-class ExampleTask(HorizontalTask):
-    def __init__(self):
+def transform_data(data: List[Tuple[Image, str]]):
+    """
+    作为dataloader的collate_fn，用于预处理函数。
+    将输入的mnist图片调整大小、归一化后，变为torch.Tensor返回。
+    """
+    xs, ys = [], []
+    for x, y in data:
+        xs.append(np.array(x).reshape((1, 28, 28)))
+        ys.append(int(y))
+
+    imgs = torch.tensor(xs)
+    label = torch.tensor(ys)
+    imgs = imgs / 255 - 0.5
+    return imgs, label
+
+
+class Example(HorizontalLearning):
+    def __init__(self) -> None:
         super().__init__(
-            name="example", # 任务名称，用于在Deltaboard中的展示
-            dataset="mnist", # 任务用到的数据集的文件名，对应于Delta Node的data文件夹下的一个文件/文件夹
+            name="example",  # 任务名称，用于在Deltaboard中的展示
             max_rounds=2,  # 任务训练的总轮次，每聚合更新一次权重，代表一轮
             validate_interval=1,  # 验证的轮次间隔，1表示每完成一轮，进行一次验证
             validate_frac=0.1,  # 验证集的比例，范围(0,1)
+            strategy=FaultTolerantFedAvg(  # 安全聚合的策略，可选策略目前包含 FedAvg和FaultTolerantFedAvg，都位于delta.task.learning包下
+                min_clients=2,  # 算法所需的最少客户端数，至少为2
+                max_clients=3,  # 算法所支持的最大客户端数，必须大雨等于min_clients
+                merge_epoch=1,  # 聚合更新的间隔，merge_interval_epoch表示每多少个epoch聚合更新一次权重
+                wait_timeout=30,  # 等待超时时间，用来控制一轮计算的超时时间
+                connection_timeout=10  # 连接超时时间，用来控制流程中每个阶段的超时时间
+            )
         )
-        
-        # 传入刚刚定义的神经网络模型
         self.model = LeNet()
-        
-        # 模型训练时用到的损失函数
         self.loss_func = torch.nn.CrossEntropyLoss()
-        
-        # 模型训练时的优化器
         self.optimizer = torch.optim.SGD(
             self.model.parameters(),
             lr=0.1,
@@ -92,19 +114,28 @@ class ExampleTask(HorizontalTask):
             nesterov=True,
         )
 
-    def preprocess(self, x, y=None):
+    def dataset(self) -> delta.dataset.Dataset:
         """
-        数据预处理方法，会在数据加载时，对每一个样本进行预处理。
-        具体的参数说明，可以参考https://docs.deltampc.com/network-deployment/prepare-data
-        x: 原始数据集中的一个样本，类型与指定的数据集相关
-        y: 数据对应的标签，如果数据集中不包含标签，则为None
-        return: 预处理完的数据和标签（如果存在），类型需要为torch.Tensor或np.ndarray
+        定义任务所需要的数据集。
+        return: 一个delta.dataset.Dataset
         """
-        x /= 255.0
-        x *= 2
-        x -= 1
-        x = x.reshape((1, 28, 28))
-        return torch.from_numpy(x), torch.tensor(int(y), dtype=torch.long)
+        return delta.dataset.Dataset(dataset="mnist")
+
+    def make_train_dataloader(self, dataset: Dataset) -> DataLoader:
+        """
+        定义训练集Dataloader，可以对dataset进行各种变换、预处理等操作。
+        dataset: 训练集的Dataset
+        return: 训练集的Dataloader
+        """
+        return DataLoader(dataset, batch_size=64, shuffle=True, drop_last=True, collate_fn=transform_data)  # type: ignore
+
+    def make_validate_dataloader(self, dataset: Dataset) -> DataLoader:
+        """
+        定义验证集Dataloader，可以对dataset进行各种变换、预处理等操作。
+        dataset: 验证集的Dataset
+        return: 验证集的Dataloader
+        """
+        return DataLoader(dataset, batch_size=64, shuffle=False, drop_last=False, collate_fn=transform_data)  # type: ignore
 
     def train(self, dataloader: Iterable):
         """
@@ -120,7 +151,7 @@ class ExampleTask(HorizontalTask):
             loss.backward()
             self.optimizer.step()
 
-    def validate(self, dataloader: Iterable) -> Dict[str, float]:
+    def validate(self, dataloader: Iterable) -> Dict[str, Any]:
         """
         验证步骤，输出验证的指标值
         dataloader: 验证集对应的dataloader
@@ -146,63 +177,29 @@ class ExampleTask(HorizontalTask):
 
         return {"loss": avg_loss, "precision": precision}
 
-    def get_params(self) -> List[torch.Tensor]:
+    def state_dict(self) -> Dict[str, torch.Tensor]:
         """
-        需要训练的模型参数
+        需要训练、更新的模型参数
         在聚合更新、保存结果时，只会更新、保存get_params返回的参数
         return: List[torch.Tensor]， 模型参数列表
         """
-        return list(self.model.parameters())
-
-    def algorithm(self):
-        """
-        聚合更新算法的配置，可选算法包含在delta.algorithm.horizontal包中
-        """
-        return FedAvg(
-            merge_interval_epoch=0,  # 聚合更新的间隔，merge_interval_epoch表示每多少个epoch聚合更新一次权重
-            merge_interval_iter=20,  # 聚合更新的间隔，merge_interval_iter表示每多少个iteration聚合更新一次，merge_interval_epoch与merge_interval_iter互斥，必须有一个为0
-            wait_timeout=10,  # 等待超时时间，用来控制等待各个客户端加入的超时时间
-            connection_timeout=10,  # 连接超时时间，用来控制聚合算法中，每轮通信的超时时间
-            min_clients=2,  # 算法所需的最少客户端数，至少为2
-            max_clients=2,  # 算法所支持的最大客户端数，必须大雨等于min_clients
-        )
-
-    def dataloader_config(
-        self,
-    ) -> Union[Dict[str, Any], Tuple[Dict[str, Any], Dict[str, Any]]]:
-        """
-        训练集dataloader和验证集dataloader的配置，
-        每个配置为一个字典，对应pytorch中dataloader的配置
-        详情参见 https://pytorch.org/docs/stable/data.html
-        return: 一个或两个Dict[str, Any]，返回一个时，同时配置训练集和验证集的dataloader，返回两个时，分别对应训练集和验证集
-        """
-        train_config = {"batch_size": 64, "shuffle": True, "drop_last": True}
-        val_config = {"batch_size": 64, "shuffle": False, "drop_last": False}
-        return train_config, val_config
-
+        return self.model.state_dict()
 ```
 
-定义横向联邦学习时，我们需要定义一个`DeltaTask`的类，继承自`HorizontalTask`类。`HorizontalTask`类是一个虚基类，我们需要实现其中的一些方法，完成横向联邦学习的定义。
+具体来讲，当定义横向联邦学习任务时，我们需要定义一个继承自`HorizontalLearning`的类。`HorizontalLearning`类是一个虚基类，针对横向联邦学习任务的流程，定义了一些虚函数，
+需要我们来实现。
 
-首先是构造函数`__init__`，我们需要首先调用父类的`__init__`方法，在构造函数中，我们可以配置任务的名称、使用的数据集、训练的总轮次数、以及进行验证的间隔和验证集的比例。 调用父类的构造函数之后，我们可以在构造函数中定义任务所需的属性，比如需要训练的模型、损失函数、优化器等。
+首先是构造函数`__init__`。构造函数在这里，主要是对任务任务进行一些基础的配置。这些配置项包括任务名称（```name```），任务训练的总轮数（```max_rounds```），执行验证的频率（每 ```validate_interval``` 轮执行一次验证），验证集的比例（```validate_frac```），以及安全聚合的策略（```strategy```）。在自己实现构造函数时，必须调用基类的构造函数，即`super().__init__()`。
 
-之后，我们有4个必须要定义的方法，分别是：
+之后是`dataset`方法。`dataset`方法定义任务所需要的数据集。该方法返回一个```delta.dataset.Dataset```实例， 其参数```dataset```代表所需数据集的名称。关于数据集格式的具体细节，请参考[这篇文章](https://docs.deltampc.com/network-deployment/prepare-data)。目前横向联邦学习任务，只支持实用一个数据集，所以`dataset`方法只能返回一个`delta.dataset.Dataset`实例
 
-* `preprocess`：用于预处理训练数据
-* `train`：定义模型的训练过程
-* `validate`：定义模型的验证过程，返回验证得到的指标值
-* `get_params`：定义任务中，需要的训练的模型参数
+然后是两个定义DataLoader的方法，分别是定义训练集DataLoader的`make_train_dataloader`和定义验证集DataLoader的`make_validate_dataloader`。这两个方法需要实现的逻辑类似，所以放在一起说。这两个方法的输入都是一个`torch.utils.data.Dataset`实例，分别为训练集和验证集；在方法中，可以按照需要对数据集进行变换、预处理等操作。最后，我们需要返回一个```torch.utils.data.Dataloader```实例，它会作为模型训练方法的输入。
 
-这些方法，定义了模型训练、验证以及数据的预处理，这与在本地训练一个神经网络的写法没有任何区别，并不需要了解横向联邦学习的知识。 这些方法，对应了横向联邦学习中的训练阶段，会在各个参与训练的Delta Node中执行。
+然后是训练模型的方法`train`。该方法的输入是在`make_train_dataloader`中定义的`DataLoader`；在该方法中，我们需要实现整个模型的训练过程，包括前向传播，后向传播和参数更新操作。
 
-除了上述4个必须要定义的方法外，我们还有两个可选方法，可以进行重载，分别是：
+还有验证模型的方法`validate`。该方法的输入是在`make_validate_dataloader`中定义的Dataloader；在该方法中，可以根据需要，在验证集上，计算模型的各种性能指标；该方法最后返回一个字典，字典的键是模型的指标的名称，对应的值是指标的值。
 
-* `algorithm`：定义横向联邦学习中的安全聚合算法
-* `dataloader_config`：定义训练集和验证集的dataloader配置
-
-在`algorithm`方法中，我们可以定义横向联邦学习中的安全聚合算法。这并不需要用户自己来实现安全聚合算法，在Delta框架中，已经预先定义好了几个安全集合算法， 在`delta.algorithm.horizontal`包中，现在包含`FedAvg`与`FaultTolerantFedAvg`。用户只需要在`algorithm`中配置所需的安全聚合算法，返回对应的算法对象即可。 如果没有重载`algorithm`方法，那么就会使用默认的安全聚合算法`FedAvg`。
-
-在`dataloader_config`方法中，我们可以定义训练集和验证集的dataloader的配置。具体的配置项，可以参考pytorch中的[**dataloader**](https://pytorch.org/docs/stable/data.html)。 如果没有重载`dataloader_config`方法，那么会对训练集和验证集，会使用相同的默认配置`(shuffle: True, batch_size: 64, drop_last: True)`。
+最后，我们还需要在```state_dict```方法中定义所有需要训练和更新的模型参数，方法的返回值就是这些模型参数的列表。
 
 ### 4. 指定执行任务用的Delta Node的API
 
@@ -223,7 +220,7 @@ DELTA_NODE_API = "http://127.0.0.1:6704"
 接下来我们可以开始运行这个模型了：
 
 ```python
-task = ExampleTask()
+task = Example().build()
 
 delta_node = DeltaNode(DELTA_NODE_API)
 delta_node.create_task(task)
