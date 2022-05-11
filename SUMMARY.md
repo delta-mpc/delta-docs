@@ -31,6 +31,7 @@
 
 * [代码安全性检查](system-design/code-security-check.md)
 * [隐私计算任务生成](system-design/task-generation.md)
+* [链上安全聚合](system-design/secure-aggregation-on-blockchain.md)
 * [横向联邦学习](system-design/horizontal-federated-learning.md)
 * [纵向联邦学习](system-design/vertical-federated-learning.md)
 * [横向联邦统计](system-design/horizontal-federated-analytics.md)
