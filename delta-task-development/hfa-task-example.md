@@ -36,10 +36,10 @@ from typing import Dict
 
 
 ```python
-class Example(HorizontalAnalytics):
+class WageAvg(HorizontalAnalytics):
     def __init__(self) -> None:
         super().__init__(
-            name="example",  # 任务名称，用于在Deltaboard中的展示
+            name="wage_avg",  # 任务名称，用于在Deltaboard中的展示
             min_clients=2,  # 算法所需的最少客户端数，至少为2
             max_clients=3,  # 算法所支持的最大客户端数，必须大雨等于min_clients
             wait_timeout=5,  # 等待超时时间，用来控制一轮计算的超时时间
@@ -52,16 +52,15 @@ class Example(HorizontalAnalytics):
         return: 字典，键是数据的名字，需要与execute方法中的参数名称对应；值是一个delta.dataset.DataFrame实例。
         """
         return {
-            "df1": delta.dataset.DataFrame("df1.csv"),
-            "df2": delta.dataset.DataFrame("df2.csv")
+            "wages": delta.dataset.DataFrame("wages.csv")
         }
 
-    def execute(self, df1: pd.DataFrame, df2: pd.DataFrame):
+    def execute(self, wages: pd.DataFrame):
         """
         实现具体的统计逻辑。
         输入与dataset方法的返回值对应
         """
-        return df1.sum(), df2.sum()
+        return wages.mean()
 ```
 
 具体来讲，定义横向联邦统计任务时，我们需要定义一个继承自`HorizontalAnalytics`的类。`HorizontalAnalytics`是一个虚基类，针对横向联邦统计任务，定义了一些虚函数，需要我们来实现。
@@ -93,7 +92,7 @@ DELTA_NODE_API = "http://127.0.0.1:6704"
 接下来我们可以开始运行这个模型了：
 
 ```python
-task = Example().build()
+task = WageAvg().build()
 
 delta_node = DeltaNode(DELTA_NODE_API)
 delta_node.create_task(task)
