@@ -1,4 +1,4 @@
-# An Example Delta Task
+# An Example of the Horizontal Federated Learning Task
 
 This is an example of Delta Task running horizontal federated learning on multiple Delta Nodes.
 
@@ -12,17 +12,20 @@ The dataset is [MNIST](http://yann.lecun.com/exdb/mnist/) distributed on several
 
 ### 1. Import the Required Packages
 
-The computation logic is written in Torch. So we must import `numpy` and `torch`, and some helper tools. Then we need to import Delta Task framework components from Python package `delta-task` including `DeltaNode` for Delta Node API connection and the `HorizontalTask` that we'll be running in this example:
+The computation logic is written in Torch. So we must import ```numpy``` and ```torch```, and some other helper tools. Then we need to import Delta Task framework components from Python package ```delta-task``` including ```DeltaNode``` for Delta Node API connection, the ```HorizontalLearning``` for defination of the horizontal learning task and the ```FaultTolerantFedAvg``` for the configuration of the secure aggregation:
 
 ```python
-from typing import Dict, Iterable, List, Tuple, Any, Union
+from typing import Any, Dict, Iterable, List, Tuple
 
+import logging
 import numpy as np
 import torch
+from PIL.Image import Image
+from torch.utils.data import DataLoader, Dataset
 
-from delta import DeltaNode
-from delta.task import HorizontalTask
-from delta.algorithm.horizontal import FedAvg
+from delta.delta_node import DeltaNode
+from delta.task.learning import HorizontalLearning, FaultTolerantFedAvg
+import delta.dataset
 ```
 
 ### 2. Define the Neural Network Model
@@ -59,31 +62,51 @@ class LeNet(torch.nn.Module):
 
 The next step is to define our horizontal federated learning task to train the above model on multiple nodes.
 
-There're several parts in the PPC Task that need to be programed by the developer himself:
+There're several parts in the PPC Task that need to be programmed by the developer:
 
-* _**Model Training Method:**_ Including what loss function and optimizer are used, and how to perform training steps.
-* _**Data Pre-process Method:**_ Before performing training step, there's a function `preprocess` could be used to transform the training data. For the detailed explanation of the arguments, please refer to [this document](https://docs.deltampc.com/network-deployment/prepare-data).
-* _**Model Validation Method:**_ How to calculate precision score on each iteration.
-* _**Horizontal Federated Learning Config:**_ The minimum/maximum number of nodes required to start an iteration, number of max steps, etc.
+* ***Task Config***: We can make some basis task config in the ```super().__init__()``` method. The configurations involves task name (```name```), training rounds of task (```max_rounds```), the frequency of validation (validate per ```validate_interval``` round), validate dataset fraction (```validate_frac```) and the aggregate strategy (```strategy```). 
+* ***Dataset***: In the ```dataset``` method, you can specify the dataset for task. You should return an instance of ```delta.dataset.Dataset```, and the parameter ```dataset``` of ```delta.dataset.Dataset``` represents the dataset name. For detailed explanation of the dataset format, please refer to [this document](https://docs.deltampc.com/network-deployment/prepare-data).
+* ***Train dataloader method***: In the ```make_train_dataloader``` method, you can specify the dataloader used for training. We will pass the training dataset (an instance of ```torch.utils.data.Dataset```) to this method according to the configuration in the ```dataset``` method, and you can transform the dataset, do some preprocess, etc. And finally you should return a ```torch.utils.data.Dataloader```, and it will be used for model training.
+* ***Validation dataloader method***: In the ```make_validate_dataloader``` method, you can specify the dataloader used for validation. The implementation of this method is very similar with the ```make_train_dataloader```, except of the passed dataset is the validation dataset.
+* ***Model Training Method***: In the ```train```method, you should define the whole procedure of model training, including forward propagation and backward propagation. The input parameter of this method is the traing dataloader.
+* ***Model Validation Method***: In the ```validate``` method, you should define the whole procedure of model validation. The input parameter of this method is the validation dataloader, and the return value should be a ```dict``` of which key should be the validation metrics name, and corresponding value should be the metrics value.
+* ***State dict***: In the ```state_dict``` method, you can specify all the model parameters need to train and update, and the return value should be a list of these parameters.
 
 ```python
-class ExampleTask(HorizontalTask):
-    def __init__(self):
+def transform_data(data: List[Tuple[Image, str]]):
+    """
+    Used as the collate_fn of dataloader to preprocess the data.
+    Resize, normalize the input mnist image, and the return it as a torch.Tensor.
+    """
+    xs, ys = [], []
+    for x, y in data:
+        xs.append(np.array(x).reshape((1, 28, 28)))
+        ys.append(int(y))
+
+    imgs = torch.tensor(xs)
+    label = torch.tensor(ys)
+    imgs = imgs / 255 - 0.5
+    return imgs, label
+
+
+class Example(HorizontalLearning):
+    def __init__(self) -> None:
         super().__init__(
-            name="example", # The task name which is used for displaying purpose.
-            dataset="mnist", # The file/folder name of the dataset used. The file/folder should be placed under the data folder of all the Delta Nodes.
+            name="example",  # The task name which is used for displaying purpose.
             max_rounds=2,  # The number of total rounds of training. In every round, all the nodes calculate their own partial results, and summit them to the server.
             validate_interval=1,  # The number of rounds after which we calculate a validation score.
             validate_frac=0.1,  # The ratio of samples for validate set in the whole dataset，range in (0,1)
+            strategy=FaultTolerantFedAvg(  # Strategy for secure aggregation, now available strategies are FedAvg and FaultTolerantFedAvg, in package delta.task.learning
+                min_clients=2,  # Minimum nodes required in each round, must be greater than 2.
+                max_clients=3,  # Maximum nodes allowed in each round, must be greater equal than min_clients.
+                merge_epoch=1,  # The number of epochs to run before aggregation is performed.
+                merge_iteration=0, # The number of iterations to run before aggregation is performed. One of this and the above number must be 0.
+                wait_timeout=30,  # Timeout for calculation.
+                connection_timeout=10  # Wait timeout for each step.
+            )
         )
-        
-        # Pass in the NN model we just defined
         self.model = LeNet()
-        
-        # Define the loss function
         self.loss_func = torch.nn.CrossEntropyLoss()
-        
-        # Define the optimizer
         self.optimizer = torch.optim.SGD(
             self.model.parameters(),
             lr=0.1,
@@ -92,25 +115,33 @@ class ExampleTask(HorizontalTask):
             nesterov=True,
         )
 
-    def preprocess(self, x, y=None):
+    def dataset(self) -> delta.dataset.Dataset:
         """
-        The data pre-processing method.
-        After data loading, every sample is passed through this method to be transformed.
-        For the detailed explanation of the input arguments, please refer to https://docs.deltampc.com/network-deployment/prepare-data
-        x: a sample from the dataset, the type depends on the data provided.
-        y: the label of the sample, None if no label is attached to the sample.
-        return: the data and label after processing, the type should be torch.Tensor or np.ndarray
+        Define the dataset for task.
+        return: an instance of delta.dataset.Dataset
         """
-        x /= 255.0
-        x *= 2
-        x -= 1
-        x = x.reshape((1, 28, 28))
-        return torch.from_numpy(x), torch.tensor(int(y), dtype=torch.long)
+        return delta.dataset.Dataset(dataset="mnist")
+
+    def make_train_dataloader(self, dataset: Dataset) -> DataLoader:
+        """
+        Define the training dataloader. You can transform the dataset, do some preprocess to the dataset.
+        dataset: training dataset
+        return: training dataloader
+        """
+        return DataLoader(dataset, batch_size=64, shuffle=True, drop_last=True, collate_fn=transform_data)  # type: ignore
+
+    def make_validate_dataloader(self, dataset: Dataset) -> DataLoader:
+        """
+        Define the validation dataloader. You can transform the dataset, do some preprocess to the dataset.
+        dataset: validation dataset
+        return: validation dataloader
+        """
+        return DataLoader(dataset, batch_size=64, shuffle=False, drop_last=False, collate_fn=transform_data)  # type: ignore
 
     def train(self, dataloader: Iterable):
         """
-        The training step definition.
-        dataloader: the dataloader cooresponding to the dataset.
+        The training step defination.
+        dataloader: the dataloader corresponding to the dataset.
         return: None
         """
         for batch in dataloader:
@@ -121,13 +152,13 @@ class ExampleTask(HorizontalTask):
             loss.backward()
             self.optimizer.step()
 
-    def validate(self, dataloader: Iterable) -> Dict[str, float]:
+    def validate(self, dataloader: Iterable) -> Dict[str, Any]:
         """
         Validation method.
         To calculate validation scores on each node after several training steps.
         The result will also go through the secure aggregation before sending back to server.
-        dataloader: the dataloader cooresponding to the dataset.
-        return: Dict[str, float]，A dictionary with each key (str) corresponds to a score's name and the value (float) to the score's value.
+        dataloader: the dataloader corresponding to the dataset.
+        return: Dict[str, float], A dictionary with each key (str) corresponds to a score's name and the value (float) to the score's value.
         """
         total_loss = 0
         count = 0
@@ -149,63 +180,28 @@ class ExampleTask(HorizontalTask):
 
         return {"loss": avg_loss, "precision": precision}
 
-    def get_params(self) -> List[torch.Tensor]:
+    def state_dict(self) -> Dict[str, torch.Tensor]:
         """
-        The params that need to be trained.
+        The params that need to train and update.
         Only the params returned by this function will be updated and saved during aggregation.
         return: List[torch.Tensor]， The list of model params.
         """
-        return list(self.model.parameters())
-
-    def algorithm(self):
-        """
-        Algorithm used to perform result aggregation. All the candidates are included in the package delta.algorithm.horizontal
-        """
-        return FedAvg(
-            merge_interval_epoch=0,  # The number of epochs to run before aggregation is performed.
-            merge_interval_iter=20,  # The number of iterations to run before aggregation is performed. One of this and the above number must be 0.
-            wait_timeout=10,  # Timeout when waiting for node participating.
-            connection_timeout=10,  # Connection timeout in each communication in the aggregation algorithm.
-            min_clients=2,  # Minimum nodes required in each round.
-            max_clients=2,  # Maximum nodes allowed in each round.
-        )
-
-    def dataloader_config(
-        self,
-    ) -> Union[Dict[str, Any], Tuple[Dict[str, Any], Dict[str, Any]]]:
-        """
-        the config for dataloaders of training and validating，
-        each config is a dictionary corresponding to the dataloader config of PyTorch.
-        The details are in https://pytorch.org/docs/stable/data.html
-        return: One or two Dict[str, Any]. When returning one dict, it is used for both training and validating dataloader.
-        """
-        train_config = {"batch_size": 64, "shuffle": True, "drop_last": True}
-        val_config = {"batch_size": 64, "shuffle": False, "drop_last": False}
-        return train_config, val_config
-
+        return self.model.state_dict()
 ```
 
-We defined a class for the `DeltaTask`,which inherits from `HorizontalTask`, which is a virtual base class. Some methods must be implemented by the developer before it can be executed on Delta Node.
+In the code above, we define a class `Example`, which inherits from a virtual base class `HorizontalLearning`. The class `HorizontalLearning` defines some virtual class method, and user must implement them.
 
-The first method we need to implement is the constructor `__init__`. The parent's constructor must be called first, in which we could configure the task name, the dataset to be used, the number of total rounds to be executed, the validation interval, and the fraction of samples to be used as the validation set.
+The first method is the constructor `__init__`. The super class' constructor must be called first, in which we could configure the task name (`name`), the number of total rounds to be executed (`max_rounds`), the validation interval (validate per `validate_interval` round), the fraction of validation dataset (`validate_frac`), and the strategy for secure aggregation (`strategy`).
 
-After the invocation of the parent's constructor, we could define the model's parameters, such as the loss function and optimizer to be used. 
+The second method is `dataset`. In `dataset` method, you could define the dataset for task. This method returns a `delta.dataset.Dataset` instance of which parameter is the dataset filename. For detailed explanation of the dataset format, please refer to [this document](https://docs.deltampc.com/network-deployment/prepare-data). At present, the horizontal learning task type only supports one dataset per task, so the `dataset` method can only return one `delta.dataset.Dataset` instance.
 
-Then there're 4 more methods to be implemented, as listed below:
+Then there are two methods `make_train_dataloader` and `make_validate_dataloader` which defines the train dataloader and validation dataloader, respectively. The parameter of both method is a `torch.utils.data.Dataset` instance, represents train dataset and validation dataset, respectively. In these two methods, you could transform and process the dataset, and finally return a `torch.utils.data.DataLoader` instance which will be passed to `train` and `validate` method.
 
-* `preprocess`：Data preprocessing before the training step.
-* `train`：The training step.
-* `validate`：Definition of the validation metrics.
-* `get_params`：The parameters to be trained in the training step.
+The next is `train` method which defines the training process. In this method, you should define the whole train process, include the forward propagation, backward propagation and weight updating. The parameter of `train` method is the dataloader defined in the `make_train_dataloader` method.
 
-And there're 2 optional methods to be overloaded:
+And then is the `validate` method which defines the vaidation process. In this method, you could test you model's performance on the validation dataset and calculate some metrics. This method should return a dictionary of key is the metrics name and value is the metrics value. The parameter of `validate` method is the dataloader defined in the `make_validate_dataloader` method.
 
-* `algorithm`：The secure aggregation algorithm to be used.
-* `dataloader_config`：The `dataloader` config for the training set and the validation set.
-
-The  `algorithm` method is used to define the secure aggregation algorithm. The algorithm candidates to be chosen from resides in the `delta.algorithm.horizontal` package.  2 options are provided for now: `FedAvg` and `FaultTolerantFedAvg`. If `algorithm` method is not overloaded, `FedAvg` is chosen by default.
-
-The other method `dataloader_config` is used to configure the `dataloader` for the data of the training set and the validation set. The configurable items are the same as `PyTorch`, which could be found in its [official document](https://pytorch.org/docs/stable/data.html). The default config is to use the same configuration for both the training set and the validation set `(shuffle:True, batch_size:64, drop_last:True)`.
+Finally, you should define the parameters for training and updating in the `state_dict` method. The return value of this method is a list of model parameters.
 
 ### 4. Set the API Address of the Delta Node
 
@@ -226,8 +222,7 @@ DELTA_NODE_API = "http://127.0.0.1:6704"
 Finally we can start the task:
 
 ```python
-task = ExampleTask()
-
+task = Example().build()
 delta_node = DeltaNode(DELTA_NODE_API)
 delta_node.create_task(task)
 ```
