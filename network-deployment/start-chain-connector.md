@@ -28,7 +28,7 @@ $ mkdir delta_chain_connector
 
 ```
 $ cd delta_chain_connector
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta_chain_connector:0.3.5 init
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-chain-connector:0.3.5 init
 ```
 
 运行命令后，会在根目录`delta_chain_connector`中，新建文件夹`config`，`config`文件夹用来存放节点的配置文件。
