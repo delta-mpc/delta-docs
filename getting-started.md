@@ -19,7 +19,7 @@ Delta提供了一个docker-compose文件，用于一次启动整个网络。
 1. 克隆delta-all-in-one的github仓库：
 
 ```
-$ git clone --depth 1 --branch v0.3.5 https://github.com/delta-mpc/delta-all-in-one.git
+$ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
 1. 进入无区块链网络的配置文件夹：
@@ -89,7 +89,7 @@ Delta采用Docker镜像进行快速部署。在Delta All-in-One仓库中，包�
 1. 克隆delta-all-in-one的github仓库：
 
 ```
-$ git clone --depth 1 --branch v0.3.5 https://github.com/delta-mpc/delta-all-in-one.git
+$ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
 1. 进入包含区块链网络的配置文件夹：
