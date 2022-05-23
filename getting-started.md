@@ -72,15 +72,17 @@ $ docker-compose up -d
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
 
-## 最小完整网络搭建
+## 最小Ganache区块链网络搭建
 
-一个最小的包含区块链的Delta网络，需要三个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
+一个最小的包含本地区块链节点的Delta网络，需要三个数据持有方。每个数据持有方各搭建一套完全一样的系统，包括一个部署了Delta智能合约的区块链节点，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
 
 ![](.gitbook/assets/delta-with-multi-chain.png)
 
 为了简化网络，Deltaboard可以只搭建一个，区块链节点也可以只搭一个，如下图所示：
 
 ![](.gitbook/assets/delta-with-single-chain.png)
+
+在本示例中，使用这种简化的网络结构来搭建Delta网络。其中，区块链节点使用Ganache来进行部署。
 
 ### 使用All-in-One镜像启动整个网络
 
@@ -95,7 +97,7 @@ $ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-all-in-
 1. 进入包含区块链网络的配置文件夹：
 
 ```
-$ cd delta-all-in-one/with-deltachain
+$ cd delta-all-in-one/with-blockchain
 ```
 
 1. 修改配置文件
@@ -104,7 +106,7 @@ $ cd delta-all-in-one/with-deltachain
 
 ```
 $ ls
-connector1  connector2  connector3  deltaboard  delta-node1  delta-node2  delta-node3  docker-compose.yml
+connector1  connector2  connector3  contract  delta-node1  delta-node2  delta-node3  deltaboard  docker-compose.yml
 ```
 
 其中，`connector1`、`connector2`和`connector3`分别存放Chain Connector的配置：
@@ -125,31 +127,27 @@ $ cat connector1/config/config.json
     }
   },
   "chain": {
-    "nodeAddress": "",
-    "privateKey": "",
-    "provider": "wss://apus.chain.deltampc.com",
-    "gasPrice": 1,
-    "gasLimit": 4294967294,
+    "nodeAddress": "0x6578aDabE867C4F7b2Ce4c59aBEAbDC754fBb990",
+    "privateKey": "0xf0f239a0cc63b338e4633cec4aaa3b705a4531d45ef0cbcc7ba0a4b993a952f2",
+    "provider": "ws://ganache:8545",
+    "gasPrice": 20000000000,
+    "gasLimit": 6721975,
     "chainParam": {
-      "chainId": 42,
-      "name": "delta"
+      "chainId": 1337,
+      "name": ""
     },
 
     "identity": {
-      "contractAddress": "0x43A6feb218F0a1Bc3Ad9d9045ee6528349572E42"
+      "contractAddress": "0xCe69c1DDCcD29a821bB4d3BdEEb3EdE9De9C7903"
     },
     "hfl": {
-      "contractAddress": "0x3830C82700B050dA87F1D1A60104Fb667227B686"
+      "contractAddress": "0x7864Bf464F9ecE0D3A95cA55e171D9060cf7336a"
     }
   }
 }
 ```
 
-`chain.provider`代表区块链节点的地址，`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。为了方便大家快速地搭建，我们已经提前在我们的[Delta Chain](https://explorer.deltampc.com)上部署好了智能合约，并填写好了这三项。当然，大家可以自行将与Delta配套的智能合约部署到其他支持以太坊虚拟机的区块链上，更改这三项配置。
-
-在这里，我们需要填写`chain.nodeAddress`以及`chain.privateKey`，这两项分别代表用户的区块链钱包地址和私钥。用户可以使用任意与以太坊兼容的钱包（比如Metamask），来生成钱包地址和私钥。
-
-生成了3个钱包地址和私钥后，分别将他们填入`connector1`、`connector2`和`connector3`中配置文件的`chain.nodeAddress`、`chain.privateKey`项。 这时，我们生成的钱包中还没有Deltachain的token，我们需要获取一些Deltachain的测试Token。在Delta的Slack中可以自动化获取测试Token，请加入[Delta的Slack](https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw)，在delta-chain-faucet的channel中，发送命令给Delta Bot来获取测试Token。
+`chain.provider`代表区块链节点的地址，`chain.nodeAddress`和`chain.privateKey`分别代表用户的区块链钱包地址和私钥，`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。为了方便大家快速地搭建，我们会在部署Ganache区块链节点的同时部署智能合约，并填写好了这几项。当然，大家可以自己生成区块链的钱包地址和私钥，自行将与Delta配套的智能合约部署到其他支持以太坊虚拟机的区块链上，更改这几项配置。
 
 1. 使用docker-compose命令启动全部的服务：
 
@@ -179,6 +177,55 @@ http://localhost:8090
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
+
+### 使用各个组件的Docker镜像搭建
+
+1.使用Ganache启动区块链节点，在这里，我们使用Ganache的官方镜像来进行部署：
+
+```bash
+docker run -d --name=ganache -p 8545:8545 trufflesuite/ganache-cli:v6.12.2 -s delta
+```
+
+2.在区块链上部署Delta智能合约：
+
+{% content-ref url="network-deployment/deploy-smart-contracts.md" %}
+[deploy-smart-contracts.md](network-deployment/deploy-smart-contracts.md)
+{% endcontent-ref %}
+
+3.启动Chain Connector，并配置为Blockchain模式：
+
+{% content-ref url="network-deployment/start-chain-connector.md" %}
+[start-chain-connector.md](network-deployment/start-chain-connector.md)
+{% endcontent-ref %}
+
+在配置Blockchain模式下的Chain Connector时，我们需要填写`chain.nodeAddress`、`chain.privateKey`、`chain.provider`、`chain.identity.contractAddress`以及`chain.hfl.contractAddress`这几项配置。
+
+其中，`chain.nodeAddress`、`chain.privateKey`是区块链钱包的地址和私钥，Ganache会预先生成10个自带代币的钱包，通过命令
+
+```bash
+docker logs -f ganache
+```
+
+即可从日志中获取自动生成的钱包地址和私钥。
+
+`chain.provider`为区块链节点地址，在本地部署的情况下，这一项填写`ws://localhost:8545`即可。
+
+`chain.identity.contractAddress`以及`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
+
+接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
+
+
+## 最小Delta区块链网络搭建
+
+一个最小的包含区块链的Delta网络，需要三个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
+
+![](.gitbook/assets/delta-with-multi-chain.png)
+
+为了简化网络，Deltaboard可以只搭建一个，区块链节点也可以只搭一个，如下图所示：
+
+![](.gitbook/assets/delta-with-single-chain.png)
+
+在本示例中，区块链节点使用Delta Chain Node来进行搭建。
 
 ### 使用各个组件的Docker镜像搭建
 
