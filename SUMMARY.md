@@ -30,7 +30,7 @@
 ## 系统详细设计 <a href="#system-design" id="system-design"></a>
 
 * [代码安全性检查](system-design/code-security-check.md)
-* [隐私计算任务生成](system-design/task-generation.md)
+* [横向联邦任务框架](system-design/task-generation.md)
 * [链上安全聚合](system-design/secure-aggregation-on-blockchain.md)
 * [横向联邦学习](system-design/horizontal-federated-learning.md)
 * [纵向联邦学习](system-design/vertical-federated-learning.md)
