@@ -16,13 +16,13 @@ A minimum Delta network in this mode requires a Delta Chain Connector, 2 Delta N
 
 {% tabs %}
 {% tab title="Using All-in-One script" %}
-### **Start the network using All-in-One script.**
+### **Start the network using All-in-One script**
 
 Delta has an All-in-One startup scripts which use docker-compose to start the whole network at once.
 
 
 
-1\. Clone the Github repo:
+1.Clone the Github repo:
 
 ```
 $ git clone --depth 1 --branch v0.3.5 https://github.com/delta-mpc/delta-all-in-one.git
@@ -30,7 +30,7 @@ $ git clone --depth 1 --branch v0.3.5 https://github.com/delta-mpc/delta-all-in-
 
 
 
-2\. Go to the deployment folder for no-blockchain network:
+2.Go to the deployment folder for no-blockchain network:
 
 ```
 $ cd delta-all-in-one/no-blockchain
@@ -38,7 +38,7 @@ $ cd delta-all-in-one/no-blockchain
 
 
 
-3\. Start all the container using docker-composer:
+3.Start all the container using docker-composer:
 
 ```
 $ docker-compose up -d
@@ -48,7 +48,7 @@ After the downloading of all the Docker images, the service should be started no
 
 
 
-4\. We can now visit Deltaboard to run our first Delta Task:
+4.We can now visit Deltaboard to run our first Delta Task:
 
 {% content-ref url="system-deployment/run-delta-task.md" %}
 [run-delta-task.md](system-deployment/run-delta-task.md)
@@ -56,11 +56,9 @@ After the downloading of all the Docker images, the service should be started no
 {% endtab %}
 
 {% tab title="Manually Deployment" %}
+### Manually deploy the network using Docker images
 
-{% endtab %}
-{% endtabs %}
 
-### Start the network using Docker images of the components
 
 1.Start the Chain Connector and configure it to run in coordinator mode:
 
@@ -68,11 +66,15 @@ After the downloading of all the Docker images, the service should be started no
 [start-chain-connector.md](system-deployment/start-chain-connector.md)
 {% endcontent-ref %}
 
+
+
 2.Start 2 instances of Delta Node, and connect them to the Chain Connector:
 
 {% content-ref url="system-deployment/start-delta-node.md" %}
 [start-delta-node.md](system-deployment/start-delta-node.md)
 {% endcontent-ref %}
+
+
 
 3.Put some test data into each of the Delta Nodes:
 
@@ -80,17 +82,33 @@ After the downloading of all the Docker images, the service should be started no
 [prepare-data.md](system-deployment/prepare-data.md)
 {% endcontent-ref %}
 
-4.Start Deltaboard, and connect it to one of the Delta Nodes:
+
+
+4.If the Graphical User Interface is not required. We can already start writing codes and executing them:
+
+{% content-ref url="delta-task-development/manage-delta-task-using-delta-node-api.md" %}
+[manage-delta-task-using-delta-node-api.md](delta-task-development/manage-delta-task-using-delta-node-api.md)
+{% endcontent-ref %}
+
+
+
+5.(Optional) Start Deltaboard, and connect it to one of the Delta Nodes:
 
 {% content-ref url="system-deployment/start-deltaboard.md" %}
 [start-deltaboard.md](system-deployment/start-deltaboard.md)
 {% endcontent-ref %}
 
-5.Now the network is fully up and running, let's try to run a computation task:
+
+
+6.(Optional) Now the network is fully up and running, let's try to run a computation task:
 
 {% content-ref url="system-deployment/run-delta-task.md" %}
 [run-delta-task.md](system-deployment/run-delta-task.md)
 {% endcontent-ref %}
+{% endtab %}
+{% endtabs %}
+
+
 
 ## Minimum Network with Blockchain
 
