@@ -37,3 +37,7 @@
 * [横向联邦学习](system-design/horizontal-federated-learning.md)
 * [纵向联邦学习](system-design/vertical-federated-learning.md)
 * [横向联邦统计](system-design/horizontal-federated-analytics.md)
+
+## 联邦统计 <a href="#federated-analytics" id="federated-analytics"></a>
+
+* [Pandas API支持列表](federated-analytics/pandas-api-supporting.md)
