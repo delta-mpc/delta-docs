@@ -16,7 +16,9 @@ Delta保证了计算结果的可信性，在用户无法获取原始数据的前
 
 Delta包含了搭建一个完整的区块链隐私计算网络的全部组件，每个组件都可以使用Docker镜像快速部署。开发者可以根据需要选择需要的组件快速完成网络的搭建。
 
-Delta对隐私计算底层技术进行了彻底的封装，编写隐私计算任务无需对底层的原理有任何了解。Delta中的隐私计算任务使用Python语言开发，支持流行的机器学习框架PyTorch。开发者只需编写传统的PyTorch训练任务，Delta可自动完成训练任务的隐私计算化，并且在网络中完成任务的执行。
+Delta对隐私计算底层技术进行了彻底的封装，编写隐私计算任务无需对底层的原理有任何了解，只需要开发者按照以前的方式完成计算任务编写，Delta就可以将其做为隐私计算任务，在多节点网络中进行执行。
+
+Delta支持使用PyTorch编写的机器学习任务，以及使用Pandas编写的数据统计任务。以前写的PyTorch/Pandas代码几乎可以不加修改的直接在Delta网络中执行，通过隐私计算联合多个节点的数据，获得更大数据集上的模型训练结果、验证结果以及统计数据。
 
 关于Delta框架的详细架构说明，可以参考这篇文章：
 
@@ -34,15 +36,15 @@ Delta网络可以使用Docker镜像快速完成搭建，详情请参考：
 
 ## Delta社区
 
-**Github：**代码使用过程中出现的问题，可以在Github中对应的仓库提Issue，为方便其他人查询，请将Issue标题写为问题的大致描述：
+\*\*Github：\*\*代码使用过程中出现的问题，可以在Github中对应的仓库提Issue，为方便其他人查询，请将Issue标题写为问题的大致描述：
 
 {% embed url="https://github.com/delta-mpc" %}
 
-**微信交流群：**请扫码加好友，并备注"Delta社区"：
+\*\*微信交流群：\*\*请扫码加好友，并备注"Delta社区"：
 
 ![扫码加好友，并备注"Delta社区"](.gitbook/assets/9db164bd4d5d449ddb9da507085d925.png)
 
-**Slack：**点击下面的邀请链接加入Slack：
+\*\*Slack：\*\*点击下面的邀请链接加入Slack：
 
 {% embed url="https://join.slack.com/t/delta-mpc/shared_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw" %}
 
