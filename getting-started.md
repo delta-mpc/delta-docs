@@ -15,7 +15,7 @@ A minimum Delta network in this mode requires a Delta Chain Connector, 2 Delta N
 ![Delta Network - No-blockchain Mode](<.gitbook/assets/image (3).png>)
 
 {% tabs %}
-{% tab title="Using All-in-One script" %}
+{% tab title="Using All-in-One Script" %}
 ### **Start the network using All-in-One script**
 
 Delta has an All-in-One startup scripts which use docker-compose to start the whole network at once.
