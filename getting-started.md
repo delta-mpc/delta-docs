@@ -62,8 +62,8 @@ $ docker-compose up -d
 
 4.如果不需要图形界面来管理网络、测试任务，这里我们就已经可以使用代码连接Delta Node API提交计算任务了：
 
-{% content-ref url="delta-task-development/shi-yong-delta-node-api-guan-li-ren-wu.md" %}
-[shi-yong-delta-node-api-guan-li-ren-wu.md](delta-task-development/shi-yong-delta-node-api-guan-li-ren-wu.md)
+{% content-ref url="delta-task-development/manage-task-with-delta-node-api.md" %}
+[manage-task-with-delta-node-api.md](delta-task-development/manage-task-with-delta-node-api.md)
 {% endcontent-ref %}
 
 5.（可选）继续启动Deltaboard，Delta Node的图形化管理界面，以及在线代码调试环境。连接到上面配置的其中一个Delta Node：

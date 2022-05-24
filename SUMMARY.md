@@ -7,6 +7,7 @@
 
 ## 版本发布说明 <a href="#release-notes" id="release-notes"></a>
 
+* [v0.5.2](release-notes/v0.5.2.md)
 * [v0.5.0](release-notes/v0.5.0.md)
 * [v0.3.5](release-notes/v0.3.5.md)
 * [v0.3.0](release-notes/v0.3.0.md)
@@ -26,7 +27,7 @@
 
 * [横向联邦学习任务](delta-task-development/hfl-task-example.md)
 * [横向联邦统计任务](delta-task-development/hfa-task-example.md)
-* [使用Delta Node API管理任务](delta-task-development/shi-yong-delta-node-api-guan-li-ren-wu.md)
+* [使用Delta Node API管理任务](delta-task-development/manage-task-with-delta-node-api.md)
 
 ## 系统详细设计 <a href="#system-design" id="system-design"></a>
 
