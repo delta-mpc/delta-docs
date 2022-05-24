@@ -1,44 +1,64 @@
 # Getting Started
 
-Delta network is composed of several components. Based on the functions required, components could be chosen and organized to form different network types. Before the deployment, it is better to take a look at the system architecture overview to have a basic understanding of the network structure and components:
+Delta network is composed of several components. Based on the user requirements, components could be selected and organized into different network types. Before the deployment, it is better to take a look at the system architecture to have a basic understanding of the network structure and components:
 
 {% content-ref url="system-overview.md" %}
 [system-overview.md](system-overview.md)
 {% endcontent-ref %}
 
-## Minimum Network without Blockchain
+## No-Blockchain Network
 
-A minimum Delta network without Blockchain requires a Chain Connector running in coordinator mode, 2 Delta Nodes, and a Deltaboard connected to one of the Delta Nodes, as shown in the image below:
+Delta network could be started without using Blockchain. In the `no-blockchain` mode, Delta Chain Connector acts as the coordinator of the network. All the Delta Nodes connect to the Delta Chain Connector to form the network.
 
-![](<.gitbook/assets/image (3).png>)
+A minimum Delta network in this mode requires a Delta Chain Connector, 2 Delta Nodes, and a Deltaboard which connects to one of the Delta Nodes, the network is shown in the image below:
 
-### Start the network using All-in-One Docker image
+![Delta Network - No-blockchain Mode](<.gitbook/assets/image (3).png>)
 
-Delta has an All-in-One startup scripts using docker-compose to start the whole network at once.
+{% tabs %}
+{% tab title="Using All-in-One script" %}
+### **Start the network using All-in-One script.**
 
-1. Clone the Github repo:
+Delta has an All-in-One startup scripts which use docker-compose to start the whole network at once.
+
+
+
+1\. Clone the Github repo:
 
 ```
 $ git clone --depth 1 --branch v0.3.5 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-1. Go to the config folder for no-blockchain network:
+
+
+2\. Go to the deployment folder for no-blockchain network:
 
 ```
 $ cd delta-all-in-one/no-blockchain
 ```
 
-1. Start all the container using docker-composer:
+
+
+3\. Start all the container using docker-composer:
 
 ```
 $ docker-compose up -d
 ```
 
-After the downloading of all the Docker images, the service should be started normally. The network now is fully up and running. We can go to Deltaboard to run our first Delta Task:
+After the downloading of all the Docker images, the service should be started normally. The network now is fully up and running.&#x20;
+
+
+
+4\. We can now visit Deltaboard to run our first Delta Task:
 
 {% content-ref url="system-deployment/run-delta-task.md" %}
 [run-delta-task.md](system-deployment/run-delta-task.md)
 {% endcontent-ref %}
+{% endtab %}
+
+{% tab title="Manually Deployment" %}
+
+{% endtab %}
+{% endtabs %}
 
 ### Start the network using Docker images of the components
 
