@@ -12,35 +12,49 @@ Delta隐私计算网络支持无区块链模式的运行。这种模式下，由
 
 ![Delta隐私计算网络 - 无区块链模式](.gitbook/assets/88fbc43f76d794b066889a7cac4d4f4.png)
 
-### 方法1：使用All-in-One镜像启动整个网络
+{% tabs %}
+{% tab title="使用All-in-One镜像" %}
+### 使用All-in-One镜像启动整个网络
 
 Delta提供了一个docker-compose文件，用于一次启动整个网络。
 
-1. 克隆delta-all-in-one的github仓库：
+
+
+1.克隆delta-all-in-one的github仓库：
 
 ```
 $ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-1. 进入无区块链网络的配置文件夹：
+
+
+2.进入无区块链网络的配置文件夹：
 
 ```
 $ cd delta-all-in-one/no-blockchain
 ```
 
-1. 使用docker-compose命令启动全部的服务：
+
+
+3.使用docker-compose命令启动全部的服务：
 
 ```
 $ docker-compose up -d
 ```
 
-等待Docker镜像全部下载后，服务会自动全部启动起来。等服务全部启动后，就可以开始访问Deltaboard的界面，执行计算任务了：
+
+
+4.等待Docker镜像全部下载后，服务会自动全部启动起来。等服务全部启动后，就可以开始访问Deltaboard的界面，执行计算任务了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
+{% endtab %}
 
-### 方法2：使用各个组件的Docker镜像搭建
+{% tab title="手动搭建" %}
+### 使用各个组件的Docker镜像手动搭建
+
+
 
 1.参照启动Chain Connector的教程启动Chain Connector，并配置为Coordinator模式：
 
@@ -48,11 +62,15 @@ $ docker-compose up -d
 [start-chain-connector.md](network-deployment/start-chain-connector.md)
 {% endcontent-ref %}
 
+
+
 2.分别启动两个Delta Node，都连接到上面配置的Chain Connector：
 
 {% content-ref url="network-deployment/start-delta-node.md" %}
 [start-delta-node.md](network-deployment/start-delta-node.md)
 {% endcontent-ref %}
+
+
 
 3.在Delta Node中各自放置一些测试用的数据：
 
@@ -60,11 +78,15 @@ $ docker-compose up -d
 [prepare-data.md](network-deployment/prepare-data.md)
 {% endcontent-ref %}
 
+
+
 4.如果不需要图形界面来管理网络、开发任务，这里我们就已经可以使用代码连接Delta Node API提交计算任务了：
 
 {% content-ref url="delta-task-development/manage-task-with-delta-node-api.md" %}
 [manage-task-with-delta-node-api.md](delta-task-development/manage-task-with-delta-node-api.md)
 {% endcontent-ref %}
+
+
 
 5.（可选）继续启动Deltaboard，Delta Node的图形化管理界面，以及在线代码调试环境。连接到上面配置的其中一个Delta Node：
 
@@ -72,11 +94,15 @@ $ docker-compose up -d
 [start-deltaboard.md](network-deployment/start-deltaboard.md)
 {% endcontent-ref %}
 
+
+
 6.（可选）至此Delta隐私计算网络已经搭建完成，接下来可以在Deltaboard中编写一个隐私计算任务试试看了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
+{% endtab %}
+{% endtabs %}
 
 ## 区块链网络搭建
 
