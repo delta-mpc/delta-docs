@@ -94,23 +94,27 @@ $ docker-compose up -d
 
 ### 用Ganache做为区块链节点
 
+[Ganache](https://trufflesuite.com/ganache/)是一个专门用于本地测试的区块链节点，API和以太坊完全兼容，可以快速在本地搭建一个模拟以太坊的区块链节点。
+
+注意Ganache仅仅是一个本地模拟以太坊的节点，不包括共识算法，因此绝不能用于正式环境。
+
+在Delta All-in-One仓库中，包含了使用Ganache一键启动整个Delta网络的脚本，可以直接使用。开发者也可以自行使用各个组件的docker镜像完成网络搭建：
+
 #### 使用All-in-One镜像启动整个网络
 
-Delta采用Docker镜像进行快速部署。在Delta All-in-One仓库中，包含了快速启动一个Delta网络所需要的全部启动文件和配置。
-
-1. 克隆delta-all-in-one的github仓库：
+**1. 克隆delta-all-in-one的github仓库：**
 
 ```
 $ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
-1. 进入包含区块链网络的配置文件夹：
+**2. 进入区块链网络的配置文件夹：**
 
 ```
 $ cd delta-all-in-one/with-blockchain
 ```
 
-1. 修改配置文件
+**3. 修改配置文件：**
 
 在这个文件夹下，我们可以看到如下文件：
 
@@ -159,7 +163,7 @@ $ cat connector1/config/config.json
 
 `chain.provider`代表区块链节点的地址，`chain.nodeAddress`和`chain.privateKey`分别代表用户的区块链钱包地址和私钥，`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。为了方便大家快速地搭建，我们会在部署Ganache区块链节点的同时部署智能合约，并填写好了这几项。当然，大家可以自己生成区块链的钱包地址和私钥，自行将与Delta配套的智能合约部署到其他支持以太坊虚拟机的区块链上，更改这几项配置。
 
-1. 使用docker-compose命令启动全部的服务：
+**4. 使用docker-compose命令启动全部的服务：**
 
 接下来就可以启动Delta隐私计算网络了。输入命令：
 
@@ -190,19 +194,21 @@ http://localhost:8090
 
 #### 使用各个组件的Docker镜像搭建
 
-1.使用Ganache启动区块链节点，在这里，我们使用Ganache的官方镜像来进行部署：
+**1. 使用Ganache启动区块链节点，在这里，我们使用Ganache的官方镜像来进行部署：**
 
 ```bash
 docker run -d --name=ganache -p 8545:8545 trufflesuite/ganache-cli:v6.12.2 -s delta
 ```
 
-2.在区块链上部署Delta智能合约：
+这里需要注意的是，在启动镜像时通过`-s`参数写死了随机初始化的种子，保证了第一次部署合约时，合约地址永远是一样的，以方便后续的系统配置。Ganache本来就只能用于本地测试，因此这样做也没有什么问题。
+
+**2. 在区块链上部署Delta智能合约：**
 
 {% content-ref url="network-deployment/deploy-smart-contracts.md" %}
 [deploy-smart-contracts.md](network-deployment/deploy-smart-contracts.md)
 {% endcontent-ref %}
 
-3.启动Chain Connector，并配置为Blockchain模式：
+**3. 启动Chain Connector，并配置为Blockchain模式：**
 
 {% content-ref url="network-deployment/start-chain-connector.md" %}
 [start-chain-connector.md](network-deployment/start-chain-connector.md)
