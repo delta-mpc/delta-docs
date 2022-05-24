@@ -72,7 +72,7 @@ $ docker-compose up -d
 [start-deltaboard.md](network-deployment/start-deltaboard.md)
 {% endcontent-ref %}
 
-6.至此Delta隐私计算网络已经搭建完成，接下来可以在Deltaboard中编写一个隐私计算任务试试看了：
+6.（可选）至此Delta隐私计算网络已经搭建完成，接下来可以在Deltaboard中编写一个隐私计算任务试试看了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
@@ -208,7 +208,7 @@ docker run -d --name=ganache -p 8545:8545 trufflesuite/ganache-cli:v6.12.2 -s de
 [deploy-smart-contracts.md](network-deployment/deploy-smart-contracts.md)
 {% endcontent-ref %}
 
-**3. 启动Chain Connector，并配置为Blockchain模式：**
+**3. 启动3个Chain Connector，并配置为Blockchain模式：**
 
 {% content-ref url="network-deployment/start-chain-connector.md" %}
 [start-chain-connector.md](network-deployment/start-chain-connector.md)
@@ -222,38 +222,50 @@ docker run -d --name=ganache -p 8545:8545 trufflesuite/ganache-cli:v6.12.2 -s de
 docker logs -f ganache
 ```
 
-即可从日志中获取自动生成的钱包地址和私钥。
+即可从日志中获取自动生成的钱包地址和私钥。**3个Chain Connector必须配置成不同的钱包地址和私钥。**
 
 `chain.provider`为区块链节点地址，在本地部署的情况下，这一项填写`ws://localhost:8545`即可。
 
 `chain.identity.contractAddress`以及`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
 
-接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
+**4. 启动3个Delta Node，分别连接到上述3个Chain Connector:**
+
+{% content-ref url="network-deployment/start-delta-node.md" %}
+[start-delta-node.md](network-deployment/start-delta-node.md)
+{% endcontent-ref %}
+
+**5. 如果不需要图形界面，就可以使用上面任意一个Delta Node的API，通过代码来提交任务，获取执行结果了：**
+
+{% content-ref url="delta-task-development/manage-task-with-delta-node-api.md" %}
+[manage-task-with-delta-node-api.md](delta-task-development/manage-task-with-delta-node-api.md)
+{% endcontent-ref %}
+
+**6. （可选）启动1个Deltaboard，连接到任意一个Delta Node，用于图形化的网络管理：**
+
+{% content-ref url="network-deployment/start-deltaboard.md" %}
+[start-deltaboard.md](network-deployment/start-deltaboard.md)
+{% endcontent-ref %}
+
+**7. （可选）然后就可以在Deltaboard中编写和测试计算任务了：**
+
+{% content-ref url="network-deployment/run-delta-task.md" %}
+[run-delta-task.md](network-deployment/run-delta-task.md)
+{% endcontent-ref %}
 
 ### 方法2：用Delta Chain做为区块链节点
 
-1.启动区块链节点，可以启动一个区块链节点，让两个Chain Connector连接到这一个节点，也可以启动两个区块链节点组成网络，两个Chain Connector各自连接一个节点：
+用Delta Chain做为区块链节点的搭建方式和[方法1](getting-started.md#ke-xuan-fang-shi-2-shi-yong-ge-ge-zu-jian-de-docker-jing-xiang-da-jian)完全一致，只是将方法1中的第1步，启动Ganache镜像替换为启动Delta Chain镜像即可。
+
+**1. 启动Delta Chain区块链节点，可以启动一个节点，也可以启动多个节点组成网络：**
 
 {% content-ref url="network-deployment/start-delta-chain-node.md" %}
 [start-delta-chain-node.md](network-deployment/start-delta-chain-node.md)
 {% endcontent-ref %}
 
-2.为了方便查看区块链节点的数据，可以再启动一个图形化界面的区块链浏览器，这一步可选：
+**2.（可选）启动一个图形化界面的区块链浏览器，方便查看区块链数据：**
 
 {% content-ref url="network-deployment/start-delta-chain-explorer.md" %}
 [start-delta-chain-explorer.md](network-deployment/start-delta-chain-explorer.md)
 {% endcontent-ref %}
 
-3.在区块链上部署Delta智能合约：
-
-{% content-ref url="network-deployment/deploy-smart-contracts.md" %}
-[deploy-smart-contracts.md](network-deployment/deploy-smart-contracts.md)
-{% endcontent-ref %}
-
-4.启动Chain Connector，并配置为Blockchain模式：
-
-{% content-ref url="network-deployment/start-chain-connector.md" %}
-[start-chain-connector.md](network-deployment/start-chain-connector.md)
-{% endcontent-ref %}
-
-接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
+**3. 从**[**方法1**](getting-started.md#ke-xuan-fang-shi-2-shi-yong-ge-ge-zu-jian-de-docker-jing-xiang-da-jian)**中的第2步继续操作。**
