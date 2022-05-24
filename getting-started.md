@@ -140,7 +140,15 @@ $ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-all-in-
 
 
 
-2.使用docker-compose命令启动全部的服务：
+2.进入区块链网络的启动文件夹：
+
+```
+ cd delta-all-in-one/with-blockchain
+```
+
+
+
+3.使用docker-compose命令启动全部的服务：
 
 ```
 $ docker-compose up
@@ -159,7 +167,7 @@ dashboard       | [D 2022-01-18 09:20:40.851 JupyterHub app:2452] It took 1.211 
 
 
 
-3.进入Deltaboard的图形化界面：
+4.进入Deltaboard的图形化界面：
 
 ```
 http://localhost:8090
