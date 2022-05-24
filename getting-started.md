@@ -259,7 +259,7 @@ docker logs -f ganache
 
 此种搭建方式目前只支持手动搭建的方式，可以搭建多个区块链节点组网的Delta区块链隐私计算网络。
 
-搭建方式和方法1中的手动搭建方式完全一致，只需要替换掉第1步。
+搭建方式和[方法1](getting-started.md#ganache\_as\_blockchain\_node)中的手动搭建方式完全一致，只需要替换掉第1步。
 
 在第1步时，按照下述步骤，启动Delta Chain镜像：
 
@@ -275,4 +275,4 @@ docker logs -f ganache
 [start-delta-chain-explorer.md](network-deployment/start-delta-chain-explorer.md)
 {% endcontent-ref %}
 
-**3. 从方法1中的\[手动搭建-第2步]继续操作。**
+**3. 从**[**方法1**](getting-started.md#ganache\_as\_blockchain\_node)**中的\[手动搭建-第2步]继续操作。**
