@@ -7,6 +7,7 @@
 
 ## Release Notes
 
+* [v0.5.2](release-notes/v0.5.2.md)
 * [v0.5.0](release-notes/v0.5.0.md)
 * [v0.3.5](release-notes/v0.3.5.md)
 * [v0.3.0](release-notes/v0.3.0.md)
@@ -26,11 +27,17 @@
 
 * [Horizontal Federated Learning Task](delta-task-development/horizontal-federated-learning-task.md)
 * [Horizontal Federated Analytics Task](delta-task-development/horizontal-federated-analytics-task.md)
+* [Manage Delta Task using Delta Node API](delta-task-development/manage-delta-task-using-delta-node-api.md)
 
 ## System Design
 
 * [Code Execution Security](system-design/code-execution-security.md)
-* [Delta Task Generation](system-design/delta-task-generation.md)
+* [Horizontal Task Framework](system-design/horizontal-task-framework.md)
+* [On-chain Secure Aggregation](system-design/on-chain-secure-aggregation.md)
 * [Horizontal Federated Learning](system-design/horizontal-federated-learning.md)
-* [Vertical Federated Learning](system-design/vertical-federated-learning.md)
 * [Horizontal Federated Analytics](system-design/horizontal-federated-analytics.md)
+* [Vertical Federated Learning](system-design/vertical-federated-learning.md)
+
+## Horizontal Federated Analytics
+
+* [Supported Pandas APIs](horizontal-federated-analytics/supported-pandas-apis.md)
