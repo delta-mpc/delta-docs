@@ -118,7 +118,7 @@ $ docker-compose up -d
 
 在本示例中，使用上述网络结构来搭建Delta网络。
 
-### 方法1：用Ganache做为区块链节点
+### 方法1：用Ganache做为区块链节点 <a href="#ganache_as_blockchain_node" id="ganache_as_blockchain_node"></a>
 
 [Ganache](https://trufflesuite.com/ganache/)是一个专门用于本地测试的区块链节点，API和以太坊完全兼容，可以快速在本地搭建一个模拟以太坊的区块链节点。
 
@@ -257,7 +257,11 @@ docker logs -f ganache
 
 ### 方法2：用Delta Chain做为区块链节点
 
-用Delta Chain做为区块链节点的搭建方式和[方法1](getting-started.md#ke-xuan-fang-shi-2-shi-yong-ge-ge-zu-jian-de-docker-jing-xiang-da-jian)完全一致，只是将方法1中的第1步，启动Ganache镜像替换为启动Delta Chain镜像即可。
+此种搭建方式目前只支持手动搭建的方式，可以搭建多个区块链节点组网的Delta区块链隐私计算网络。
+
+搭建方式和方法1中的手动搭建方式完全一致，只需要替换掉第1步。
+
+在第1步时，按照下述步骤，启动Delta Chain镜像：
 
 **1. 启动Delta Chain区块链节点，可以启动一个节点，也可以启动多个节点组成网络：**
 
@@ -271,4 +275,4 @@ docker logs -f ganache
 [start-delta-chain-explorer.md](network-deployment/start-delta-chain-explorer.md)
 {% endcontent-ref %}
 
-**3. 从**[**方法1**](getting-started.md#ke-xuan-fang-shi-2-shi-yong-ge-ge-zu-jian-de-docker-jing-xiang-da-jian)**中的第2步继续操作。**
+**3. 从方法1中的\[手动搭建-第2步]继续操作。**
