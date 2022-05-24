@@ -8,9 +8,9 @@ Delta隐私计算网络由多个组件构成，可根据需要进行选择和组
 
 ## 无区块链网络搭建
 
-最小化的Delta隐私计算网络，需要搭建一个Chain Connector（运行于Coordinator模式），两个Delta Node，一个Deltaboard。这种模式下，由Chain Connector完成组网，协调两个Delta Node完成计算任务执行，如下图所示：
+Delta隐私计算网络支持无区块链模式的运行。这种模式下，由Chain Connector完成组网，协调Delta Node完成计算任务执行。最小化的网络需要搭建一个Chain Connector（运行于Coordinator模式），两个Delta Node，一个Deltaboard，如下图所示：
 
-![最小Delta隐私计算网络（无区块链）](.gitbook/assets/88fbc43f76d794b066889a7cac4d4f4.png)
+![Delta隐私计算网络 - 无区块链模式](.gitbook/assets/88fbc43f76d794b066889a7cac4d4f4.png)
 
 ### 使用All-in-One镜像启动整个网络
 
@@ -60,7 +60,7 @@ $ docker-compose up -d
 [prepare-data.md](network-deployment/prepare-data.md)
 {% endcontent-ref %}
 
-4.如果不需要图形界面来管理网络、测试任务，这里我们就已经可以使用代码连接Delta Node API提交计算任务了：
+4.如果不需要图形界面来管理网络、开发任务，这里我们就已经可以使用代码连接Delta Node API提交计算任务了：
 
 {% content-ref url="delta-task-development/manage-task-with-delta-node-api.md" %}
 [manage-task-with-delta-node-api.md](delta-task-development/manage-task-with-delta-node-api.md)
@@ -78,19 +78,23 @@ $ docker-compose up -d
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
 
-## 区块链网络搭建 - Ganache本地测试节点
+## 区块链网络搭建
 
-一个最小的包含本地区块链节点的Delta网络，需要三个数据持有方。每个数据持有方各搭建一套完全一样的系统，包括一个部署了Delta智能合约的区块链节点，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
+运行于区块链模式的Delta网络，需要至少三个数据持有方。每个数据持有方各自搭建一套完全一样的系统。系统中包括一个部署了Delta智能合约的区块链节点，运行于区块链模式的`Chain Connector`，`Delta Node`，以及用于图形化管理的`Deltaboard`。
 
-![](.gitbook/assets/delta-with-multi-chain.png)
+![Delta隐私计算网络 - 三个数据持有方](.gitbook/assets/delta-with-multi-chain.png)
 
-为了简化网络，Deltaboard可以只搭建一个，区块链节点也可以只搭一个，如下图所示：
+参与网络搭建的多方也可以共享同一个区块链节点，这种情况一般用于本地测试，或者是多方之间互相信任，愿意共享同一个区块链节点。多方共享同一个区块链节点的情况下，各方的数据仍然保持同样的隐私保护程度，无数据泄露风险。只是区块链网络节点数更少，从而共识强度更低，更容易出现针对Tx的攻击行为，导致任务无法正常执行，或者是数据持有者参与了一些本不愿意参与的计算，付出了额外的算力成本。
+
+单个区块链节点的Delta网络结构如下图所示：
 
 ![](.gitbook/assets/delta-with-single-chain.png)
 
-在本示例中，使用这种简化的网络结构来搭建Delta网络。其中，区块链节点使用Ganache来进行部署。
+在本示例中，使用上述网络结构来搭建Delta网络。
 
-### 使用All-in-One镜像启动整个网络
+### 用Ganache做为区块链节点
+
+#### 使用All-in-One镜像启动整个网络
 
 Delta采用Docker镜像进行快速部署。在Delta All-in-One仓库中，包含了快速启动一个Delta网络所需要的全部启动文件和配置。
 
@@ -184,7 +188,7 @@ http://localhost:8090
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
 
-### 使用各个组件的Docker镜像搭建
+#### 使用各个组件的Docker镜像搭建
 
 1.使用Ganache启动区块链节点，在这里，我们使用Ganache的官方镜像来进行部署：
 
@@ -220,19 +224,7 @@ docker logs -f ganache
 
 接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
 
-## 区块链网络搭建 - Delta Chain区块链节点
-
-一个最小的包含区块链的Delta网络，需要三个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
-
-![](.gitbook/assets/delta-with-multi-chain.png)
-
-为了简化网络，Deltaboard可以只搭建一个，区块链节点也可以只搭一个，如下图所示：
-
-![](.gitbook/assets/delta-with-single-chain.png)
-
-在本示例中，区块链节点使用Delta Chain Node来进行搭建。
-
-### 使用各个组件的Docker镜像搭建
+### 用Delta Chain做为区块链节点
 
 1.启动区块链节点，可以启动一个区块链节点，让两个Chain Connector连接到这一个节点，也可以启动两个区块链节点组成网络，两个Chain Connector各自连接一个节点：
 
