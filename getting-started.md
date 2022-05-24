@@ -1,6 +1,6 @@
 # 快速搭建指南
 
-Delta隐私计算网络由多个组件构成，可根据需要进行选择和组合。在开始搭建前，建议先阅读系统架构说明文档，对Delta的整个框架结构有一个初步的了解：
+方法Delta隐私计算网络由多个组件构成，可根据需要进行选择和组合。在开始搭建前，建议先阅读系统架构说明文档，对Delta的整个框架结构有一个初步的了解：
 
 {% content-ref url="delta-architecture.md" %}
 [delta-architecture.md](delta-architecture.md)
@@ -12,7 +12,7 @@ Delta隐私计算网络支持无区块链模式的运行。这种模式下，由
 
 ![Delta隐私计算网络 - 无区块链模式](.gitbook/assets/88fbc43f76d794b066889a7cac4d4f4.png)
 
-### 使用All-in-One镜像启动整个网络
+### 方法1：使用All-in-One镜像启动整个网络
 
 Delta提供了一个docker-compose文件，用于一次启动整个网络。
 
@@ -40,7 +40,7 @@ $ docker-compose up -d
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
 
-### 使用各个组件的Docker镜像搭建
+### 方法2：使用各个组件的Docker镜像搭建
 
 1.参照启动Chain Connector的教程启动Chain Connector，并配置为Coordinator模式：
 
@@ -92,7 +92,7 @@ $ docker-compose up -d
 
 在本示例中，使用上述网络结构来搭建Delta网络。
 
-### 用Ganache做为区块链节点
+### 方法1：用Ganache做为区块链节点
 
 [Ganache](https://trufflesuite.com/ganache/)是一个专门用于本地测试的区块链节点，API和以太坊完全兼容，可以快速在本地搭建一个模拟以太坊的区块链节点。
 
@@ -100,7 +100,7 @@ $ docker-compose up -d
 
 在Delta All-in-One仓库中，包含了使用Ganache一键启动整个Delta网络的脚本，可以直接使用。开发者也可以自行使用各个组件的docker镜像完成网络搭建：
 
-#### 使用All-in-One镜像启动整个网络
+#### 可选方式1：使用Delta All-in-One镜像启动整个网络
 
 **1. 克隆delta-all-in-one的github仓库：**
 
@@ -192,7 +192,7 @@ http://localhost:8090
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
 
-#### 使用各个组件的Docker镜像搭建
+#### 可选方式2：使用各个组件的Docker镜像搭建
 
 **1. 使用Ganache启动区块链节点，在这里，我们使用Ganache的官方镜像来进行部署：**
 
@@ -230,7 +230,7 @@ docker logs -f ganache
 
 接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
 
-### 用Delta Chain做为区块链节点
+### 方法2：用Delta Chain做为区块链节点
 
 1.启动区块链节点，可以启动一个区块链节点，让两个Chain Connector连接到这一个节点，也可以启动两个区块链节点组成网络，两个Chain Connector各自连接一个节点：
 
