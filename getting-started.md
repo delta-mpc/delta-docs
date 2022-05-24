@@ -6,9 +6,9 @@ Delta隐私计算网络由多个组件构成，可根据需要进行选择和组
 [delta-architecture.md](delta-architecture.md)
 {% endcontent-ref %}
 
-## 最小无区块链网络搭建
+## 最小网络搭建 - 无区块链模式
 
-最小化的Delta隐私计算网络，需要搭建一个Chain Connector（运行于Coordinator模式），两个Delta Node，一个Deltaboard，如下图所示：
+最小化的Delta隐私计算网络，需要搭建一个Chain Connector（运行于Coordinator模式），两个Delta Node，一个Deltaboard。这种模式下，由Chain Connector完成组网，协调两个Delta Node完成计算任务，如下图所示：
 
 ![最小Delta隐私计算网络（无区块链）](.gitbook/assets/88fbc43f76d794b066889a7cac4d4f4.png)
 
@@ -54,19 +54,25 @@ $ docker-compose up -d
 [start-delta-node.md](network-deployment/start-delta-node.md)
 {% endcontent-ref %}
 
-3.在Delta Node中各自放置一些测试用的数据
+3.在Delta Node中各自放置一些测试用的数据：
 
 {% content-ref url="network-deployment/prepare-data.md" %}
 [prepare-data.md](network-deployment/prepare-data.md)
 {% endcontent-ref %}
 
-4.启动Deltaboard，连接到上面配置的其中一个Delta Node：
+4.如果不需要图形界面来管理网络、测试任务，这里我们就已经可以使用代码连接Delta Node API提交计算任务了：
+
+{% content-ref url="delta-task-development/shi-yong-delta-node-api-guan-li-ren-wu.md" %}
+[shi-yong-delta-node-api-guan-li-ren-wu.md](delta-task-development/shi-yong-delta-node-api-guan-li-ren-wu.md)
+{% endcontent-ref %}
+
+5.（可选）继续启动Deltaboard，Delta Node的图形化管理界面，以及在线代码调试环境。连接到上面配置的其中一个Delta Node：
 
 {% content-ref url="network-deployment/start-deltaboard.md" %}
 [start-deltaboard.md](network-deployment/start-deltaboard.md)
 {% endcontent-ref %}
 
-5.至此最小化的Delta隐私计算网络已经搭建完成，接下来可以开始编写一个隐私计算任务试试看了：
+6.至此Delta隐私计算网络已经搭建完成，接下来可以在Deltaboard中编写一个隐私计算任务试试看了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
@@ -213,7 +219,6 @@ docker logs -f ganache
 `chain.identity.contractAddress`以及`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
 
 接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
-
 
 ## 最小Delta区块链网络搭建
 
