@@ -110,9 +110,11 @@ After the downloading of all the Docker images, the service should be started no
 
 
 
-## Minimum Network with Blockchain
+## Blockchain Network
 
-A minimum network with Blockchain consists of 3 parties deploying the same set of network components: Delta Chain Node with Delta Contracts deployed, Chain Connector running in Blockchain mode, Delta Node, and the GUI Deltaboard, the structure is as following:
+To run a Delta Network in Blockchain mode, at least 3 parties are required. Each of the 3 parties starts a group of the same components and forms the network altogether.
+
+The components a party should deploy includes a Blockchain Node with the Delta Contracts deployed, a Chain Connector running in Blockchain mode, a Delta Node, and a Deltaboard. The network with 3 parties is shown below:
 
 ![](.gitbook/assets/delta-with-multi-chain.png)
 
