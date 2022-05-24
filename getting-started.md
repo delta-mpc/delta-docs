@@ -1,14 +1,14 @@
 # 快速搭建指南
 
-Delta隐私计算网络由多个组件构成，可根据需要进行选择和组合。在开始搭建前，建议先阅读系统架构说明文档，以对Delta的整个框架结构有一个初步的了解：
+Delta隐私计算网络由多个组件构成，可根据需要进行选择和组合。在开始搭建前，建议先阅读系统架构说明文档，对Delta的整个框架结构有一个初步的了解：
 
 {% content-ref url="delta-architecture.md" %}
 [delta-architecture.md](delta-architecture.md)
 {% endcontent-ref %}
 
-## 最小网络搭建 - 无区块链模式
+## 无区块链网络搭建
 
-最小化的Delta隐私计算网络，需要搭建一个Chain Connector（运行于Coordinator模式），两个Delta Node，一个Deltaboard。这种模式下，由Chain Connector完成组网，协调两个Delta Node完成计算任务，如下图所示：
+最小化的Delta隐私计算网络，需要搭建一个Chain Connector（运行于Coordinator模式），两个Delta Node，一个Deltaboard。这种模式下，由Chain Connector完成组网，协调两个Delta Node完成计算任务执行，如下图所示：
 
 ![最小Delta隐私计算网络（无区块链）](.gitbook/assets/88fbc43f76d794b066889a7cac4d4f4.png)
 
@@ -78,7 +78,7 @@ $ docker-compose up -d
 [run-delta-task.md](network-deployment/run-delta-task.md)
 {% endcontent-ref %}
 
-## 最小Ganache区块链网络搭建
+## 区块链网络搭建 - Ganache本地测试节点
 
 一个最小的包含本地区块链节点的Delta网络，需要三个数据持有方。每个数据持有方各搭建一套完全一样的系统，包括一个部署了Delta智能合约的区块链节点，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
 
@@ -220,7 +220,7 @@ docker logs -f ganache
 
 接着，就可以按照上一节中部署无区块链网络的教程，完成Delta Node和Deltaboard的部署，准备节点数据，然后就可以运行Delta计算任务了。
 
-## 最小Delta区块链网络搭建
+## 区块链网络搭建 - Delta Chain区块链节点
 
 一个最小的包含区块链的Delta网络，需要三个数据持有方，每个数据持有方各搭建一套完全一样的系统，包括Delta Chain Node，部署了Delta智能合约，运行于区块链模式的Chain Connector，Delta Node，以及用于图形化管理的Deltaboard。
 
