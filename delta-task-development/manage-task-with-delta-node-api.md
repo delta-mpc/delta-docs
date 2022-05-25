@@ -96,3 +96,34 @@ delta_node = DeltaNode(DELTA_NODE_API)
 task_id = delta_node.create_task(task)
 delta_node.wait(task_id)
 ```
+
+### get_result - 获取任务结果
+
+```python
+delta.delta_node.DeltaNode.get_result(self, task_id)
+```
+
+用户可以通过该方法，在任务正常结束后，获取任务结果。如果任务没有结束或执行过程中出现异常，调用此方法会抛出异常。
+
+参数：
+
+* task_id: 已经提交的任务ID。可以通过create_task方法得到
+
+返回值：
+
+* 任务结果。横向联邦学习任务，结果的类型是Dict[str, torch.Tensor]，即delta.task.HorizontalLearning.state_dict()的返回类型；横向联邦统计任务，结果的类型是delta.task.HorizontalAnalytics.execute()的返回类型（delta.pandas对应pandas）。
+
+例子：
+
+```python
+# Example is a horizontal learning task (subclass of HorizontalLearning) or a horizontal analytics task (subclass of HorizontalAnalytics)
+task = Example().build()
+DELTA_NODE_API = "http://127.0.0.1:6700"
+delta_node = DeltaNode(DELTA_NODE_API)
+task_id = delta_node.create_task(task)
+if delta_node.wait(task_id):
+    res = delta_node.get_result(task_id)
+    print(res)
+else:
+    print("Task error")
+```

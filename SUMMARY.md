@@ -7,7 +7,7 @@
 
 ## 版本发布说明 <a href="#release-notes" id="release-notes"></a>
 
-* [v0.5.2](release-notes/v0.5.2.md)
+* [v0.5.3](release-notes/v0.5.3.md)
 * [v0.5.0](release-notes/v0.5.0.md)
 * [v0.3.5](release-notes/v0.3.5.md)
 * [v0.3.0](release-notes/v0.3.0.md)
