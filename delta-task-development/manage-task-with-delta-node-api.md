@@ -21,6 +21,12 @@ Delta支持直接通过Delta Node的API来提交任务、监控任务执行状�
 [hfa-task-example.md](hfa-task-example.md)
 {% endcontent-ref %}
 
+想在本地开发环境编写并发送Delta Task任务，首先需要在本地的Python环境中安装`delta-task`包。可以使用`pip`进行安装：
+
+```
+pip install delta-task
+```
+
 接下来，我们在本地的Python开发环境中编写如下的代码，首先是计算任务的定义：
 
 ```python
