@@ -6,6 +6,12 @@ Delta支持直接通过Delta Node的API来提交任务、监控任务执行状�
 
 下面的示例代码可以运行在任何Python环境中，比如开发者本地的PyCharm开发环境中。只要搭建有可用的Delta Node，可以远程访问API，就可以直接执行。
 
+在任务开发之前，需要在本地的Python环境中安装`delta-task`包。可以使用`pip`进行安装：
+
+```
+pip install delta-task
+```
+
 假设这样一个场景：有三家企业，每家都有一份员工工资表。这个工资表绝对不能对外暴露。现在这三家企业都在企业内部署了Delta节点，并接入了工资表的数据，我们现在要写一个数据统计任务，计算出这三家企业的全部员工的工资平均值。
 
 相关的API在delta-task中对应的方法主要有如下几个：
@@ -20,12 +26,6 @@ Delta支持直接通过Delta Node的API来提交任务、监控任务执行状�
 {% content-ref url="hfa-task-example.md" %}
 [hfa-task-example.md](hfa-task-example.md)
 {% endcontent-ref %}
-
-想在本地开发环境编写并发送Delta Task任务，需要在本地的Python环境中安装`delta-task`包。可以使用`pip`进行安装：
-
-```
-pip install delta-task
-```
 
 接下来，我们在本地的Python开发环境中编写如下的代码，首先是计算任务的定义：
 
