@@ -2,19 +2,19 @@
 
 ## 横向联邦学习的实现
 
-在文章隐私计算任务生成中
+Delta中的横向联邦学习在横向联邦任务框架下执行：
 
 {% content-ref url="horizontal-task-framework.md" %}
 [horizontal-task-framework.md](horizontal-task-framework.md)
 {% endcontent-ref %}
 
-我们对横向联邦场景下的隐私任务进行了抽象。有了对任务的抽象之后，我们就知道如何实现横向联邦学习了： 将横向联邦学习中的各个步骤，对应到计算任务中的map与reduce操作中去。
+横向联邦任务框架对横向的隐私计算任务进行了抽象，所有的横向任务都可被拆分为多个计算单元，每个计算单元包括`select`, `map`, `aggregate`, `reduce`四个步骤。
 
-关于计算任务中的select与aggregate操作，这两个操作并不是由用户自己编写的，而是由Delta提供了一些 预定义的实现，用户在创建任务的时候，只需要填写一些配置项即可。
+用户编写的不同的横向计算任务，在真正执行前，都会先由Delta做一次转化，将整个计算过程转化为包含这四个步骤的多个单元，然后再发送到Delta Node进行执行。
+
+本文详细讲解横向联邦学习的任务从用户编写的计算代码，到可被Delta Node执行的多个计算单元的转化过程。
 
 ### 横向联邦学习任务的组成与流程
-
-横向联邦学习任务，就是在横向联邦场景下的机器学习。 想要实现一个横向联邦学习任务，我们首先需要知道，如何在单机上实现一个机器学习。
 
 一个常见的机器学习任务，流程通常是这样的：
 
@@ -37,7 +37,7 @@
 
 我们回到横向联邦学习任务。在我们定义横向联邦学习任务时，也只需要定义好上述的5个部分， 就可以完成机器学习相关的定义。
 
-参考横向联邦学习的示例，
+参考横向联邦学习的代码示例：
 
 {% content-ref url="../delta-task-development/hfl-task-example.md" %}
 [hfl-task-example.md](../delta-task-development/hfl-task-example.md)
@@ -51,11 +51,11 @@
 4. 模型训练：对应`train`
 5. 模型验证：对应`validate`
 
-用户在定义横向联邦学习任务时，只需要定义好这6个方法，就完成了机器学习部分的定义。 那么，接下来Delta要做的就是，将这些用户定义的方法，生成一个隐私计算任务。
+用户在定义横向联邦学习任务时，只需要定义好这6个方法，就完成了机器学习部分的定义。 那么，接下来Delta要做的就是，将这些用户定义的方法，转化为多个可被执行的计算单元。
 
-### 生成隐私计算任务
+### 转化为横向联邦任务计算单元
 
-要生成隐私计算任务，Delta要做的，就是将用户定义的这6个函数，对应到map与reduce操作上来。
+要生成计算单元，Delta要做的，就是将用户定义的这6个函数，对应到map与reduce操作上来。
 
 首先，我们需要明确，一个横向联邦学习任务，有多少个Round，每个Round，又对应用户定义的哪些部分呢？ 这都是由用户在构造函数中定义的。在构造函数中，参数`max_rounds`定义了任务有多少个Round；而`merge_epoch`和`merge_iteration` 这两个参数，定义了每个Round，对应于机器学习中的多少个epoch，或者多少个iteration。
 
@@ -78,10 +78,6 @@
 5. `validate`：对应一个map+reduce操作。因为一个Round中验证完成之后，得到的只是模型在本地数据的验证结果，想要得到全局数据上的验证结果，还需要聚合多个客户端的结果。
 
 将这些方法与map和reduce对应起来之后，构建任务就比较简单了。我们还是按照构建计算图的做法，先在图上添加`dataset`、`make_train_dataloader`与`make_validate_dataloader` 对应的操作，然后根据有多少个Round、验证的频率，依次添加`train`方法与`validate`对应的操作。然后与横向联邦统计中意义，通过计算图，构建出一个完整的隐私计算任务。
-
-### 任务的执行
-
-在这方面，与横向联邦统计没有任何差别，这里就不再赘述了。具体可以参考横向联邦统计的设计
 
 {% content-ref url="horizontal-federated-analytics.md" %}
 [horizontal-federated-analytics.md](horizontal-federated-analytics.md)
