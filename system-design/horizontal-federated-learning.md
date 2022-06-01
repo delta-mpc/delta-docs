@@ -1,7 +1,5 @@
 # 横向联邦学习
 
-## 横向联邦学习的实现
-
 Delta中的横向联邦学习在横向联邦任务框架下执行：
 
 {% content-ref url="horizontal-task-framework.md" %}
