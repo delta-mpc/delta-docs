@@ -1,6 +1,6 @@
 # Getting Started
 
-Delta network is composed of several components. Based on the user requirements, components could be selected and organized into different network types. Before the deployment, it is better to take a look at the system architecture to have a basic understanding of the network structure and components:
+Delta network is composed of several components. In different use scenarios, components could be selected and organized into different network types. Before actually deploying the system, it is better to take a look at the system architecture to have a basic understanding of the network structure and components:
 
 {% content-ref url="system-overview.md" %}
 [system-overview.md](system-overview.md)
@@ -112,13 +112,13 @@ After the downloading of all the Docker images, the service should be started no
 
 ## Blockchain Network
 
-To run a Delta Network in Blockchain mode, at least 3 parties are required. Each of the 3 parties starts a group of the same components and forms the network altogether.
+To run a Delta Network in Blockchain mode, at least 3 participants are required. Each of the 3 participants should deploy a group of the same components.
 
-The components a party should deploy includes a Blockchain Node with the Delta Contracts deployed, a Chain Connector running in Blockchain mode, a Delta Node, and a Deltaboard. The network with 3 parties is shown below:
+The components include a Blockchain Node with the Delta Contracts deployed, a Chain Connector running in Blockchain mode, a Delta Node, and a Deltaboard. The network with 3 participants is shown below:
 
 ![](.gitbook/assets/delta-with-multi-chain.png)
 
-The network could be further minimized if started by a single developer. We need only one instance of Deltaboard to control the network. And the Blockchain node could be shared among the 3 Chain Connectors:
+In use cases such as local testing, or a limited group of participants who trust each other, the Blockchain node could be shared. All the Chain Connectors connect to the same Blockchain Node. In this case, the data is still kept private and safe for every participant. It is just with less Blockchain node, the consensus algorithm is more likely to be attacked,&#x20;
 
 ![](.gitbook/assets/delta-with-single-chain.png)
 
