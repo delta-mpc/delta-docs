@@ -234,7 +234,6 @@ delta.delta_node.DeltaNode.get_result(self, task_id)
 例子：
 
 ```python
-# Example is a horizontal learning task (subclass of HorizontalLearning) or a horizontal analytics task (subclass of HorizontalAnalytics)
 task = Example().build()
 DELTA_NODE_API = "http://127.0.0.1:6700"
 delta_node = DeltaNode(DELTA_NODE_API)
