@@ -1,14 +1,16 @@
 # 横向联邦统计
 
-## 横向联邦统计的实现
-
-在文章隐私计算任务生成中
+Delta中的横向联邦统计在横向联邦任务框架下执行：
 
 {% content-ref url="horizontal-task-framework.md" %}
 [horizontal-task-framework.md](horizontal-task-framework.md)
 {% endcontent-ref %}
 
-我们对横向联邦场景下的隐私任务进行了抽象。有了对任务的抽象之后，如何实现横向联邦统计就很明确了：从用户编写的代码中，提取出任务的输入与输出，将用户 编写的计算逻辑，转化为一个个map与reduce的操作。 这里可能要问了，为什么只有map与reduce的操作，select与aggregate操作呢？ 其实，在横向联邦统计这种任务类型中，aggregate和select操作已经预定义好了，与用户编写的代码无关，Delta会自动在合适的时机， 来执行预定好的select与aggregate操作。
+横向联邦任务框架对横向的隐私计算任务进行了抽象，所有的横向任务都可被拆分为多个计算单元，每个计算单元包括`select`, `map`, `aggregate`, `reduce`四个步骤。
+
+用户编写的不同的横向计算任务，在真正执行前，都会先由Delta做一次转化，将整个计算过程转化为包含这四个步骤的多个单元，然后再发送到Delta Node进行执行。
+
+本文详细讲解横向联邦统计的任务从用户编写的计算代码，到可被Delta Node执行的多个计算单元的转化过程。
 
 ### 用户如何定义横向联邦统计任务
 
