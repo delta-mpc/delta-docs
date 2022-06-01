@@ -1,6 +1,6 @@
 # 快速搭建指南
 
-方法Delta隐私计算网络由多个组件构成，可根据需要进行选择和组合。在开始搭建前，建议先阅读系统架构说明文档，对Delta的整个框架结构有一个初步的了解：
+Delta隐私计算网络由多个组件构成，可根据需要进行选择和组合。在开始搭建前，建议先阅读系统架构说明文档，对Delta的整个框架结构有一个初步的了解：
 
 {% content-ref url="delta-architecture.md" %}
 [delta-architecture.md](delta-architecture.md)
