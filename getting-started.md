@@ -134,7 +134,7 @@ In Delta All-in-One script repo, we have a docker compose script to start the ab
 
 {% tabs %}
 {% tab title="Using All-in-One Script" %}
-**Using Delta All-in-One Docker Compose Script**
+### **Start the network using All-in-One script**
 
 
 
@@ -187,9 +187,69 @@ Now we can actually run a computation task:
 {% endtab %}
 
 {% tab title="Manually Deployment" %}
+### Manually deploy the network using Docker images
 
+1.Using the official Ganache docker image to start the Blockchain node:
+
+```bash
+docker run -d --name=ganache -p 8545:8545 trufflesuite/ganache-cli:v6.12.2 -s delta
+```
+
+Note that we're passing a fixed random seed to the container using `-s`. By doing this, the contract addresses and wallet addresses will always be same for the first time deployment of the same contracts, which will simplify our further configuration. Since Ganache is dedicated for local testing, we're not bringing in more security risks by doing this anyway.
+
+
+
+2.Deploy the Delta smart contracts on the Blockchain:
+
+{% content-ref url="system-deployment/deploy-smart-contracts.md" %}
+[deploy-smart-contracts.md](system-deployment/deploy-smart-contracts.md)
+{% endcontent-ref %}
+
+
+
+3\. Start 3 Chain Connectors, configure them to run at `blockchain` mode, and connect them all to the Blockchain node we just started:
+
+{% content-ref url="system-deployment/start-chain-connector.md" %}
+[start-chain-connector.md](system-deployment/start-chain-connector.md)
+{% endcontent-ref %}
+
+when configuring the Chain Connectors, the config file must be filled with the right information about the wallet address and the contract address:
+
+
+
+4\. Start 3 Delta Nodes, and connect them to each of the 3 Chain Connectors:
+
+{% content-ref url="system-deployment/start-delta-node.md" %}
+[start-delta-node.md](system-deployment/start-delta-node.md)
+{% endcontent-ref %}
+
+
+
+5\. If GUI is not required, we can already start running Delta Tasks in the network:
+
+{% content-ref url="delta-task-development/manage-delta-task-using-delta-node-api.md" %}
+[manage-delta-task-using-delta-node-api.md](delta-task-development/manage-delta-task-using-delta-node-api.md)
+{% endcontent-ref %}
+
+
+
+6.(Optional) Start Deltaboard to manage the network and write Delta Tasks in the web interface:
+
+{% content-ref url="system-deployment/start-deltaboard.md" %}
+[start-deltaboard.md](system-deployment/start-deltaboard.md)
+{% endcontent-ref %}
+
+
+
+7.(Optional) Write and execute Delta Tasks in Deltaboard:
+
+{% content-ref url="system-deployment/run-delta-task.md" %}
+[run-delta-task.md](system-deployment/run-delta-task.md)
+{% endcontent-ref %}
 {% endtab %}
 {% endtabs %}
+
+
 
 ### Method 2: Using Delta Chain as the Blockchain Node
 
