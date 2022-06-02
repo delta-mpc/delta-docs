@@ -215,6 +215,18 @@ Note that we're passing a fixed random seed to the container using `-s`. By doin
 
 when configuring the Chain Connectors, the config file must be filled with the right information about the wallet address and the contract address:
 
+`chain.nodeAddress` and `chain.privateKey` are the wallet address and its private key we choose to use for this Delta Node. Ganache will automatically generate 10 wallets at starting up. We can find them in the logs and choose one to use:
+
+```
+docker logs -f ganache
+```
+
+**We must use 3 different wallets for the 3 different Chain Connectors.**
+
+`chain.provider` is the address of our Blockchain node. If the node is deployed locally, this one should be `ws://localhost:8545`.
+
+`chain.identity.contractAddress` and `chain.hfl.contractAddress` should be filled with the right contract addresses we just deployed in step 2.
+
 
 
 4\. Start 3 Delta Nodes, and connect them to each of the 3 Chain Connectors:
@@ -225,7 +237,15 @@ when configuring the Chain Connectors, the config file must be filled with the r
 
 
 
-5\. If GUI is not required, we can already start running Delta Tasks in the network:
+5.Prepare some testing data for each of the 3 Delta Nodes:
+
+{% content-ref url="system-deployment/prepare-data.md" %}
+[prepare-data.md](system-deployment/prepare-data.md)
+{% endcontent-ref %}
+
+
+
+6\. If GUI is not required, we can already start running Delta Tasks in the network:
 
 {% content-ref url="delta-task-development/manage-delta-task-using-delta-node-api.md" %}
 [manage-delta-task-using-delta-node-api.md](delta-task-development/manage-delta-task-using-delta-node-api.md)
@@ -233,7 +253,7 @@ when configuring the Chain Connectors, the config file must be filled with the r
 
 
 
-6.(Optional) Start Deltaboard to manage the network and write Delta Tasks in the web interface:
+7.(Optional) Start Deltaboard to manage the network and write Delta Tasks in the web interface:
 
 {% content-ref url="system-deployment/start-deltaboard.md" %}
 [start-deltaboard.md](system-deployment/start-deltaboard.md)

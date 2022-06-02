@@ -6,9 +6,9 @@ description: Out-of-the-Box Blockchain-powered Verifiable PPC network
 
 ## Overview
 
-Delta performs statistical and machine learning computations jointly on the data possessed by a group of data holders while keeping the data private for each of them. Delta is useful in a lot of scenarios such as risk assessment model training using private data from different banks, or health condition prediction for patients using data from different hospitals.
+Delta performs statistical and machine learning computations jointly on data possessed by a group of data holders while keeping the data private for each of them. Delta is useful in a lot of cases such as risk assessment model training using private data from different banks, or health condition prediction for patients using data from different hospitals.
 
-By encapsulating modern privacy-preserving computation techniques inside, Delta doesn't require users to have any knowledge about privacy-preserving computation. Developers just write computation task using `PyTorch` or `Pandas`, and send it to the Delta network. The rest parts are taken care of by Delta.
+By encapsulating modern privacy-preserving computation techniques inside, Delta doesn't require users to have any knowledge about privacy-preserving computation. Developers just write computation task using `PyTorch` and send it to the Delta network. And the rest parts are taken care of by Delta.
 
 Delta network determines the task type by checking the distribution status of the data required by the task, and transforms the task into horizontal/vertical federated learning, or federated analytics task and executes it on the network.
 
