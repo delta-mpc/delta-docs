@@ -14,7 +14,7 @@ Delta network determines the task type by checking the distribution status of th
 
 The original data is never accessible to the developers. Delta integrates Blockchain and Zero Knowledge Proof so that the developer could verify that the computation is actually performed as designed on the required data.
 
-Delta supports running machine learning tasks written in `PyTorch`, and data analytics tasks written in Pandas. The old `PyTorch/Pandas` codes could be executed directly on Delta network with almost zero modification. Developers could get the training/validation/statistical results on a larger dataset at no cost.
+Delta supports running machine learning tasks written in `PyTorch`, and data analytics tasks written in `Pandas`. The old `PyTorch/Pandas` codes could be executed directly on Delta network with almost zero modification. Developers could get the training/validation/statistical results on a larger dataset at no cost.
 
 ## Getting Started
 
