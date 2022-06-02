@@ -261,7 +261,7 @@ docker logs -f ganache
 
 
 
-7.(Optional) Write and execute Delta Tasks in Deltaboard:
+8.(Optional) Write and execute Delta Tasks in Deltaboard:
 
 {% content-ref url="system-deployment/run-delta-task.md" %}
 [run-delta-task.md](system-deployment/run-delta-task.md)
