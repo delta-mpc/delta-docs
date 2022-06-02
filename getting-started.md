@@ -114,15 +114,33 @@ After the downloading of all the Docker images, the service should be started no
 
 To run a Delta Network in Blockchain mode, at least 3 participants are required. Each of the 3 participants should deploy a group of the same components.
 
-The components include a Blockchain Node with the Delta Contracts deployed, a Chain Connector running in Blockchain mode, a Delta Node, and a Deltaboard. The network with 3 participants is shown below:
+The components one participant should deploy include a Blockchain Node with the Delta Contracts deployed, a Chain Connector running in Blockchain mode, a Delta Node, and a Deltaboard. The network with 3 participants is shown below:
 
 ![](.gitbook/assets/delta-with-multi-chain.png)
 
-In use cases such as local testing, or a limited group of participants who trust each other, the Blockchain node could be shared. All the Chain Connectors connect to the same Blockchain Node. In this case, the data is still kept private and safe for every participant. It is just with less Blockchain node, the consensus algorithm is more likely to be attacked,&#x20;
+In use cases such as local testing, or deploying a network among a limited group of participants who trust each other, the Blockchain node could be shared. All the Chain Connectors connect to the same Blockchain Node. In this case, the data is still kept private and safe for every participant. It is just with less Blockchain node, the consensus algorithm is more likely to be attacked, causing task execution failure, and the wasting of computing power for the other participants.
+
+The network structure with one shared Blockchain node is shown in the figure below, we will deploy this network in the remaining tutorial:
 
 ![](.gitbook/assets/delta-with-single-chain.png)
 
-### Start the network using All-in-One Docker image
+### Method 1: Using Ganache as the Blockchain node
+
+Ganache is a simplified Ethereum simulating Blockchain dedicated for local testing. The APIs are the same as Ethereum. We can use Ganache to start a local Ethereum node really fast.
+
+Note that there is no multiple node consensus algorithm built into Ganache. So Ganache should never be used in a production environment.
+
+In Delta All-in-One script repo, we have a docker compose script to start the above network using Ganache at one click. Or you can manually start the components one by one using docker images.
+
+{% tabs %}
+{% tab title="Using All-in-One Script" %}
+
+{% endtab %}
+
+{% tab title="Manually Deployment" %}
+
+{% endtab %}
+{% endtabs %}
 
 1. Clone the Github repo:
 
