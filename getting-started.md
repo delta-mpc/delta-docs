@@ -18,10 +18,6 @@ A minimum Delta network in this mode requires a Delta Chain Connector, 2 Delta N
 {% tab title="Using All-in-One Script" %}
 ### **Start the network using All-in-One script**
 
-Delta has an All-in-One startup scripts which use docker-compose to start the whole network at once.
-
-
-
 1.Clone the Github repo:
 
 ```
@@ -57,8 +53,6 @@ After the downloading of all the Docker images, the service should be started no
 
 {% tab title="Manually Deployment" %}
 ### Manually deploy the network using Docker images
-
-
 
 1.Start the Chain Connector and configure it to run in coordinator mode:
 
@@ -135,8 +129,6 @@ In Delta All-in-One script repo, we have a docker compose script to start the ab
 {% tabs %}
 {% tab title="Using All-in-One Script" %}
 ### **Start the network using All-in-One script**
-
-
 
 1.Clone the Github repo:
 
@@ -273,28 +265,18 @@ docker logs -f ganache
 
 ### Method 2: Using Delta Chain as the Blockchain Node
 
-1.Start the Delta Chain Node. We can start only one node running in test mode, and make both Chain Connectors connect to the same node. Or we can start 2 nodes to run a more complete network:
+By using Delta Chain we can deploy a "real" multi-node Delta network. At this moment the Delta Chain could only be deployed manually with Docker image. The deployment steps are almost the same as the manually deployment steps of [Method 1](getting-started.md#method-1-using-ganache-as-the-blockchain-node), except the step 1 should be replaced with the following:
+
+1.Start the Delta Chain Node. We can start only one node running in test mode. Or we can start multiple nodes to form a real Blockchain network:
 
 {% content-ref url="system-deployment/start-delta-chain-node.md" %}
 [start-delta-chain-node.md](system-deployment/start-delta-chain-node.md)
 {% endcontent-ref %}
 
-2.To check the Blockchain data more intuitively, we could start a Blockchain explorer. This step is optional:
+2.(Optional) Start a chain explorer to see the Block data in web browsers:
 
 {% content-ref url="system-deployment/start-delta-chain-explorer.md" %}
 [start-delta-chain-explorer.md](system-deployment/start-delta-chain-explorer.md)
 {% endcontent-ref %}
 
-3.Deploy the Delta Smart Contracts on Blockchain:
-
-{% content-ref url="system-deployment/deploy-smart-contracts.md" %}
-[deploy-smart-contracts.md](system-deployment/deploy-smart-contracts.md)
-{% endcontent-ref %}
-
-4.Start the Chain Connectors in Blockchain mode:
-
-{% content-ref url="system-deployment/start-chain-connector.md" %}
-[start-chain-connector.md](system-deployment/start-chain-connector.md)
-{% endcontent-ref %}
-
-Then, we could following the steps in the previous section of running no-blockchain network, from step 2 to step 5, to start Delta Node and prepare the data, and finally run a Delta Task.
+3\. Continue from step 2 of the manually deployment steps of [Method 1](getting-started.md#method-1-using-ganache-as-the-blockchain-node).
