@@ -175,19 +175,27 @@ docker run -d --name=ganache -p 8545:8545 trufflesuite/ganache-cli:v6.12.2 -s de
 [start-chain-connector.md](network-deployment/start-chain-connector.md)
 {% endcontent-ref %}
 
-在配置Blockchain模式下的Chain Connector时，我们需要填写`chain.nodeAddress`、`chain.privateKey`、`chain.provider`、`chain.identity.contractAddress`以及`chain.hfl.contractAddress`这几项配置。
 
-其中，`chain.nodeAddress`、`chain.privateKey`是区块链钱包的地址和私钥，Ganache会预先生成10个自带代币的钱包，通过命令
+
+在配置Blockchain模式下的Chain Connector时，需要在Chain Connector的配置文件中填入一些区块链节点的信息：
+
+`chain.nodeAddress`、`chain.privateKey`是区块链钱包的地址和私钥，Ganache在启动时会自动生成10个自带代币的钱包，可以在docker容器的日志中找到地址和私钥：
 
 ```bash
 docker logs -f ganache
 ```
 
-即可从日志中获取自动生成的钱包地址和私钥。**3个Chain Connector必须配置成不同的钱包地址和私钥。**
+**注意3个Chain Connector必须配置成不同的钱包地址和私钥。**
+
+****
 
 `chain.provider`为区块链节点地址，在本地部署的情况下，这一项填写`ws://localhost:8545`即可。
 
-`chain.identity.contractAddress`以及`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
+
+
+`chain.identity.contractAddress`以及`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在第2步部署智能合约完成后，我们可以得到这几个合约的地址，在这里填入配置文件中。
+
+
 
 4.启动3个Delta Node，分别连接到上述3个Chain Connector:
 
@@ -197,7 +205,15 @@ docker logs -f ganache
 
 ***
 
-5.如果不需要图形界面，就可以使用上面任意一个Delta Node的API，通过代码来提交任务，获取执行结果了：
+***
+
+{% content-ref url="network-deployment/prepare-data.md" %}
+[prepare-data.md](network-deployment/prepare-data.md)
+{% endcontent-ref %}
+
+***
+
+6.如果不需要图形界面，就可以使用上面任意一个Delta Node的API，通过代码来提交任务，获取执行结果了：
 
 {% content-ref url="delta-task-development/manage-task-with-delta-node-api.md" %}
 [manage-task-with-delta-node-api.md](delta-task-development/manage-task-with-delta-node-api.md)
@@ -205,7 +221,7 @@ docker logs -f ganache
 
 ***
 
-6.（可选）启动1个Deltaboard，连接到任意一个Delta Node，用于图形化的网络管理：
+7.（可选）启动1个Deltaboard，连接到任意一个Delta Node，用于图形化的网络管理：
 
 {% content-ref url="network-deployment/start-deltaboard.md" %}
 [start-deltaboard.md](network-deployment/start-deltaboard.md)
@@ -213,7 +229,7 @@ docker logs -f ganache
 
 ***
 
-7.（可选）然后就可以在Deltaboard中编写和测试计算任务了：
+8.（可选）然后就可以在Deltaboard中编写和测试计算任务了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)

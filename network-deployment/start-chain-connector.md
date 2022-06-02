@@ -6,7 +6,7 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 
 ## 使用Coordinator模式启动Chain Connector
 
-![Coordinator模式下的无区块链Delta隐私计算网络结构](<../.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (1) (1) (1) (1) (1) (4).png>)
+![Coordinator模式下的无区块链Delta隐私计算网络结构](<../.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (1) (1) (1) (1) (1) (1) (4).png>)
 
 ### 下载镜像
 
