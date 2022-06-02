@@ -126,7 +126,7 @@ The network structure with one shared Blockchain node is shown in the figure bel
 
 ### Method 1: Using Ganache as the Blockchain node
 
-Ganache is a simplified Ethereum simulating Blockchain dedicated for local testing. The APIs are the same as Ethereum. We can use Ganache to start a local Ethereum node really fast.
+[Ganache](https://trufflesuite.com/ganache/) is a simplified Ethereum simulating Blockchain dedicated for local testing. The APIs are the same as Ethereum. We can use Ganache to start a local Ethereum node really fast.
 
 Note that there is no multiple node consensus algorithm built into Ganache. So Ganache should never be used in a production environment.
 
@@ -134,7 +134,56 @@ In Delta All-in-One script repo, we have a docker compose script to start the ab
 
 {% tabs %}
 {% tab title="Using All-in-One Script" %}
+**Using Delta All-in-One Docker Compose Script**
 
+
+
+1.Clone the Github repo:
+
+```
+$ git clone --depth 1 --branch v0.3.5 https://github.com/delta-mpc/delta-all-in-one.git
+```
+
+
+
+2.Go to the folder for blockchain network:
+
+```
+$ cd delta-all-in-one/with-blockchain
+```
+
+
+
+3.Start all the containers using docker compose:
+
+```
+$ docker-compose up 
+```
+
+
+
+When the following logs are showing up, the network is fully up and running:
+
+```
+dashboard       | [I 2022-01-18 09:20:40.850 JupyterHub app:2849] JupyterHub is now running at http://:8000
+dashboard       | [D 2022-01-18 09:20:40.851 JupyterHub app:2452] It took 1.211 seconds for the Hub to start
+```
+
+
+
+4.Enter the following address in a browser to access Deltaboard:
+
+```
+http://localhost:8090
+```
+
+
+
+Now we can actually run a computation task:
+
+{% content-ref url="system-deployment/run-delta-task.md" %}
+[run-delta-task.md](system-deployment/run-delta-task.md)
+{% endcontent-ref %}
 {% endtab %}
 
 {% tab title="Manually Deployment" %}
@@ -142,86 +191,7 @@ In Delta All-in-One script repo, we have a docker compose script to start the ab
 {% endtab %}
 {% endtabs %}
 
-1. Clone the Github repo:
-
-```
-$ git clone --depth 1 --branch v0.3.5 https://github.com/delta-mpc/delta-all-in-one.git
-```
-
-1. Go to the folder for blockchain network:
-
-```
-$ cd delta-all-in-one/with-deltachain
-```
-
-1. Edit config files
-
-In the folder for blockchain network, we can see some sub directories:
-
-```bash
-$ ls
-connector1  connector2  connector3  deltaboard  delta-node1  delta-node2  delta-node3  docker-compose.yml
-```
-
-The directories `connector1`, `connector2` and `connector3` store config files for delta-chain-connector. The config file looks like:
-
-```json
-$ cat connector1/config/config.json
-{
-  "log": {
-    "level": "info"
-  },
-  "impl": "chain",
-  "host": "0.0.0.0",
-  "port": 4500,
-  "monkey": {
-    "db": {
-      "type": "sqlite",
-      "url": "db/chain.db"
-    }
-  },
-  "chain": {
-    "nodeAddress": "",
-    "privateKey": "",
-    "provider": "wss://apus.chain.deltampc.com",
-    "gasPrice": 1,
-    "gasLimit": 4294967294,
-    "chainParam": {
-      "chainId": 42,
-      "name": "delta"
-    },
-
-    "identity": {
-      "contractAddress": "0x43A6feb218F0a1Bc3Ad9d9045ee6528349572E42"
-    },
-    "hfl": {
-      "contractAddress": "0x3830C82700B050dA87F1D1A60104Fb667227B686"
-    }
-  }
-}
-```
-
-In the config file, `chain.provider`, `chain.identity.contractAddress` and `chain.hfl.contractAddress` represent the blockchain node address, the address of Identity Contract and HFL Contract which support for the delta framework, respectively. For convenience, we have created a blockchain node for our delta-chain, and deployed the Identity Contract and HFL Contract on it. You can keep these config items as they are, unless you want to deploy the contracts on another chain compatible with EVM.
-
-In the config file, `chain.nodeAddress` and `chain.privateKey` represent a wallet address compatible with Ethernet and its private key, respectively. You can a wallet you prefer to, such as Metamask, to generate the wallet address and private key.
-
-Since we need to start three parties, we need to generate three different wallet address and private key, and then set them to `chain.nodeAddress` and `chain.privateKey` in config files in `connector1`, `connector2` and `connector3`. As a wallet need to have some tokens to send transactions to blockchain, you need to query for some tokens for you three wallet. You can join in our [slack](https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw), and query for tokens in the `delta-chain-faucet` channel.
-
-1. Start all the container using docker-composer:
-
-After config files have been edited, you can start the network by:
-
-```
-$ docker-compose up -d
-```
-
-After the downloading of all the Docker images, the service should be started normally. The network now is fully up and running. We can go to Deltaboard to run our first Delta Task:
-
-{% content-ref url="system-deployment/run-delta-task.md" %}
-[run-delta-task.md](system-deployment/run-delta-task.md)
-{% endcontent-ref %}
-
-### Start the network using Docker images of the components
+### Method 2: Using Delta Chain as the Blockchain Node
 
 1.Start the Delta Chain Node. We can start only one node running in test mode, and make both Chain Connectors connect to the same node. Or we can start 2 nodes to run a more complete network:
 
