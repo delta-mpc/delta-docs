@@ -6,7 +6,7 @@
 
 ### 下载镜像
 
-目前Delta框架还处于开发阶段，后续会发布正式的release版本。在现阶段，我们可以下载开发版本的docker镜像，开发版本镜像的tag名称是`dev`：
+从Docker Hub拉取最新的release版本镜像：
 
 ```
 $ docker pull deltampc/delta-node:0.5.3
@@ -73,8 +73,20 @@ $ docker logs -f delta_node_1
 
 Delta Node也会将log同时输出到本地数据文件夹中的log目录，可以在log目录中查看节点运行日志。
 
-至此Delta Node启动完成，下一步我们将启动Deltaboard的服务，用于对Delta Node的可视化管理，以及计算任务的在线编辑和运行：
+至此Delta Node启动完成，在执行Delta计算任务之前，还需要在Delta Node的data文件夹中放置一些数据，供Delta计算任务调用：
+
+{% content-ref url="prepare-data.md" %}
+[prepare-data.md](prepare-data.md)
+{% endcontent-ref %}
+
+数据准备好后，我们就可以真正开始执行计算任务了。可以部署Deltaboard，在web界面中可视化管理Delta网络，以及在线编辑和运行Delta任务：
 
 {% content-ref url="start-deltaboard.md" %}
 [start-deltaboard.md](start-deltaboard.md)
+{% endcontent-ref %}
+
+如果不需要GUI的话，也可以直接在本地的IDE中编写Delta Task，通过delta-task库直接调用Delta Node API完成任务发送和执行：
+
+{% content-ref url="../delta-task-development/manage-task-with-delta-node-api.md" %}
+[manage-task-with-delta-node-api.md](../delta-task-development/manage-task-with-delta-node-api.md)
 {% endcontent-ref %}

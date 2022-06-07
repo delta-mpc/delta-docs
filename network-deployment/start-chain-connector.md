@@ -6,7 +6,7 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 
 ## 使用Coordinator模式启动Chain Connector
 
-![Coordinator模式下的无区块链Delta隐私计算网络结构](<../.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (1) (1) (1) (1) (1) (4).png>)
+![Coordinator模式下的无区块链Delta隐私计算网络结构](<../.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (1) (1) (1) (1) (1) (1) (4).png>)
 
 ### 下载镜像
 
@@ -40,9 +40,23 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-chain-connector:0.3.5 init
 在这里我们将impl设置为`monkey`，即为coordinator模式：
 
 ```
-# Chain Connector运行模式
-impl: "monkey"
+{
+  "log": {
+    "level": "debug"
+  },
+  "impl": "monkey",
+  "host": "0.0.0.0",
+  "port": 4500,
+  "monkey": {
+    "db": {
+      "type": "sqlite",
+      "url": "db/chain.db"
+    }
+  }
+}
 ```
+
+coordinator模式的Chain Connector，还需要配置一个数据库，用于存储"链上"数据。可以直接使用SQLite，指定一个数据库文件存储地址即可。
 
 完成配置之后，就可以启动Chain Connector。
 
@@ -69,13 +83,37 @@ $ docker logs -f chain_connector
 要以Chain模式启动Chain Connector，我们需要将impl改为chain：
 
 ```
-# Chain Connector运行模式
-impl: "chain"
+{
+  "log": {
+    "level": "debug"
+  },
+  "impl": "chain",
+  "host": "0.0.0.0",
+  "port": 4500,
+  "chain": {
+    "nodeAddress": "0x6578aDabE867C4F7b2Ce4c59aBEAbDC754fBb990",
+    "privateKey": "0xf0f239a0cc63b338e4633cec4aaa3b705a4531d45ef0cbcc7ba0a4b993a952f2",
+    "provider": "ws://127.0.0.1:8545",
+    "gasPrice": 20000000000,
+    "gasLimit": 6721975,
+    "chainParam": {
+      "chainId": 1337,
+      "name": ""
+    },
+
+    "identity": {
+      "contractAddress": "0xCe69c1DDCcD29a821bB4d3BdEEb3EdE9De9C7903"
+    },
+    "hfl": {
+      "contractAddress": "0x7864Bf464F9ecE0D3A95cA55e171D9060cf7336a"
+    }
+  }
+}
 ```
 
 接下来，我们需要修改`chain.nodeAddress`、`chain.privateKey`、`chain.provider`、`chain.identity.contractAddress`以及`chain.hfl.contractAddress`这几项配置。
 
-其中，`chain.nodeAddress`和`chain.privateKey`分别代表用户的区块链钱包地址和私钥。用户可以使用任意与以太坊兼容的钱包（比如Metamask），来生成钱包地址和私钥。
+其中，`chain.nodeAddress`和`chain.privateKey`分别代表用户的区块链钱包地址和私钥。用户可以使用任意与以太坊兼容的钱包（比如[Metamask](https://metamask.io/)），来生成钱包地址和私钥。
 
 `chain.provider`代表区块链节点的地址，这里需要使用WebSocket的链接地址。`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
 
