@@ -72,7 +72,7 @@ $ docker logs -f chain_connector
 
 ## Blockchain mode
 
-Starting the Chain Connector in the chain mode is the same as coordinator mode except for the configuration.
+The steps of starting a Chain Connector in the chain mode is the same as coordinator mode described above. Except for the configuration:
 
 ### Configuration
 
@@ -109,12 +109,8 @@ To start the chain connector in the chain mode, we must set the item `impl` to `
 
 Then we need to further specify the details about the Blockchain:
 
+The `chain.nodeAddress` should be set to the wallet address used by the Delta Node. And the `chain.privateKey` should be set to the corresponding private key. You may use a wallet app, such as [Metamask](https://metamask.io/), to generate the wallet address and private key.
 
+The `chain.provider` should be set to the API address of the Blockchain node, which should be a websocket endpoint.&#x20;
 
-The `chain.nodeAddress` means the wallet address compatible with Ethernet, and the `chain.privateKey` means the the private key for the wallet. You can use a wallet app you preferred , such as Metamask, to generate the address and private key.
-
-The `chain.provider` means the URL of the chain node, and it should be a websocket endpoint. The `chain.identity.contractAddress` and `chain.hfl.contractAddress` means identity contract address and hfl contract address, respectively. You can learn how to deploy smart contracts on the chain in deploy-smart-contracts section.
-
-{% content-ref url="system-deployment/start-chain-connector.md" %}
-[start-chain-connector.md](system-deployment/start-chain-connector.md)
-{% endcontent-ref %}
+The `chain.identity.contractAddress` and `chain.hfl.contractAddress` should be set to the contract addresses obtained when deploying the smart contracts. You can learn how to deploy smart contracts on the chain in deploy-smart-contracts section.
