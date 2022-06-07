@@ -2,12 +2,12 @@
 
 Delta Contracts are written in Solidity, and can be used on any Blockchain that supports EVM.
 
-The code inside [Delta Contracts](https://github.com/delta-mpc/delta-contracts) repository contains the smart contract codes, and the helper codes and tools to deploy them. The helper codes are written in NodeJS. Be sure to have Node and Yarn installed before using the codes.
+The code inside [Delta Contracts](https://github.com/delta-mpc/delta-contracts) repository contains the smart contract codes. The smart contracts are managed using [Truffle](https://trufflesuite.com/). The helper codes and also included in this repo. Be sure to have NodeJS installed on your local machine before using this repo.
 
 ### Get the Smart Contract Codes
 
 ```bash
-$ git clone https://github.com/delta-mpc/delta-contracts.git
+$ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-contracts.git
 ```
 
 ### Install the Dependencies
@@ -47,4 +47,3 @@ After the command is executed successfully, a new `Mpc.json` will show up in the
 ### Add the Smart Contracts to the Delta Chain Explorer
 
 For easy debugging, we could attach the source code of the smart contracts to the deployed ones in the Delta Chain Explorer, so that when we check the contract invocation contracts in the explorer, it will have a better visualization.
-
