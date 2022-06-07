@@ -15,7 +15,7 @@
 ## system deployment
 
 * [Start the Delta Chain Node](system-deployment/start-delta-chain-node.md)
-* [Start Delta Chain Explorer](system-deployment/start-delta-chain-explorer.md)
+* [Start the Delta Chain Explorer](system-deployment/start-delta-chain-explorer.md)
 * [Deploy Smart Contracts](system-deployment/deploy-smart-contracts.md)
 * [Start the Chain Connector](system-deployment/start-chain-connector.md)
 * [Start Delta Node](system-deployment/start-delta-node.md)
