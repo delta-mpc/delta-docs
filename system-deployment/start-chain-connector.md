@@ -4,7 +4,7 @@ Chain Connector is the middleware sitting between the Delta Node and the Blockch
 
 Chain Connector could be configured to run at "coordinator" mode. At coordinator mode, Blockchain is not required. Chain Connector itself behaves like a center node of the whole network. All the Delta Nodes in the network connect to this Chain Connector to submit and receive Delta Tasks.
 
-## Start Chain Connector at the coordinator mode
+## Coordinator mode (No Blockchain)
 
 ![Delta network structure in coordinator mode](<../.gitbook/assets/image (2).png>)
 
@@ -35,13 +35,26 @@ After successful running of the command, a sub directory named `config` should b
 
 ### Configuration
 
-There is a generated config file `config.json` inside the config folder after initialization. To start chain connector at the coordinator mode, we must set the item `impl` to `monkey`:
+There is a generated config file `config.json` inside the config folder after initialization. To start the Chain Connector in the coordinator mode, we must set the item `impl` to `monkey`:
 
 ```
----
-# Running mode
-impl: "monkey"
+{
+  "log": {
+    "level": "debug"
+  },
+  "impl": "monkey",
+  "host": "0.0.0.0",
+  "port": 4500,
+  "monkey": {
+    "db": {
+      "type": "sqlite",
+      "url": "db/chain.db"
+    }
+  }
+}
 ```
+
+The Chain Connector in the coordinator mode uses a database to store the "on-chain" data. The database must also be configured. SQLite could be used for simplicity.
 
 ### Start the Docker container
 
@@ -57,32 +70,46 @@ Now that the container has started, we could use the Docker logs command to chec
 $ docker logs -f chain_connector
 ```
 
-## Start Chain Connector at Chain mode
+## Blockchain mode
 
-Starting chain connector at chain mode is the same as at coordinator mode except for the configuration.
+Starting the Chain Connector in the chain mode is the same as coordinator mode except for the configuration.
 
 ### Configuration
 
-To start chain connector at chain mode, we must set the item `impl` to `chain`:
+To start the chain connector in the chain mode, we must set the item `impl` to `chain`:
 
 ```
----
-# Running mode
-impl: "chain"
+{
+  "log": {
+    "level": "debug"
+  },
+  "impl": "chain",
+  "host": "0.0.0.0",
+  "port": 4500,
+  "chain": {
+    "nodeAddress": "0x6578aDabE867C4F7b2Ce4c59aBEAbDC754fBb990",
+    "privateKey": "0xf0f239a0cc63b338e4633cec4aaa3b705a4531d45ef0cbcc7ba0a4b993a952f2",
+    "provider": "ws://127.0.0.1:8545",
+    "gasPrice": 20000000000,
+    "gasLimit": 6721975,
+    "chainParam": {
+      "chainId": 1337,
+      "name": ""
+    },
 
-# Blockchain configuration
-chain:
-  provider: ""
-  nodeAddress: ""
-  privateKey: ""
-  
-  identity:
-    contractAddress: ""
-  hfl:
-    contractAddress: ""
+    "identity": {
+      "contractAddress": "0xCe69c1DDCcD29a821bB4d3BdEEb3EdE9De9C7903"
+    },
+    "hfl": {
+      "contractAddress": "0x7864Bf464F9ecE0D3A95cA55e171D9060cf7336a"
+    }
+  }
+}
 ```
 
-Then we need to edit these configurations: `chain.nodeAddress`, `chain.privateKey`, `chain.provider`, `chain.identity.contractAddress` and `chain.hfl.contractAddress`.
+Then we need to further specify the details about the Blockchain:
+
+
 
 The `chain.nodeAddress` means the wallet address compatible with Ethernet, and the `chain.privateKey` means the the private key for the wallet. You can use a wallet app you preferred , such as Metamask, to generate the address and private key.
 
