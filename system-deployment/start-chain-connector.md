@@ -1,14 +1,14 @@
-# Start Chain Connector
+# Start the Chain Connector
 
-Chain Connector is an abstract layer connecting Delta Node and the Blockchain. Chain Connector provides a unique set of APIs to Delta Node regardless of the type of Blockchain system used. And Chain Connector handles the Blockchain transaction signing. In a strict security environment, Chain Connector supports using an isolated signer to keep the private key offline and submit the signature remotely, thus keeping the private key safe.
+Chain Connector is the middleware sitting between the Delta Node and the Blockchain. Chain Connector provides the same set of APIs to the Delta Node regardless of the different Blockchain systems in use. Chain Connector also handles the Blockchain transaction signing. In a production  environment where the private key security is critical, a network isolated signer is supported to keep the private key beyond the reach of the online system. The signatures are generated remotely in the signer, and then submitted to the Chain Connector.
 
-Chain Connector could be configured to run at "coordinator" mode. At coordinator mode, Blockchain is not required. Chain Connector itself behaves like a center node of the whole network. All the Delta Nodes in the network connect to the same Chain Connector to submit and receive Delta Tasks.
+Chain Connector could be configured to run at "coordinator" mode. At coordinator mode, Blockchain is not required. Chain Connector itself behaves like a center node of the whole network. All the Delta Nodes in the network connect to this Chain Connector to submit and receive Delta Tasks.
 
-## Start Chain Connector at Coordinator mode
+## Start Chain Connector at the coordinator mode
 
 ![Delta network structure in coordinator mode](<../.gitbook/assets/image (2).png>)
 
-### Get Docker image
+### Get the Docker image
 
 Use the release tag to get the latest docker image:
 
@@ -35,7 +35,7 @@ After successful running of the command, a sub directory named `config` should b
 
 ### Configuration
 
-There is a generated config file `config.json` inside the config folder after initialization. To start chain connector at coordinator mode, we must set the item `impl` to `monkey`, means the coordinaotr mode:
+There is a generated config file `config.json` inside the config folder after initialization. To start chain connector at the coordinator mode, we must set the item `impl` to `monkey`:
 
 ```
 ---
@@ -43,7 +43,7 @@ There is a generated config file `config.json` inside the config folder after in
 impl: "monkey"
 ```
 
-### Start Docker container
+### Start the Docker container
 
 We use the command line to start Chain Connector Docker container. The directory we created above must be mounted to the `app` folder inside the container, and `4500` port must be exposed for API connections:
 
@@ -63,12 +63,23 @@ Starting chain connector at chain mode is the same as at coordinator mode except
 
 ### Configuration
 
-To start chain connector at chain mode, we must set the item `impl` to `chain`, means the chain mode:
+To start chain connector at chain mode, we must set the item `impl` to `chain`:
 
 ```
 ---
 # Running mode
 impl: "chain"
+
+# Blockchain configuration
+chain:
+  provider: ""
+  nodeAddress: ""
+  privateKey: ""
+  
+  identity:
+    contractAddress: ""
+  hfl:
+    contractAddress: ""
 ```
 
 Then we need to edit these configurations: `chain.nodeAddress`, `chain.privateKey`, `chain.provider`, `chain.identity.contractAddress` and `chain.hfl.contractAddress`.
