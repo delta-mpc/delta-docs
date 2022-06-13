@@ -1,47 +1,47 @@
-# Start Deltaboard
+# Start the Deltaboard
 
-## Start Deltaboard by docker
+## Start the Deltaboard using docker image
 
-We recommend to deploy Deltaboard by Docker.
+Deltaboard could be easily started using docker image.
 
-### Pull Docker Image
+### Pull the Docker Image
 
 ```bash
-$ docker pull deltampc/deltaboard:0.3.5
+$ docker pull deltampc/deltaboard:0.5.3
 ```
 
 ### Configuration
 
-Deltaboard need to store some data locally which includes configuration file, user data and logs, etc.. Before starting deltaboard, we need to config the board first.
-
-Firstly, make a new directory called `deltaboard` as the root directory of the board:
+Create a directory called `deltaboard` as the root directory to store the Deltaboard data.
 
 ```
 $ mkdir deltaboard
 ```
 
-Then, in the root directory, input command:
+In the root directory, run the following command to initialize the folder structure.
 
 ```
 $ cd deltaboard
-$ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:0.3.5 init
+$ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:0.5.3 init
 ```
 
-This command will create three new sub directories in the root directory, called `config`, `data` and `db`. The `config` directory is for storing configuration file, the `data` directory is for storing user data such as code in JupyterLab, and the `db` directory is for storing database file for deltaboard.
+This command will create three sub directories in the root directory: `config`, `data` and `db`. The `config` directory is for configuration file, the `data` directory is for user data, such as the codes written in the JupyterLab, and the `db` directory is for database files of Deltaboard.
 
-### Start Docker Container
+The config file must be adjusted according to the environment. Such as the address of the Delta Node.
+
+### Start the Docker Container
 
 ```
-$ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboard:0.3.5
+$ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboard:0.5.3
 ```
 
-### **Visit Deltaboard**
+### **Visit the Deltaboard**
 
 Visit [http://localhost:8090](http://localhost:8090) in the browser
 
 ![](../.gitbook/assets/login.png)
 
-When you see this login page of Deltaboard, it means the service has successfully started.
+When you see this login page, the service has successfully started.
 
 The default account for Deltaboard is:
 
