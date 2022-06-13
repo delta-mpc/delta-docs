@@ -19,7 +19,7 @@
 * [Deploy the Smart Contracts](system-deployment/deploy-smart-contracts.md)
 * [Start the Chain Connector](system-deployment/start-chain-connector.md)
 * [Start the Delta Node](system-deployment/start-delta-node.md)
-* [Prepare Data](system-deployment/prepare-data.md)
+* [Prepare the Datasets](system-deployment/prepare-data.md)
 * [Start Deltaboard](system-deployment/start-deltaboard.md)
 * [Run Delta Task](system-deployment/run-delta-task.md)
 
