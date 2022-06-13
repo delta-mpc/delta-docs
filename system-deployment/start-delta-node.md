@@ -1,39 +1,43 @@
-# Start Delta Node
+# Start the Delta Node
 
-## Start Delta Node by Docker
+## Start the Delta Node using Docker Image
 
-We recommend to deploy Delta Node by Docker.
-
-### Pull Docker Image
+### Pull the Docker Image
 
 Use the latest release tag to pull the docker image:
 
 ```
-$ docker pull deltampc/delta-node:0.3.5
+$ docker pull deltampc/delta-node:0.5.3
 ```
 
-### Configuration
+### Initialization
 
-Delta node need to store some data locally which includes configuration file, user data and logs, etc.. Before starting delta node, we need to config the node first.
+Delta Node stores data locally including configuration file, temporary files generated during task computation, logs, etc. We must create the folder before starting the container.
 
-Firstly, Create a directory named `delta_node` as the root directory:
+Create a directory named `delta_node` as the root directory:
 
 ```
 $ mkdir delta_node
 ```
 
-Run the following command inside the directory created above:
+Use the built-in command inside Delta Node to create the folder structure, and generate the sample config file. Run the following command inside the root directory we just created:
 
 ```
 $ cd delta_node
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.3.5 init
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.5.3 init
 ```
 
-This command will create three new sub directories in the root directory, called `config`, `task` and `data`. The `config` directory is for storing configuration file, the `task` directory is for storing result and temporary data of task, and the `data` directory is for storing data provided by the node for task.
+This command will create three sub directories in the root directory: `config`, `task` and `data`. The `config` directory is for the configuration file, the `task` directory is for temporary computation results, and the `data` directory is used to store private datasets.
 
-### Edit Configuration File
+### Edit the Configuration File
 
-There is a pre-generated configuration file `config.yaml` in the config directory. Before first start, we must edit some configuration item in the configuration file. The first is the `chain_connector.host` which means the address of the Chain Connector described in last section. And the second is the `node_address.host` which means the address of the node itself, and delta node will use this address to register itself in the block chain and other nodes will connect to this address for communication. For example, we can set `node_address.host` to the public ip address of the machine:
+After initialization, there will be a pre-generated configuration file `config.yaml` in the config directory. Before actually starting the container, some items must be adjusted according to our environment.
+
+`chain_connector.host` must be set to the address of the Chain Connector we just started in the previous section.
+
+`node_address.host` is used by other Delta Nodes to communicate with our node. This address will be publicly registered on the Blockchain. Set this address to a publicly accessible address.
+
+The following is an example of the configuration file:
 
 ```
 ---
@@ -51,14 +55,14 @@ node_address:
   port: 6800
 ```
 
-After completing edition of the configuration file, we can start delta node now.
+### Start the Docker Container
 
-### Start Docker Container
+When starting the container, the root directory we created in last step must be mounted to the `app` directory in the docker container. In addition, port `6700` and `6800` must be exposed from the container for the API service and the communication between Delta Nodes.
 
-We use docker to start delta node service, and we need to mount the root directory created in last step to the `app` directory in the docker container. In addition, delta node docker container needs to expose two ports, `6700` and `6800`, for providing API service and communication between nodes.
+Using the following command to start the container:
 
 ```
-$ docker run -d --name=delta_node_1 -v ${PWD}:/app -p 6800:6800 -p 6700:6700 deltampc/delta-node:0.3.5
+$ docker run -d --name=delta_node_1 -v ${PWD}:/app -p 6800:6800 -p 6700:6700 deltampc/delta-node:0.5.3
 ```
 
 We can use `docker logs` command to watch logs of the node to ensure the node is running properly:
@@ -67,10 +71,22 @@ We can use `docker logs` command to watch logs of the node to ensure the node is
 $ docker logs -f delta_node_1
 ```
 
-Delta Node will also write logs to the local directory `log`, and we can watch logs in the `log` directory.
+Delta Node will also write logs to `log` under the root directory. We could find detailed logs of the node in the `log` directory.
 
-Now the delta node is started, in the next step, we will start the Deltaboard which can manage the node, edit and run the task in GUI:
+The Delta Node is started. Before running computation tasks, we should prepare some datasets for the computation tasks:
+
+{% content-ref url="prepare-data.md" %}
+[prepare-data.md](prepare-data.md)
+{% endcontent-ref %}
+
+And now we're finally ready to execute some computation tasks. We could start a Deltaboard for a graphic user interface to write tasks and manage the network:
 
 {% content-ref url="start-deltaboard.md" %}
 [start-deltaboard.md](start-deltaboard.md)
+{% endcontent-ref %}
+
+Or we can use a local IDE to write tasks, and send them to the Delta Node using Delta Node API:
+
+{% content-ref url="../delta-task-development/manage-delta-task-using-delta-node-api.md" %}
+[manage-delta-task-using-delta-node-api.md](../delta-task-development/manage-delta-task-using-delta-node-api.md)
 {% endcontent-ref %}
