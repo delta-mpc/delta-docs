@@ -177,6 +177,14 @@ dashboard       | [D 2022-01-18 09:20:40.851 JupyterHub app:2452] It took 1.211 
 http://localhost:8090
 ```
 
+Login using the default account:
+
+**username: admin**
+
+**password: admin**
+
+
+
 Now we can actually run a computation task:
 
 {% content-ref url="system-deployment/run-delta-task.md" %}
