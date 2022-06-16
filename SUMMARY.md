@@ -27,7 +27,7 @@
 
 * [Horizontal Federated Learning Task](delta-task-development/horizontal-federated-learning-task.md)
 * [Horizontal Federated Analytics Task](delta-task-development/horizontal-federated-analytics-task.md)
-* [Manage Delta Task using Delta Node API](delta-task-development/manage-delta-task-using-delta-node-api.md)
+* [Manage Delta Tasks using the Delta Node API](delta-task-development/manage-delta-task-using-delta-node-api.md)
 
 ## System Design
 
