@@ -53,3 +53,9 @@ $ docker-compose restart
 ```
 
 之后即可正常启动。
+
+#### 1.3 service.XXX.depends_on contains an invalid type
+
+![](.gitbook/assets/node_err3.png)
+
+类似上图的问题，是由docker和docker-compose版本过低引起的。需要将docker版本升级至19.03.0+，docker-compose版本升级至1.29.2+。
