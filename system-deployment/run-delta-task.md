@@ -1,12 +1,12 @@
-# Run Delta Task
+# Run the First Delta Task
 
 We're finally ready to run the first Delta Task!
 
-Delta Task could running in any environment that has Python runtime integrated. For fast testing and developing of Delta Tasks. Deltaboard has [JupyterHub](https://jupyter.org/hub) embedded in, which is basically a multi-user version of [JupyterLab](https://jupyter.org), which is a very popular IDE among data scientists (not among developers though, lol.). JupyterLab supports edit and run the code directly online, and mix the code with Markdown explanations, and show the running result.
+Delta Task could running in any environment that has Python runtime integrated. For fast testing and developing of the Delta Tasks. Deltaboard has [JupyterHub](https://jupyter.org/hub) embedded in, which is basically a multi-user version of the [JupyterLab](https://jupyter.org), which is a very popular IDE among the data scientists (not among the developers though, lol.). JupyterLab supports writing and running the code directly online in the browser, and supporting Markdown explanation blocks displayed alongside the codes.
 
-We have put an example Delta Task  inside the JupyterLab already. Go to the playground tab of the Deltaboard, there's a file named `delta_example.ipynb`. Open it and you'll see the example code:
+We have put some example Delta Tasks inside the JupyterLab already, including both learning tasks and statistical tasks. Just go to the playground tab of the Deltaboard and go to the "examples" folder, you will find the examples in different languages:
 
-![](../.gitbook/assets/playground.png)
+
 
 The example Delta Task trains a neural network model to recognize handwriting digits on the public dataset MNIST. Delta node has a built-in command to prepare MNIST data, go to the following document for details if you have not:
 
@@ -18,7 +18,7 @@ After the data is ready, press the Run button to start the execution. From the l
 
 ![](../.gitbook/assets/submit.png)
 
-&#x20;You can view the running status of the task in real time in the task list tab of Deltaboard:
+You can view the running status of the task in real time in the task list tab of Deltaboard:
 
 ![](../.gitbook/assets/task-list.png)
 
