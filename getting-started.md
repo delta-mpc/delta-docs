@@ -40,7 +40,21 @@ $ docker-compose up -d
 
 
 
-4.等待Docker镜像全部下载后，服务会自动全部启动起来。等服务全部启动后，就可以开始访问Deltaboard的界面，执行计算任务了：
+4.等待Docker镜像全部下载后，服务会自动全部启动起来。等服务全部启动后，就可以开始访问Deltaboard的界面了，在浏览器里打开如下网址，可以看到Deltaboard的登录界面：
+
+```
+http://localhost:8090
+```
+
+使用Deltaboard中默认的管理员账户登录：
+
+**用户名：admin**
+
+**密码：admin**
+
+
+
+5.进入Deltaboard的界面，接下来就可以在Playground中，执行计算任务了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
@@ -164,6 +178,14 @@ dashboard       | [D 2022-01-18 09:20:40.851 JupyterHub app:2452] It took 1.211 
 ```
 http://localhost:8090
 ```
+
+使用Deltaboard中默认的管理员账户登录：
+
+**用户名：admin**
+
+**密码：admin**
+
+****
 
 至此，一个三节点Delta区块链隐私计算网络，就已经搭建完成了。想要更进一步地了解Delta平台的功能、设计思路，可以浏览我们的文档：
 
