@@ -4,6 +4,7 @@
 * [系统架构说明](delta-architecture.md)
 * [快速搭建指南](getting-started.md)
 * [Delta在线Demo](delta-online.md)
+* [常见问题解答](faq.md)
 
 ## 版本发布说明 <a href="#release-notes" id="release-notes"></a>
 
