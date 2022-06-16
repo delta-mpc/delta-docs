@@ -21,7 +21,7 @@
 * [Start the Delta Node](system-deployment/start-delta-node.md)
 * [Prepare the Datasets](system-deployment/prepare-data.md)
 * [Start the Deltaboard](system-deployment/start-deltaboard.md)
-* [Run Delta Task](system-deployment/run-delta-task.md)
+* [Run the First Delta Task](system-deployment/run-delta-task.md)
 
 ## Delta Task Development
 
