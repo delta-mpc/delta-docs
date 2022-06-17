@@ -86,9 +86,15 @@ In this example, we'll feed the wages data into the task, which are stored in th
 
 **Computation Logic**
 
-The third and the final method is the `execute` method. You could implement the analytics logical in the execute method. The parameters of this method are corresponding to the keys of dataset dictionary returned by `dataset` method. The parameter type of `execute` method can only be `delta.pandas.DataFrame` now. The `delta.pandas.DataFrame` instance is simliar with the `pandas.DataFrame` instance, it now supports operator `+`, `-`, `*`, `/`, `//`, `%`, and methods `all`, `any`, `count`, `sum`, `mean`, `std`, `var`, `sem`.
+The actual computation logic is implemented in the method `execute`. the arguments of the execute method is given exactly as what is returned in the dataset method. As for now, the type of the arguments will only be `delta.pandas.DataFrame` as this is the only supported format. which is the same as `pandas.DataFrame`. The supported Pandas APIs on `delta.pandas.DataFrame` are listed in this document:
 
-The second part is the logic to submit the task to a Delta Node, trace its execution, and get the computation result after the execution is done:
+{% content-ref url="../horizontal-federated-analytics/supported-pandas-apis.md" %}
+[supported-pandas-apis.md](../horizontal-federated-analytics/supported-pandas-apis.md)
+{% endcontent-ref %}
+
+The computation of a average wage is easy in this example. Just use the `mean` method of Pandas on the imported DataFrame.
+
+Now we have fully implemented the task. The second part is to submit the task to a Delta Node, trace its execution, and get the computation result after the execution is done:
 
 ```
 task = WageAvg().build()
