@@ -93,13 +93,13 @@ The computation of a average wage is easy in this example. Just use the `mean` m
 
 ### 3. Set the API Address of the Delta Node
 
-After defining the task details, we're ready to run the task on the Delta Nodes.
+After defining the task details, we're ready to run the task on the Delta Network.
 
-Delta Task framework could send the task to Delta Node directly, as long as the Delta Node API address is specified.
+`delta-task` library could send the task to the Delta Node directly, as long as the Delta Node API address is specified.
 
-Here we use the Delta Node API provided by Deltaboard. Deltaboard provides a separate API address for each of its users, the tasks submitted via the API could be listed inside Deltaboard. The developer could also use API from Delta Node directly.
+Here we use the Delta Node API provided by the Deltaboard. Deltaboard provides a separate API address for each of its users, the tasks submitted via the API could be listed inside the Deltaboard. The developer could also use API from the Delta Node directly.
 
-Click "Profiles" on the sidebar of Deltaboard, copy the API Address in Deltaboard API section, and paste it here:
+Click "Profiles" on the sidebar of the Deltaboard, copy the API Address in the Deltaboard API section, and paste it here:
 
 ```python
 DELTA_NODE_API = "http://127.0.0.1:6704"
@@ -119,4 +119,24 @@ delta_node.create_task(task)
 
 After clicking the run button, some logs will be print out showing the task is submitted to the Delta Node successfully.
 
-To see the task execution details, go to "My Tasks" on the sidebar of Deltaboard, the task should be listed. Click the item to view the execution logs.
+To see the task execution details, go to "Task List" on the sidebar of the Deltaboard, the task should be listed. Click the item to view the execution logs:
+
+![](<../.gitbook/assets/image (8).png>)
+
+We can tell from the logs that during the execution of this task, one round of On-chain Secure Aggregation is performed to get the result. We could also click on the links to view the Blockchain transaction details in the Blockchain explorer. For a complete explanation about the On-chain Secure Aggregation, refer to this document:
+
+{% content-ref url="../system-design/on-chain-secure-aggregation.md" %}
+[on-chain-secure-aggregation.md](../system-design/on-chain-secure-aggregation.md)
+{% endcontent-ref %}
+
+After the termination of the task. We could click on the download button to get the computation result. The content of the file is a serialized version of what is returned in the `execute` function of the task. The file could be read directly using Python:
+
+![](<../.gitbook/assets/image (7).png>)
+
+The result shows that the average wage of all the three enterprises is 4906. Beyond this number, nothing could be found about the wage of a single employee, or the average wage of a single enterprise.
+
+To understand more about the techniques underneath, start from here:
+
+{% content-ref url="../system-design/horizontal-federated-analytics.md" %}
+[horizontal-federated-analytics.md](../system-design/horizontal-federated-analytics.md)
+{% endcontent-ref %}

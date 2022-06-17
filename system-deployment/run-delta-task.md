@@ -26,7 +26,7 @@ Now go to the "Task List" tab in the Deltaboard, we can find the task we just su
 
 The task has already started running. Click on the item, we can see the detailed running logs:
 
-![](<../.gitbook/assets/image (7) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1).png>)
 
 As the logs indicated, the task has been sent to multiple nodes in the network. Each node has performed several rounds of local training. The training result of each node has been masked using on-chain secure aggregation before sending back to the task initiator. The task initiator collected all the masked partial results, and summed them up to get the final result on all the data.
 
