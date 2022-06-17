@@ -1,6 +1,6 @@
 # Manage Delta Tasks using the Delta Node API
 
-Delta Tasks could be developed in an IDE on the developer's local device, and submitted to the Delta Node using Delta Node API. The computation result, the execution status could also be fetched directly in the code, which makes it possible to embed the Delta PPC Tasks into a larger computation workflow and execute them automatically. In this document, we will show a complete example to write a Delta Task locally and execute it using the Delta Node API.
+Delta Tasks could be developed in an IDE on the developer's local device, and submitted to the Delta Node remotely using Delta Node API. The computation result, the execution status could also be fetched directly in the code, which makes it possible to embed the Delta PPC Tasks into a larger computation workflow and execute them automatically. In this document, we will show a complete example to write a Delta Task locally and execute it using the Delta Node API.
 
 The task we're about to write is a federated analytics task that computes the average wage of all the employees distributed in 3 different enterprises. Each enterprise has a Delta Node deployed, and each Delta Node has access to a `wages.csv` file containing all the wages of the employees of the corresponding enterprise. Obviously `wages.csv` is sensitive to all the enterprises and should always be kept private for each of them. That's where federated analytics is required to compute the overall average wage without revealing to others about the internal wages of each enterprise.
 
@@ -17,7 +17,7 @@ The methods involved in managing Delta Tasks in `delta-task` library are listed 
 * `wait`: block the current code execution till the Delta Task finishes running on the Delta Node.
 * `get_result`: get the computation result of a Delta Task from the Delta Node.
 
-There is another document describing the writing and executing of the same example using Deltaboard, the web interface of Delta Network. The doc could be found here:
+There is another document which describes the writing and executing of the same example using Deltaboard, the web interface of the Delta Network. The doc could be found here:
 
 {% content-ref url="horizontal-federated-analytics-task.md" %}
 [horizontal-federated-analytics-task.md](horizontal-federated-analytics-task.md)
@@ -87,4 +87,24 @@ if delta_node.trace(task_id):  # Trace the execution of the task
 else:
     print("Task error")
 ```
+
+The invocation of `create_task` will submit the task to the specified Delta Node. The method will return a `task_id` that represents the task on the Delta Node.
+
+If we want to monitor the logs during the task execution, we could use `trace` method. This method will keep fetching the logs from the node, and printing them to `stdout` until the termination of the task. If the task finished successfully `trace` will return `True`, otherwise `False`.
+
+If we don't need the logs and just want to continue the next steps with the computation result, we could use `wait`. `wait` is almost the same as `trace` except that no logs will be fetched and printed.
+
+After a successful termination of the Delta Task execution, we could use `get_result` to get the computation result. The returned data type of `get_result` depends on the definition of the task. The data type will be `Dict[str, torch.Tensor]` for federated learning tasks, which is defined in `delta.task.HorizontalLearning.state_dict()`. For analytics tasks, the data type will be the same as returned in `delta.task.HorizontalAnalytics.execute()`.
+
+`get_result` will throw an exception if called before the termination of the task. So do use either `trace` or `wait` to wait till the termination of the task before calling `get_result`.
+
+After the execution of the code above, we should get the following output in our console:
+
+![](<../.gitbook/assets/image (7).png>)
+
+As the figure is shown, the logs about the critical steps during the execution are printed. At the end of the logs, we get the final computation result.
+
+We have finished the whole example successfully by now.
+
+The following are the detailed explanations about the API methods:
 
