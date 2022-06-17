@@ -2,8 +2,7 @@
 
 This is an example of running horizontal federated analytics Delta Task on multiple Delta Nodes.
 
-The data is a csv file distributed on several nodes, and the file content is the wage of  all employee in the company.
-And the task is to calculate the average wage of these companies.
+The task we're about to write is to compute the average wage of all the employees distributed in 3 different enterprises. Each enterprise has a Delta Node deployed, and each Delta Node has access to a `wages.csv` file containing all the wages of the employees of the corresponding enterprise. Obviously `wages.csv` is sensitive to all the enterprises and should always be kept private for each of them. That's where federated analytics is required to compute the overall average wage without revealing to others about the internal wages of each enterprise.
 
 > This example could be executed in Deltaboard directly, and the complete Jupyter Notebook has already been included in Deltaboard. Just go to the playground of Deltaboard, and find this example inside the `examples` folder.
 >
@@ -13,7 +12,7 @@ And the task is to calculate the average wage of these companies.
 
 ### 1. Import the Required Packages
 
-We need to import Delta Task framework components from Python package ```delta-task``` including ```DeltaNode``` for Delta Node API connection, and the ```HorizontalAnalytics``` for defination of the horizontal analytics task:
+We need to import Delta Task framework components from Python package `delta-task` including `DeltaNode` for Delta Node API connection, and the `HorizontalAnalytics` for defination of the horizontal analytics task:
 
 ```python
 from delta import pandas as pd
@@ -24,22 +23,18 @@ import delta.dataset
 from typing import Dict
 ```
 
+Note that we are replacing the original `Pandas` library with the one imported from `Delta`. By doing so, the code that performs the computation using Pandas keeps the same, however, its actual execution is replaced underneath with privacy-preserving computation in the Delta Network.
+
 ### 2. Define the Horizontal Federated Analytics Task
 
-The next step is to define our horizontal analytics learning task to analyze the data on multiple nodes.
-
-There're several parts in the PPC Task that need to be programmed by the developer:
-
-* ***Task Config***: We can make some basis task config in the ```super().__init__()``` method. The configurations involves task name (```name```), minimum client count(```min_clients```), maximum client count(```max_clients```),waiting timeout for calculation (```wait_timeout```)，and connection timeout for each step in the procedure(```connection_timeout```).
-* ***Dataset***: In the ```dataset``` method, you can specify the dataset for task. The return value is a dict of which key should be the name of dataset and value should be an instance of ```delta.dataset.DataFrame```; the key of dict should be corresponding to the parameters of the execute method. For detailed explanation of the dataset format, please refer to [this document](https://docs.deltampc.com/network-deployment/prepare-data).
-* ***Analytics implementation***: We need to implement the analytics process in the execute method. The input parameters should be the same with the keys of returned dict of ```dataset``` method. Now the type of all parameter can only be ```delta.pandas.DataFrame```. ```delta.pandas.DataFrame``` is similar with ```pandas.DataFrame```,  now it support operator ```+,-,*,/,//,%```, and method```all, any, count, sum, mean, std, var, sem```.
+The next step is to define the Delta Task:
 
 ```python
 class WageAvg(HorizontalAnalytics):
     def __init__(self) -> None:
         super().__init__(
             name="wage_avg",  # The task name which is used for displaying purpose.
-            min_clients=2,  # Minimum nodes required in each round, must be greater than 2.
+            min_clients=3,  # Minimum nodes required in each round, must be greater than 2.
             max_clients=3,  # Maximum nodes allowed in each round, must be greater equal than min_clients.
             wait_timeout=5,  # Timeout for calculation.
             connection_timeout=5,  # Wait timeout for each step.
@@ -62,13 +57,39 @@ class WageAvg(HorizontalAnalytics):
         return wages.mean()
 ```
 
-In the code above, we define a class `WageAvg`, which inherits from a virtual base class `HorizontalAnalytics`. The class `HorizontalAnalytics` defines some virtual class method, and user must implement them.
+There are basically 3 parts inside the definition of the analytics task: the task configuration, the selection of the datasets, and the computation logic.
 
-The first method is the constructor `__init__`. In the constructor, you can configure the task. The super class constructor must be called first, in which you could configure the task name (`name`), the minimal clients task need (`min_clients`), the maximal clients task need (`max_clients`), waiting timeout (`wait_timeout`, timeout for calculation stage in a round), and connection timeout (`connection_timeout`, timeout for stages except for calculation stage in a round).
+**Task Config**
 
-The second method is the `dataset` method. In this method, you could define the dataset for task. This method returns a dictionary, of which key is the dataset name and value is a `delta.dataset.DataFrame` instance. The parameter of `delta.dataset.DataFrame` is the dataset filename. At present, the horizontal federated analytics task only supports the `delta.dataset.DataFrame` as the dataset format.
+The task config is given in the `super().__init__()` method. The configs include the task name, the minimum/maximum number of nodes required, and several timeouts.
 
-The third and the final method is the `execute` method. You could implement the analytics logical in the execute method. The parameters of this method are corresponding to the keys of dataset dictionary returned by `dataset` method. The parameter type of `execute` method can only be `delta.pandas.DataFrame` now. The `delta.pandas.DataFrame` instance is simliar with the `pandas.DataFrame` instance, it now supports operator `+`, `-`, `*`, `/`, `//`, `%`, and methods `all`, `any`, `count`, `sum`, `mean`, `std`, `var`, `sem`.
+Since the nodes are not always online in a Delta Network, we must define the required number of nodes in the task config. When the task is published on the network, the nodes will decide to join the task or not depending on their own criteria. When the number of joined nodes meets the requirements defined in the task, the task will start to execute.
+
+We have 3 enterprises in this example, so we set both min and max number to 3 here.
+
+**Datasets**
+
+The datasets to be computed on is defined in the `dataset` method. This method returns a dictionary with its keys as the name of the dataset, and its values as the instances of `delta.dataset.DataFrame`, which will load the dataset and convert it to a `pandas.DataFrame` to be used in the computation logic in the `execute` method of the Delta Task.
+
+The keys in the dictionary will be passed as the arguments' name to the execute method, the values of the arguments will be the corresponding `pandas.DataFrame`.
+
+Note that we are passing a file name to the dataset loader. To find out more about the file names and the file types supported, refer to this document:
+
+{% content-ref url="../system-deployment/prepare-data.md" %}
+[prepare-data.md](../system-deployment/prepare-data.md)
+{% endcontent-ref %}
+
+In this example, we'll feed the wages data into the task, which are stored in the `wages.csv` files on all the three nodes.
+
+**Computation Logic**
+
+The actual computation logic is implemented in the method `execute`. the arguments of the execute method is given exactly as what is returned in the dataset method. As for now, the type of the arguments will only be `delta.pandas.DataFrame` as this is the only supported format. which is the same as `pandas.DataFrame`. The supported Pandas APIs on `delta.pandas.DataFrame` are listed in this document:
+
+{% content-ref url="../horizontal-federated-analytics/supported-pandas-apis.md" %}
+[supported-pandas-apis.md](../horizontal-federated-analytics/supported-pandas-apis.md)
+{% endcontent-ref %}
+
+The computation of a average wage is easy in this example. Just use the `mean` method of Pandas on the imported DataFrame.
 
 ### 3. Set the API Address of the Delta Node
 
@@ -98,5 +119,4 @@ delta_node.create_task(task)
 
 After clicking the run button, some logs will be print out showing the task is submitted to the Delta Node successfully.
 
-To see the task execution details, go to "My Tasks" on the sidebar of Deltaboard, the task should be listed.
-Click the item to view the execution logs.
+To see the task execution details, go to "My Tasks" on the sidebar of Deltaboard, the task should be listed. Click the item to view the execution logs.
