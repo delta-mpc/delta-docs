@@ -60,11 +60,31 @@ class WageAvg(HorizontalAnalytics):
         return wages.mean()
 ```
 
-In the code above, we define a class `WageAvg`, which inherits from a virtual base class `HorizontalAnalytics`. The class `HorizontalAnalytics` defines some virtual class method, and user must implement them.
+There are basically 3 parts inside the definition of the analytics task: the task configuration, the selection of the datasets, and the computation logic.
 
-The first method is the constructor `__init__`. In the constructor, you can configure the task. The super class constructor must be called first, in which you could configure the task name (`name`), the minimal clients task need (`min_clients`), the maximal clients task need (`max_clients`), waiting timeout (`wait_timeout`, timeout for calculation stage in a round), and connection timeout (`connection_timeout`, timeout for stages except for calculation stage in a round).
+**Task Config**
 
-The second method is the `dataset` method. In this method, you could define the dataset for task. This method returns a dictionary, of which key is the dataset name and value is a `delta.dataset.DataFrame` instance. The parameter of `delta.dataset.DataFrame` is the dataset filename. At present, the horizontal federated analytics task only supports the `delta.dataset.DataFrame` as the dataset format.
+The task config is given in the `super().__init__()` method. The configs include the task name, the minimum/maximum number of nodes required, and several timeouts.
+
+Since the nodes are not always online in a Delta Network, we must define the required number of nodes in the task config. When the task is published on the network, the nodes will decide to join the task or not depending on their own criteria. When the number of joined nodes meets the requirements defined in the task, the task will start to execute.
+
+We have 3 enterprises in this example, so we set both min and max number to 3 here.
+
+**Datasets**
+
+The datasets to be computed on is defined in the `dataset` method. This method returns a dictionary with its keys as the name of the dataset, and its values as the instances of `delta.dataset.DataFrame`, which will load the dataset and convert it to a `pandas.DataFrame` to be used in the computation logic in the `execute` method of the Delta Task.
+
+The keys in the dictionary will be passed as the arguments' name to the execute method, the values of the arguments will be the corresponding `pandas.DataFrame`.
+
+Note that we are passing a file name to the dataset loader. To find out more about the file names and the file types supported, refer to this document:
+
+{% content-ref url="../system-deployment/prepare-data.md" %}
+[prepare-data.md](../system-deployment/prepare-data.md)
+{% endcontent-ref %}
+
+In this example, we'll feed the wages data into the task, which are stored in the `wages.csv` files on all the three nodes.
+
+**Computation Logic**
 
 The third and the final method is the `execute` method. You could implement the analytics logical in the execute method. The parameters of this method are corresponding to the keys of dataset dictionary returned by `dataset` method. The parameter type of `execute` method can only be `delta.pandas.DataFrame` now. The `delta.pandas.DataFrame` instance is simliar with the `pandas.DataFrame` instance, it now supports operator `+`, `-`, `*`, `/`, `//`, `%`, and methods `all`, `any`, `count`, `sum`, `mean`, `std`, `var`, `sem`.
 
