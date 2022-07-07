@@ -22,7 +22,7 @@ $ mkdir postgres
 
 ```bash
 $ cd postgres
-$ docker run -d -v ${PWD}/data:/var/lib/postgresql/data -e PGDATA=/var/lib/postgresql/data/pgdata -e POSTGRES_PASSWORD='1234qwer' postgres:alpine3.14
+$ docker run -p 5432:5432 -d -v ${PWD}/data:/var/lib/postgresql/data -e PGDATA=/var/lib/postgresql/data/pgdata -e POSTGRES_PASSWORD='1234qwer' postgres:alpine3.14
 ```
 
 注意这行启动命令干了三件事情，第一个是创建`data`子文件夹，并将其绑定到容器中去，第二个是通过环境变量设置了Postgres使用的数据文件位置，第三个是通过环境变量设置了postgres默认用户的密码。
@@ -76,4 +76,3 @@ $ docker run -d -p 4000:4000 --env-file ./.env deltampc/delta-chain-explorer:dev
 在浏览器中访问地址[http://localhost:4000](http://localhost:4000)，可以看到区块链浏览器已经启动起来了：
 
 ![](../.gitbook/assets/8aeda9264bfe68184d52f6baf7049e0.png)
-
