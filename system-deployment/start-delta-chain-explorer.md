@@ -1,4 +1,4 @@
-# Start Delta Chain Explorer
+# Start the Delta Chain Explorer
 
 Delta Chain Explorer is a full featured Blockchain explorer based on [Blockscout](https://github.com/blockscout/blockscout), which is compatible with Ethereum's Web3 standard. It has a backend storage to persist block data and the contracts can be registered and saved to optimize the visualization of contract invocation transactions.
 
@@ -20,11 +20,11 @@ Create root folder for the docker container:
 $ mkdir postgres
 ```
 
-&#x20;Start the container using the following command:
+Start the container using the following command:
 
 ```bash
 $ cd postgres
-$ docker run -d -v ${PWD}/data:/var/lib/postgresql/data -e PGDATA=/var/lib/postgresql/data/pgdata -e POSTGRES_PASSWORD='1234qwer' postgres:alpine3.14
+$ docker run -p 5432:5432 -d -v ${PWD}/data:/var/lib/postgresql/data -e PGDATA=/var/lib/postgresql/data/pgdata -e POSTGRES_PASSWORD='1234qwer' postgres:alpine3.14
 ```
 
 Note that we did three things in this command:
