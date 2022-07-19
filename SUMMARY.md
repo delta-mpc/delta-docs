@@ -8,6 +8,7 @@
 
 ## 版本发布说明 <a href="#release-notes" id="release-notes"></a>
 
+* [v0.6.0](release-notes/v0.6.0.md)
 * [v0.5.3](release-notes/v0.5.3.md)
 * [v0.5.0](release-notes/v0.5.0.md)
 * [v0.3.5](release-notes/v0.3.5.md)
@@ -28,6 +29,7 @@
 
 * [横向联邦学习任务](delta-task-development/hfl-task-example.md)
 * [横向联邦统计任务](delta-task-development/hfa-task-example.md)
+* [逻辑回归任务](delta-task-development/luo-ji-hui-gui-ren-wu.md)
 * [使用Delta Node API管理任务](delta-task-development/manage-task-with-delta-node-api.md)
 
 ## 系统详细设计 <a href="#system-design" id="system-design"></a>
@@ -38,6 +40,7 @@
 * [横向联邦学习](system-design/horizontal-federated-learning.md)
 * [纵向联邦学习](system-design/vertical-federated-learning.md)
 * [横向联邦统计](system-design/horizontal-federated-analytics.md)
+* [逻辑回归](system-design/luo-ji-hui-gui.md)
 
 ## 联邦统计 <a href="#federated-analytics" id="federated-analytics"></a>
 
