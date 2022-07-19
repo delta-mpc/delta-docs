@@ -7,6 +7,7 @@
 
 ## Release Notes
 
+* [v0.6.0](release-notes/v0.6.0.md)
 * [v0.5.3](release-notes/v0.5.3.md)
 * [v0.5.0](release-notes/v0.5.0.md)
 * [v0.3.5](release-notes/v0.3.5.md)
@@ -27,6 +28,7 @@
 
 * [Horizontal Federated Learning Task](delta-task-development/horizontal-federated-learning-task.md)
 * [Horizontal Federated Analytics Task](delta-task-development/horizontal-federated-analytics-task.md)
+* [Logistic Regression Task](delta-task-development/logistic-regression-task.md)
 * [Manage Delta Tasks using the Delta Node API](delta-task-development/manage-delta-task-using-delta-node-api.md)
 
 ## System Design
@@ -37,6 +39,7 @@
 * [Horizontal Federated Learning](system-design/horizontal-federated-learning.md)
 * [Horizontal Federated Analytics](system-design/horizontal-federated-analytics.md)
 * [Vertical Federated Learning](system-design/vertical-federated-learning.md)
+* [Logistic Regression](system-design/logistic-regression.md)
 
 ## Horizontal Federated Analytics
 
