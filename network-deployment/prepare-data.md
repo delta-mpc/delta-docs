@@ -10,8 +10,8 @@ Delta Node的Data Connector组件的开发工作量较大，目前仍在开发�
 
 为了方便开发者上手使用，Delta Node的Docker镜像中包含了下载MNIST数据集的命令，运行下面的命令，Delta会自动下载MNIST数据集，并且随机选取1/3保留下来，删掉其他的，以模拟隐私计算网络中，多个不同的节点各自拥有不同的数据的场景：
 
-```text
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.5.3 get-mnist
+```
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.6.0 get-mnist
 ```
 
 ## Delta Node支持的数据格式
@@ -22,15 +22,15 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.5.3 get-mnist
 
 在Data文件夹下的每个文件，都表示一个完整的数据集，在文件中包含了全部的样本数据。Delta目前支持如下的文件格式：
 
-| 文件后缀 | 文件内容 | Delta Task读取后传入Preprocess函数的参数类型 |
-| :--- | :--- | :--- |
-| `npy` | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据 |
-| `npz` | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据 |
-| `pt` | `torch.Tensor`第0维为样本的维度 | `torch.Tensor` 包含单个样本的数据 |
-| `csv` | `,`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
-| `tsv` | `\t`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
-| `txt` | `\t`分隔的表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
-| `xls/xlsx` | Excel表格，不包含标题栏，每行一个样本 | `pandas.DataFrame`包含单个样本的数据 |
+| 文件后缀       | 文件内容                                                           | Delta Task读取后传入Preprocess函数的参数类型 |
+| ---------- | -------------------------------------------------------------- | -------------------------------- |
+| `npy`      | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据        |
+| `npz`      | `numpy.ndarray` 第0维为样本的维度，即`data[0],data[1]...` 表示第0个、第1个...样本 | `numpy.ndarray` 包含单个样本的数据        |
+| `pt`       | `torch.Tensor`第0维为样本的维度                                        | `torch.Tensor` 包含单个样本的数据         |
+| `csv`      | `,`分隔的表格，不包含标题栏，每行一个样本                                         | `pandas.DataFrame`包含单个样本的数据      |
+| `tsv`      | 分隔的表格，不包含标题栏，每行一个样本                                            | `pandas.DataFrame`包含单个样本的数据      |
+| `txt`      | 分隔的表格，不包含标题栏，每行一个样本                                            | `pandas.DataFrame`包含单个样本的数据      |
+| `xls/xlsx` | Excel表格，不包含标题栏，每行一个样本                                          | `pandas.DataFrame`包含单个样本的数据      |
 
 ### 使用文件夹存储的全部样本
 
@@ -47,4 +47,3 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.5.3 get-mnist
 放置在文件夹中的数据文件，每个数据文件是一个样本的数据，数据文件的格式支持上面表格中的全部格式，区别是其文件内容中不需要额外表示样本的那个维度，和传递到Preprocess函数的数据格式是一样的。
 
 可在文件夹中放置的单个样本数据文件，除了上面表格中列出的全部格式外，还额外支持图片格式，即一个样本数据文件可以是一张图片。支持[大部分常见的图片格式](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html)。每一张图片作为一个样本。使用`PIL.Image.open`进行读取并传递给Preprocess函数。
-
