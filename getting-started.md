@@ -19,7 +19,7 @@ Delta隐私计算网络支持无区块链模式的运行。这种模式下，由
 1.克隆delta-all-in-one的github仓库：
 
 ```
-$ git clone --depth 1 --branch v0.5.3 https://github.com/delta-mpc/delta-all-in-one.git
+$ git clone --depth 1 --branch v0.6.0 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
 
@@ -141,7 +141,7 @@ http://localhost:8090
 1.克隆delta-all-in-one的github仓库：
 
 ```
-$ git clone --depth 1 --branch v0.5.3 https://github.com/delta-mpc/delta-all-in-one.git
+$ git clone --depth 1 --branch v0.6.0 https://github.com/delta-mpc/delta-all-in-one.git
 ```
 
 
