@@ -11,8 +11,7 @@
 * [v0.6.0](release-notes/v0.6.0.md)
 * [v0.5.3](release-notes/v0.5.3.md)
 * [v0.5.0](release-notes/v0.5.0.md)
-* [v0.3.5](release-notes/v0.3.5.md)
-* [v0.3.0](release-notes/v0.3.0.md)
+* [历史版本](release-notes/li-shi-ban-ben.md)
 
 ## 系统搭建和部署 <a href="#network-deployment" id="network-deployment"></a>
 
@@ -34,11 +33,9 @@
 
 ## 系统详细设计 <a href="#system-design" id="system-design"></a>
 
-* [代码安全性检查](system-design/code-security-check.md)
 * [横向联邦任务框架](system-design/horizontal-task-framework.md)
 * [链上安全聚合](system-design/secure-aggregation-on-blockchain.md)
 * [横向联邦学习](system-design/horizontal-federated-learning.md)
-* [纵向联邦学习](system-design/vertical-federated-learning.md)
 * [横向联邦统计](system-design/horizontal-federated-analytics.md)
 * [逻辑回归](system-design/luo-ji-hui-gui.md)
 
