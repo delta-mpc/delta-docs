@@ -28,7 +28,7 @@
 
 * [横向联邦学习任务](delta-task-development/hfl-task-example.md)
 * [横向联邦统计任务](delta-task-development/hfa-task-example.md)
-* [逻辑回归任务](delta-task-development/luo-ji-hui-gui-ren-wu.md)
+* [逻辑回归任务](delta-task-development/logistic-regression-task.md)
 * [使用Delta Node API管理任务](delta-task-development/manage-task-with-delta-node-api.md)
 
 ## 系统详细设计 <a href="#system-design" id="system-design"></a>
@@ -37,7 +37,7 @@
 * [链上安全聚合](system-design/secure-aggregation-on-blockchain.md)
 * [横向联邦学习](system-design/horizontal-federated-learning.md)
 * [横向联邦统计](system-design/horizontal-federated-analytics.md)
-* [逻辑回归](system-design/luo-ji-hui-gui.md)
+* [逻辑回归](system-design/logistic-regression.md)
 
 ## 联邦统计 <a href="#federated-analytics" id="federated-analytics"></a>
 
