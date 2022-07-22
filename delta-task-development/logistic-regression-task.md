@@ -11,5 +11,11 @@ The dataset is the [Spector dataset](https://www.statsmodels.org/stable/datasets
 
 And our task is to train a logistic regression model to predict whether the student's grade will be improved given his TCUE, PSI and Grade data.
 
+> This example could be executed in the Deltaboard directly, and the complete Jupyter Notebook has already been included in the Deltaboard. Just go to the playground of the Deltaboard, and find this example inside the `examples` folder.
+>
+> If you don't have a deployed Deltaboard to play with already, use the online version of Deltaboard here:
+>
+> [https://board.deltampc.com](https://board.deltampc.com)
+
 
 
