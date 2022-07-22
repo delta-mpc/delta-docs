@@ -1,6 +1,6 @@
 # Logistic Regression Task
 
-This article describes an example of a Delta Logistic Regression Task.
+This article describes an example of the Delta Logistic Regression Task.
 
 The dataset is the [Spector dataset](https://www.statsmodels.org/stable/datasets/generated/spector.html) which is the experimental data on the effectiveness of the personalized system of instruction (PSI) program. The data is stored in a CSV file including 4 columns:
 
@@ -28,6 +28,8 @@ from delta.statsmodel import LogitTask
 ```
 
 The logistics regression task in Delta must be inherited from the `LogitTask` from `delta.statsmodel`. After importing the above packages, we are ready to write the task content:
+
+### 2. Define the Logistic Regression Model
 
 ```python
 class SpectorLogitTask(LogitTask):
@@ -80,3 +82,6 @@ class SpectorLogitTask(LogitTask):
             "ridge_factor": 1e-10,  # The newton method option. The factor of the ridge regression.
         }
 ```
+
+There are four parts in the definition of the logistic regression task:
+
