@@ -25,7 +25,7 @@ There is another document which describes the writing and executing of the same 
 
 Now let's start to write the code in our local IDE. The first part is the definition of the Delta Task:
 
-```
+```python
 from typing import Dict
 import delta.dataset
 
@@ -96,7 +96,7 @@ The computation of a average wage is easy in this example. Just use the `mean` m
 
 Now we have fully implemented the task. The second part is to submit the task to a Delta Node, trace its execution, and get the computation result after the execution is done:
 
-```
+```python
 task = WageAvg().build()
 
 DELTA_NODE_API = "http://127.0.0.1:6700"
