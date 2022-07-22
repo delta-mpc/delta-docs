@@ -44,8 +44,8 @@ class SpectorLogitTask(LogitTask):
 
     def dataset(self):
         """
-        定义任务所需的数据。
-        输出: 字典，键是数据的名字，需要与preprocess方法中的参数名称对应.
+        Define the data used for LR.
+        return: a dict with keys as the dataset names and values as the instances of delta.dataset.DataFrame
         """
         return {
             "data": delta.dataset.DataFrame("spector.csv"),
@@ -53,9 +53,10 @@ class SpectorLogitTask(LogitTask):
 
     def preprocess(self, data: pandas.DataFrame):
         """
-        预处理函数，处理数据集，将其分为特征(x)与标签(y)返回。
-        输入：与dataset方法的返回值对应
-        输出：特征(x)与标签(y)
+        Dataset preprocessing.
+        Returns the features(x) and labels(y) separately for the next step.
+        input：the arguements are the same as the outputs of the dataset method above.
+        return：features(x) and labels(y)
         """
         names = data.columns
 
@@ -66,15 +67,16 @@ class SpectorLogitTask(LogitTask):
     
     def options(self):
         """
-        可选方法，对逻辑回归任务的训练进行配置。
-        输出：字典，逻辑回归任务的训练配置选项。
+        (Optional)
+        The options of the logistic regression
+        return: the option names and values
         """
         return {
-            "maxiter": 35,  # 训练最大迭代次数，默认值为35
-            "method": "newton",  # 训练方法，目前选项只有"newton"
-            "start_params": None,  # 逻辑回归的初始权重，默认值为None。当为None时，会将权重初始化为全0
-            "ord": np.inf,  # newton法相关系数。梯度范数的阶
-            "tol": 1e-8,  # newton法相关系数。停止训练的容忍度
-            "ridge_factor": 1e-10,  # newton法相关系数。岭回归的系数
+            "maxiter": 35,  # The max number of iterations. Defaults to 35.
+            "method": "newton",  # The optimization method. The only option is "newton" for now.
+            "start_params": None,  # The initial weights. Defaults to None(all zero).
+            "ord": np.inf,  # The newton method option. 梯度范数的阶
+            "tol": 1e-8,  # The newton method option. 停止训练的容忍度
+            "ridge_factor": 1e-10,  # The newton method option. 岭回归的系数
         }
 ```
