@@ -32,12 +32,10 @@
 
 ## System Design
 
-* [Code Execution Security](system-design/code-execution-security.md)
 * [Horizontal Task Framework](system-design/horizontal-task-framework.md)
 * [On-chain Secure Aggregation](system-design/on-chain-secure-aggregation.md)
 * [Horizontal Federated Learning](system-design/horizontal-federated-learning.md)
 * [Horizontal Federated Analytics](system-design/horizontal-federated-analytics.md)
-* [Vertical Federated Learning](system-design/vertical-federated-learning.md)
 * [Logistic Regression](system-design/logistic-regression.md)
 
 ## Horizontal Federated Analytics
