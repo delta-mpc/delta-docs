@@ -75,8 +75,8 @@ class SpectorLogitTask(LogitTask):
             "maxiter": 35,  # The max number of iterations. Defaults to 35.
             "method": "newton",  # The optimization method. The only option is "newton" for now.
             "start_params": None,  # The initial weights. Defaults to None(all zero).
-            "ord": np.inf,  # The newton method option. 梯度范数的阶
-            "tol": 1e-8,  # The newton method option. 停止训练的容忍度
-            "ridge_factor": 1e-10,  # The newton method option. 岭回归的系数
+            "ord": np.inf,  # The newton method option. The order of the gradient norm.
+            "tol": 1e-8,  # The newton method option. The tolerance of the error in the params for the convergence.
+            "ridge_factor": 1e-10,  # The newton method option. The factor of the ridge regression.
         }
 ```
