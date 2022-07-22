@@ -38,7 +38,7 @@ class SpectorLogitTask(LogitTask):
     ) -> None:
         super().__init__(
             name="spector_logit",  # The task name. Only for displaying purpose.
-            min_clients=2,  # The min number of the clients required. Must be larger than 2.
+            min_clients=3,  # The min number of the clients required. Must be larger than 2.
             max_clients=3,  # The max number of the clients required. Must be larger than min_clients.
             wait_timeout=5,  # The max time to wait for the clients to join a round.
             connection_timeout=5,  # The max time to wait for network connections.
@@ -85,3 +85,10 @@ class SpectorLogitTask(LogitTask):
 
 There are four parts in the definition of the logistic regression task:
 
+**Task Config**
+
+The task config is given in the `super().__init__()` method. The configs include the task name, the minimum/maximum number of nodes required, and several timeouts.
+
+Since the nodes are not always online in a Delta Network, we must define the required number of nodes in the task config. When the task is published on the network, the nodes will decide to join the task or not depending on their own criteria. When the number of joined nodes meets the requirements defined in the task, the task will start to execute.
+
+We have divided the dataset into 3 parts and put them on 3 different nodes.  So we set both min and max number to 3 here.
