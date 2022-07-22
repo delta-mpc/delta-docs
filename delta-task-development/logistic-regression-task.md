@@ -35,11 +35,11 @@ class SpectorLogitTask(LogitTask):
         self,
     ) -> None:
         super().__init__(
-            name="spector_logit",  # 任务名称，用于在Deltaboard中的展示
-            min_clients=2,  # 算法所需的最少客户端数，至少为2
-            max_clients=3,  # 算法所支持的最大客户端数，必须大雨等于min_clients
-            wait_timeout=5,  # 等待超时时间，用来控制一轮计算的超时时间
-            connection_timeout=5,  # 连接超时时间，用来控制流程中每个阶段的超时时间
+            name="spector_logit",  # The task name. Only for displaying purpose.
+            min_clients=2,  # The min number of the clients required. Must be larger than 2.
+            max_clients=3,  # The max number of the clients required. Must be larger than min_clients.
+            wait_timeout=5,  # The max time to wait for the clients to join a round.
+            connection_timeout=5,  # The max time to wait for network connections.
         )
 
     def dataset(self):
