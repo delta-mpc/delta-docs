@@ -120,3 +120,18 @@ In this example, we will use the first 3 columns of the `spector.csv` as the fea
 The options for logistics regression are configured in the `options` method. This method returns a dictionary with its keys as the option names and the values as the config values. The available options are all listed in the above example with detailed explanations in the comments.
 
 The `options` method is optional. If not provided, the default values will be used for all the options.
+
+### 3. Set the API Address of the Delta Node
+
+After defining the task details, we're ready to run the task on the Delta Network.
+
+`delta-task` library could send the task to the Delta Node directly, as long as the Delta Node API address is specified.
+
+We will use the Delta Node API provided by the Deltaboard. Deltaboard provides a separate API address for each of its users, the tasks submitted via the API could be listed inside the Deltaboard. The developer could also use the API provided by the Delta Node directly.
+
+Click "Profiles" on the sidebar of the Deltaboard, copy the API Address in the Deltaboard API section, and paste it here:
+
+```python
+DELTA_NODE_API = "http://127.0.0.1:6704"
+```
+
