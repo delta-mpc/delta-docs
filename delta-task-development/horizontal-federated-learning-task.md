@@ -1,10 +1,10 @@
-# An Example of the Horizontal Federated Learning Task
+# Horizontal Federated Learning Task
 
 This is an example of Delta Task running horizontal federated learning on multiple Delta Nodes.
 
 The dataset is [MNIST](http://yann.lecun.com/exdb/mnist/) distributed on several nodes with each node having only part of the samples. And the task is to train a Convolutional Neural Network to identify hand-writing digits.
 
-> This example could be executed in Deltaboard directly, and the complete Jupyter Notebook has already been included in Deltaboard. Just go to the playground of Deltaboard, and find this example inside the `examples` folder.
+> This example could be executed in the Deltaboard directly, and the complete Jupyter Notebook has already been included in the Deltaboard. Just go to the playground of the Deltaboard, and find this example inside the `examples` folder.
 >
 > If you don't have a deployed Deltaboard to play with already, use the online version of Deltaboard here:
 >
@@ -12,7 +12,7 @@ The dataset is [MNIST](http://yann.lecun.com/exdb/mnist/) distributed on several
 
 ### 1. Import the Required Packages
 
-The computation logic is written in Torch. So we must import ```numpy``` and ```torch```, and some other helper tools. Then we need to import Delta Task framework components from Python package ```delta-task``` including ```DeltaNode``` for Delta Node API connection, the ```HorizontalLearning``` for defination of the horizontal learning task and the ```FaultTolerantFedAvg``` for the configuration of the secure aggregation:
+The computation logic is written in Torch. So we must import `numpy` and `torch`, and some other helper tools. Then we need to import Delta Task framework components from Python package `delta-task` including `DeltaNode` for Delta Node API connection, the `HorizontalLearning` for defination of the horizontal learning task and the `FaultTolerantFedAvg` for the configuration of the secure aggregation:
 
 ```python
 from typing import Any, Dict, Iterable, List, Tuple
@@ -64,13 +64,13 @@ The next step is to define our horizontal federated learning task to train the a
 
 There're several parts in the PPC Task that need to be programmed by the developer:
 
-* ***Task Config***: We can make some basis task config in the ```super().__init__()``` method. The configurations involves task name (```name```), training rounds of task (```max_rounds```), the frequency of validation (validate per ```validate_interval``` round), validate dataset fraction (```validate_frac```) and the aggregate strategy (```strategy```). 
-* ***Dataset***: In the ```dataset``` method, you can specify the dataset for task. You should return an instance of ```delta.dataset.Dataset```, and the parameter ```dataset``` of ```delta.dataset.Dataset``` represents the dataset name. For detailed explanation of the dataset format, please refer to [this document](https://docs.deltampc.com/network-deployment/prepare-data).
-* ***Train dataloader method***: In the ```make_train_dataloader``` method, you can specify the dataloader used for training. We will pass the training dataset (an instance of ```torch.utils.data.Dataset```) to this method according to the configuration in the ```dataset``` method, and you can transform the dataset, do some preprocess, etc. And finally you should return a ```torch.utils.data.Dataloader```, and it will be used for model training.
-* ***Validation dataloader method***: In the ```make_validate_dataloader``` method, you can specify the dataloader used for validation. The implementation of this method is very similar with the ```make_train_dataloader```, except of the passed dataset is the validation dataset.
-* ***Model Training Method***: In the ```train```method, you should define the whole procedure of model training, including forward propagation and backward propagation. The input parameter of this method is the traing dataloader.
-* ***Model Validation Method***: In the ```validate``` method, you should define the whole procedure of model validation. The input parameter of this method is the validation dataloader, and the return value should be a ```dict``` of which key should be the validation metrics name, and corresponding value should be the metrics value.
-* ***State dict***: In the ```state_dict``` method, you can specify all the model parameters need to train and update, and the return value should be a list of these parameters.
+* _**Task Config**_: We can make some basis task config in the `super().__init__()` method. The configurations involves task name (`name`), training rounds of task (`max_rounds`), the frequency of validation (validate per `validate_interval` round), validate dataset fraction (`validate_frac`) and the aggregate strategy (`strategy`).
+* _**Dataset**_: In the `dataset` method, you can specify the dataset for task. You should return an instance of `delta.dataset.Dataset`, and the parameter `dataset` of `delta.dataset.Dataset` represents the dataset name. For detailed explanation of the dataset format, please refer to [this document](https://docs.deltampc.com/network-deployment/prepare-data).
+* _**Train dataloader method**_: In the `make_train_dataloader` method, you can specify the dataloader used for training. We will pass the training dataset (an instance of `torch.utils.data.Dataset`) to this method according to the configuration in the `dataset` method, and you can transform the dataset, do some preprocess, etc. And finally you should return a `torch.utils.data.Dataloader`, and it will be used for model training.
+* _**Validation dataloader method**_: In the `make_validate_dataloader` method, you can specify the dataloader used for validation. The implementation of this method is very similar with the `make_train_dataloader`, except of the passed dataset is the validation dataset.
+* _**Model Training Method**_: In the `train`method, you should define the whole procedure of model training, including forward propagation and backward propagation. The input parameter of this method is the traing dataloader.
+* _**Model Validation Method**_: In the `validate` method, you should define the whole procedure of model validation. The input parameter of this method is the validation dataloader, and the return value should be a `dict` of which key should be the validation metrics name, and corresponding value should be the metrics value.
+* _**State dict**_: In the `state_dict` method, you can specify all the model parameters need to train and update, and the return value should be a list of these parameters.
 
 ```python
 def transform_data(data: List[Tuple[Image, str]]):
@@ -235,5 +235,6 @@ To see the details of the execution, go to "My Tasks" on the sidebar of Deltaboa
 
 In the System Design sections of this document, there're more detailed explanations about the task execution process. For the execution process of the above horizontal federated learning task, please read the following document:
 
-{% page-ref page="../system-design/horizontal-federated-learning.md" %}
-
+{% content-ref url="../system-design/horizontal-federated-learning.md" %}
+[horizontal-federated-learning.md](../system-design/horizontal-federated-learning.md)
+{% endcontent-ref %}

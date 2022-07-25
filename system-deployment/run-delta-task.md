@@ -22,7 +22,7 @@ After the data is prepared, we could start to run the example codes. Just follow
 
 Now go to the "Task List" tab in the Deltaboard, we can find the task we just submitted. The running status of the task is also given:
 
-![](<../.gitbook/assets/image (4).png>)
+![](<../.gitbook/assets/image (4) (1).png>)
 
 The task has already started running. Click on the item, we can see the detailed running logs:
 

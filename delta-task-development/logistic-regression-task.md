@@ -135,3 +135,28 @@ Click "Profiles" on the sidebar of the Deltaboard, copy the API Address in the D
 DELTA_NODE_API = "http://127.0.0.1:6704"
 ```
 
+### 4. Run the Task
+
+Now we can start the task using the following code:
+
+```python
+task = SpectorLogitTask().build()
+delta_node = DeltaNode(DELTA_NODE_API)
+delta_node.create_task(task)
+```
+
+### 5. Check the Running Status in the Deltaboard
+
+After clicking the run button on the top bar of the Jupyter Notebook, we can find the task listed in the "Task List" panel. Click on the task item, we will be redirected to the details page of the task:
+
+
+
+We could find the execution details from the logs. The Blockchain transactions are also listed in the logs, we could click on the transactions to view the transaction details in the Blockchain explorer.
+
+When the execution is finished, we could download the computation result by clicking the download button. The result file is a Python pickle file that could be loaded in Python directly:
+
+![](<../.gitbook/assets/image (4).png>)
+
+There are 3 parts in the result file: the weights of the logistic regression model, the value of the loss function, and the number of iterations.
+
+And now we have finished the execution of the logistic regression task.

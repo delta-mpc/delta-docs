@@ -4,7 +4,7 @@ This is an example of running horizontal federated analytics Delta Task on multi
 
 The task we're about to write is to compute the average wage of all the employees distributed in 3 different enterprises. Each enterprise has a Delta Node deployed, and each Delta Node has access to a `wages.csv` file containing all the wages of the employees of the corresponding enterprise. Obviously `wages.csv` is sensitive to all the enterprises and should always be kept private for each of them. That's where federated analytics is required to compute the overall average wage without revealing to others about the internal wages of each enterprise.
 
-> This example could be executed in Deltaboard directly, and the complete Jupyter Notebook has already been included in Deltaboard. Just go to the playground of Deltaboard, and find this example inside the `examples` folder.
+> This example could be executed in the Deltaboard directly, and the complete Jupyter Notebook has already been included in the Deltaboard. Just go to the playground of the Deltaboard, and find this example inside the `examples` folder.
 >
 > If you don't have a deployed Deltaboard to play with already, use the online version of Deltaboard here:
 >
