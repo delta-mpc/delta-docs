@@ -126,6 +126,6 @@ After a successful termination of the Delta Task execution, we could use `get_re
 
 After the execution of the code above, we should get the following output in our console:
 
-![](<../.gitbook/assets/image (7) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1).png>)
 
 As the figure is shown, the logs about the critical steps during the execution are printed. At the end of the logs, we get the final computation result. And we have finished the whole example successfully by now.

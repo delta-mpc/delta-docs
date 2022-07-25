@@ -131,7 +131,7 @@ We can tell from the logs that during the execution of this task, one round of O
 
 After the termination of the task. We could click on the download button to get the computation result. The content of the file is a serialized version of what is returned in the `execute` function of the task. The file could be read directly using Python:
 
-![](<../.gitbook/assets/image (7).png>)
+![](<../.gitbook/assets/image (7) (1).png>)
 
 The result shows that the average wage of all the three enterprises is 4906. Beyond this number, nothing could be found about the wage of a single employee, or the average wage of a single enterprise.
 

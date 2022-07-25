@@ -149,7 +149,7 @@ delta_node.create_task(task)
 
 After clicking the run button on the top bar of the Jupyter Notebook, we can find the task listed in the "Task List" panel. Click on the task item, we will be redirected to the details page of the task:
 
-
+![](<../.gitbook/assets/image (7).png>)
 
 We could find the execution details from the logs. The Blockchain transactions are also listed in the logs, we could click on the transactions to view the transaction details in the Blockchain explorer.
 
