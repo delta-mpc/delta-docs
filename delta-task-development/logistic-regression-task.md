@@ -4,7 +4,6 @@
 
 数据是[spector dataset](https://www.statsmodels.org/stable/datasets/generated/spector.html)，关于个性化教学系统（PSI）计划有效性的实验数据。数据的格式是csv文件，包含4列数据，分别是GPA（平均绩点），TCUE（经济学测试分数）,PSI（是否参与个性化教学系统）和Grade（学生成绩是否提升）。任务是通过逻辑回归模型来与预测Grade（学生成绩是否提升）。
 
-
 > 本示例可以在Deltaboard中直接运行，完整的Jupyter Notebook文件也已经包含在Deltaboard中，进入Deltaboard的Playground，可以在examples文件下看到本示例文件。
 >
 > 在Deltaboard的在线版本中可以直接查看和运行这个示例
@@ -75,7 +74,6 @@ class SpectorLogitTask(LogitTask):
             "tol": 1e-8,  # newton法相关系数。停止训练的容忍度
             "ridge_factor": 1e-10,  # newton法相关系数。岭回归的系数
         }
-
 ```
 
 逻辑回归任务的定义包含了四个部分：对数据节点的要求、数据集的选取，数据集的预处理，以及训练配置。
@@ -100,15 +98,15 @@ _**数据集**_
 
 _**数据预处理**_
 
-在预处理函数中，我们需要对`dataset`方法中返回的数据集进行处理，最后返回特征（x）和标签（y）进行训练。 输入需要与```dataset```方法的返回值对应，即一个输入形参，对应```dataset```返回的字典中的一项。输出的x和y可以是`pandas.DataFrame`或`numpy.ndarray`，y必须是一个1维的向量，表示类别标签。
+在预处理函数中，我们需要对`dataset`方法中返回的数据集进行处理，最后返回特征（x）和标签（y）进行训练。 输入需要与`dataset`方法的返回值对应，即一个输入形参，对应`dataset`返回的字典中的一项。输出的x和y可以是`pandas.DataFrame`或`numpy.ndarray`，y必须是一个1维的向量，表示类别标签。
 
 在这里，由于`spector.csv`包含4列，以此为GPA，TCUE,PSI和Grade，我们的任务是预测Grade，那么就以前三列为特征（x），最后一列为标签（y），对输入的`DataFrame`进行分割。初次之外，不需要其他的预处理操作。最后直接返回特征（x）与标签（y）即可。
 
-_**训练选项**_
+_**逻辑回归选项**_
 
-这个方法是可选的. 在`options`方法中，我们可以配置逻辑回归训练的一些参数。通用的参数包括 ```method```（逻辑回顾的训练方法，目前只有`newton`可选，即牛顿法），`maxiter`（训练的最大迭代次数，默认值35），以及`start_params`（逻辑回归的初始权重，默认值为None）。其中，`start_params`可以为`None`。`start_params`为`None`时，框架会将权重初始化为全0。
+这个方法是可选的. 在`options`方法中，我们可以配置逻辑回归的一些参数。通用的参数包括 `method`（逻辑回顾的优化方法，目前只有`newton`可选，即牛顿法），`maxiter`（最大迭代次数，默认值35），以及`start_params`（逻辑回归的初始权重，默认值为None）。其中，`start_params`可以为`None`。`start_params`为`None`时，框架会将权重初始化为全0。
 
-其他的参数为各个训练方法特有的。牛顿法的参数包括`ord`（梯度范数的阶，默认值为+inf），`tol`（停止训练的容忍值，默认值为1e-8）以及`ridge_factor`（对黑塞矩阵的脊回归系数）。
+其他的参数为各个优化方法特有的。牛顿法的参数包括`ord`（梯度范数的阶，默认值为+inf），`tol`（停止迭代的容忍值，默认值为1e-8）以及`ridge_factor`（对黑塞矩阵的脊回归系数）。
 
 上述所有的配置项，都有默认值。如果你没有特殊的需求，可以不实现这个方法，这样所有的参数都会取默认值。
 
@@ -148,7 +146,6 @@ delta_node.create_task(task)
 
 任务执行完后，可以点击下载按钮，下载执行结果文件。执行结果包含三部分，分别是逻辑回归的权重、逻辑回归损失函数的值，以及逻辑回归训练的轮数，可以直接用python读取使用：
 
-![](../.gitbook/assets/lr_result.png)
-
+![](../.gitbook/assets/lr\_result.png)
 
 至此，逻辑回归的示例就结束了。
