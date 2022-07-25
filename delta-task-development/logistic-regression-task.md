@@ -140,7 +140,7 @@ delta_node.create_task(task)
 
 接下来，可以从左侧的导航栏中，前往“任务列表”，找到刚刚提交的任务，点击进去查看具体的执行日志了：
 
-![](../.gitbook/assets/bc90dd4d46c456091636f04747fd488.png)
+![](../.gitbook/assets/logit-task-board.png)
 
 可以从日志看出，在任务执行中使用了一轮链上安全聚合。可以点击对应的链接进入区块链浏览器，看到详细的transaction执行情况。在Delta的开发文档中有详细的[链上安全聚合原理介绍](../system-design/secure-aggregation-on-blockchain.md)，这里我们就不展开了。
 
