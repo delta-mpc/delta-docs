@@ -92,3 +92,25 @@ The task config is given in the `super().__init__()` method. The configs include
 Since the nodes are not always online in a Delta Network, we must define the required number of nodes in the task config. When the task is published on the network, the nodes will decide to join the task or not depending on their own criteria. When the number of joined nodes meets the requirements defined in the task, the task will start to execute.
 
 We have divided the dataset into 3 parts and put them on 3 different nodes.  So we set both min and max number to 3 here.
+
+**Datasets**
+
+The datasets to be computed on is defined in the `dataset` method. This method returns a dictionary with its keys as the name of the dataset, and its values as the instances of `delta.dataset.DataFrame`, which will load the dataset and convert it to a `pandas.DataFrame` to be used in the computation logic in the `execute` method of the Delta Task.
+
+The keys in the dictionary will be passed as the arguments' name to the execute method, the values of the arguments will be the corresponding `pandas.DataFrame`.
+
+Note that we are passing a file name to the dataset loader. To find out more about the file names and the file types supported, refer to this document:
+
+{% content-ref url="../system-deployment/prepare-data.md" %}
+[prepare-data.md](../system-deployment/prepare-data.md)
+{% endcontent-ref %}
+
+In this example, we will use the spector`.csv` file which is stored on all the three nodes.
+
+**Data Preprocess**
+
+In the `preprocess` method, we should do the preprocessing of the data returned from the `dataset` method. The arguments of the `preprocess` method is the same as what is returned from the `dataset` method. The names of the arguments are the keys of the dictionary, and the values of the arguments are the instances of `pandas.DataFrame`.
+
+We must return the features(`x`) and the labels(`y`) separately from the `preprocess` method. The data type of `x` and `y` could be either `pandas.DataFrame` or `numpy.ndarray`. And `y` must be an 1-dimensional vector.
+
+In this example, we will use the first 3 columns of the `spector.csv` as the features, and the last column `Grade` as the label.
