@@ -114,3 +114,9 @@ In the `preprocess` method, we should do the preprocessing of the data returned 
 We must return the features(`x`) and the labels(`y`) separately from the `preprocess` method. The data type of `x` and `y` could be either `pandas.DataFrame` or `numpy.ndarray`. And `y` must be an 1-dimensional vector.
 
 In this example, we will use the first 3 columns of the `spector.csv` as the features, and the last column `Grade` as the label.
+
+**Logistic Regression Options**
+
+The options for logistics regression are configured in the `options` method. This method returns a dictionary with its keys as the option names and the values as the config values. The available options are all listed in the above example with detailed explanations in the comments.
+
+The `options` method is optional. If not provided, the default values will be used for all the options.
