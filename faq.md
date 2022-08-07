@@ -1,5 +1,26 @@
 # 常见问题解答
 
+## 怎样在其他区块链上运行Delta
+
+Delta在架构设计时做了区块链系统的分层，所以理论上可以很容易的使用在其他区块链系统上，比如Fabric、BCOS等。
+
+具体来说，连接一个区块链系统需要做两部分工作：
+
+1. 实现Delta的链上智能合约
+2. 在delta-chain-connector中实现调用区块链的方法
+
+### 实现Delta的链上智能合约
+
+目前Delta已经实现了Solidity的智能合约，如果目标区块链系统使用了EVM做为智能合约层，可以直接使用写好的Solidity合约。如果是Fabric等需要自己写的智能合约，就需要参照Delta的智能合约，实现一套功能和接口完全一样的。Delta的Solidity智能合约放置在下面的Github仓库中：
+
+{% embed url="https://github.com/delta-mpc/delta-contracts" %}
+
+Delta的Solidity合约使用了[Truffle](https://trufflesuite.com/docs/truffle/)的开发框架，目录结构也是一个标准的Truffle项目结构。合约代码放置于`/contracts`目录下，使用方法可参考Truffle的官方教程。如果要自己实现的话，需要把`/contracts`目录下的合约都实现一遍。
+
+### 实现调用区块链的方法
+
+
+
 ## Docker容器无法启动
 
 如果`docker-compose up`或`docker-compose up -d`有容器无法启动， 输入命令`docker-compose ps`查看具体的容器状态，如果容器状态显示`Exit (1)`，则表明发生了异常。 常见的情况是容器`node1`、`node2`或`node3`启动失败。
