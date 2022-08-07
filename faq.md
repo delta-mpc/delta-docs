@@ -4,10 +4,10 @@
 
 Delta在架构设计时做了区块链系统的分层，所以理论上可以很容易的使用在其他区块链系统上，比如Fabric、BCOS等。
 
-具体来说，连接一个区块链系统需要做两部分工作：
+具体来说，实现一个新的区块链系统的连接需要做两部分工作：
 
 1. 实现Delta的链上智能合约
-2. 在delta-chain-connector中实现调用区块链的方法
+2. 在`delta-chain-connector`中实现调用区块链的方法
 
 ### 实现Delta的链上智能合约
 
@@ -19,7 +19,19 @@ Delta的Solidity合约使用了[Truffle](https://trufflesuite.com/docs/truffle/)
 
 ### 实现调用区块链的方法
 
+Delta系统中针对区块链的调用进行了封装和解耦。对区块链的调用全部封装在Chain Connector中。Delta Node使用同一套API调用Chain Connector，在Chain Connector中再根据区块链的不同，使用不同的调用方法。
 
+Chain Connector中，调用区块链的方法也是统一的抽象方法。只要针对目标区块链系统，实现具体的调用逻辑就可以了。在Chain Connector的架构中也考虑了对更多区块链的兼容，可以很方便的加入其他区块链的实现。
+
+Chain Connector的代码放置在下面的仓库中：
+
+{% embed url="https://github.com/delta-mpc/delta-chain-connector" %}
+
+在`/src/impl`目录中放置的就是对不同区块链的实现。目前有两个实现，`monkey`和`chain`。`monkey`是无区块链模式的实现，Chain Connector自己做为中心节点，模拟区块链的行为。`chain`是以太坊的实现。如果需要增加新的区块链系统，只要在`/src/impl`中新建一个文件夹，比如`/src/impl/fabric`，然后参考以太坊`/src/impl/chain`的实现方式，实现对应的调用方法就可以了。
+
+调用方法的抽象`Impl`放置在[service.ts](https://github.com/delta-mpc/delta-chain-connector/blob/main/src/impl/service.ts)文件中。需要实现其中的全部方法。
+
+然后使用修改过的Chain Connector启动整个系统，在Chain Connetor的配置文件中指定使用自己新增加的区块链就可以了。
 
 ## Docker容器无法启动
 
