@@ -4,11 +4,11 @@
 
 Delta目前的智能合约使用Solidity编写，在Chain Connector中实现了以太坊API的调用，理论上可以在所有兼容以太坊的区块链上运行。但是由于Chain Connector目前使用了以太坊的`pub/sub`接口来订阅以太坊事件，因此需要目标区块链系统支持`pub/sub`事件订阅。下表中列出了经社区测试的Delta在各个以太坊兼容区块链上的适用情况：
 
-| 区块链                                       | 是否兼容 | 情况说明              |
-| ----------------------------------------- | ---- | ----------------- |
-| [Conflux/树图](https://confluxnetwork.org/) | 否    | 缺少`pub/sub`事件订阅支持 |
-| [FISCO BCOS](http://fisco-bcos.org/)      | 未知   | 未测试               |
-|                                           |      |                   |
+| 区块链                                       | 是否兼容 | 情况说明              | 测试者                        |
+| ----------------------------------------- | ---- | ----------------- | -------------------------- |
+| [Conflux/树图](https://confluxnetwork.org/) | 否    | 缺少`pub/sub`事件订阅支持 | Jupyter(s2068649@ed.ac.uk) |
+| [FISCO BCOS](http://fisco-bcos.org/)      | 未知   | 未测试               |                            |
+|                                           |      |                   |                            |
 
 如果是Delta兼容的区块链系统，可以直接使用现有的Chain Connector进行连接。只需要在配置文件中指定`impl`为`ethereum`，并且按照区块链系统的要求设置具体的配置项即可。
 
