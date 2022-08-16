@@ -10,6 +10,8 @@ Delta目前的智能合约使用Solidity编写，在Chain Connector中实现了�
 | [FISCO BCOS](http://fisco-bcos.org/)      | 未知   | 未测试               |
 |                                           |      |                   |
 
+如果是Delta兼容的区块链系统，可以直接使用现有的Chain Connector进行连接。只需要在配置文件中指定`impl`为`ethereum`，并且按照区块链系统的要求设置具体的配置项即可。
+
 如果需要在不兼容的以太坊区块链上运行，需要开发者自己在Chain Connector中实现对应的支持，比如使用`json-rpc`替代掉`pub/sub`方法，即可运行在没有`pub/sub`接口的区块链上。
 
 ### 其他区块链
@@ -39,7 +41,7 @@ Chain Connector的代码放置在下面的仓库中：
 
 {% embed url="https://github.com/delta-mpc/delta-chain-connector" %}
 
-在`/src/impl`目录中放置的就是对不同区块链的实现。目前有两个实现，`monkey`和`chain`。`monkey`是无区块链模式的实现，Chain Connector自己做为中心节点，模拟区块链的行为。`chain`是以太坊的实现。如果需要增加新的区块链系统，只要在`/src/impl`中新建一个文件夹，比如`/src/impl/fabric`，然后参考以太坊`/src/impl/chain`的实现方式，实现对应的调用方法就可以了。
+在`/src/impl`目录中放置的就是对不同区块链的实现。目前有两个实现，`coordinator`和`ethereum`。`coordinator`是无区块链模式的实现，Chain Connector自己做为中心节点，模拟区块链的行为。`ethereum`是以太坊的实现。如果需要增加新的区块链系统，只要在`/src/impl`中新建一个文件夹，比如`/src/impl/fabric`，然后参考以太坊`/src/impl/ethereum`的实现方式，实现对应的调用方法就可以了。
 
 调用方法的抽象`Impl`放置在[service.ts](https://github.com/delta-mpc/delta-chain-connector/blob/main/src/impl/service.ts)文件中。需要实现其中的全部方法。
 
