@@ -1,4 +1,4 @@
-# 区块链支持
+# 其他区块链支持
 
 ### 以太坊兼容（EVM Compatible）区块链
 
@@ -10,7 +10,7 @@ Delta目前的智能合约使用Solidity编写，在Chain Connector中实现了�
 | [FISCO BCOS](http://fisco-bcos.org/)      | 未知   | 未测试               |                            |
 |                                           |      |                   |                            |
 
-如果是Delta兼容的区块链系统，可以直接使用现有的Chain Connector进行连接。只需要在配置文件中指定`impl`为`ethereum`，并且按照区块链系统的要求设置具体的配置项即可。
+如果是Delta兼容的区块链系统，可以直接使用现有的Chain Connector进行连接。只需要在配置文件中指定`impl`为`ethereum`，并且按照区块链系统的要求设置具体的配置项即可。具体可参考快速搭建指南中的\[[区块链网络搭建-方法2-手动搭建](getting-started.md#fang-fa-2-yong-delta-chain-zuo-wei-qu-kuai-lian-jie-dian)]，或者按照系统搭建和部署章节的文档，在搭建好区块链节点后，从[部署智能合约](network-deployment/deploy-smart-contracts.md)开始操作。
 
 如果需要在不兼容的以太坊区块链上运行，需要开发者自己在Chain Connector中实现对应的支持，比如使用`json-rpc`替代掉`pub/sub`方法，即可运行在没有`pub/sub`接口的区块链上。
 
