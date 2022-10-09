@@ -7,7 +7,7 @@
 ### 下载镜像
 
 ```
-$ docker pull deltampc/deltaboard:0.6.0
+$ docker pull deltampc/deltaboard:0.8.0
 ```
 
 ### 初始化配置
@@ -24,7 +24,7 @@ $ mkdir deltaboard
 
 ```
 $ cd deltaboard
-$ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:0.6.0 init
+$ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:0.8.0 init
 ```
 
 运行命令后，会在根目录`deltaboard`中，新建文件夹`config, data，db`，其中，`config`文件夹用来存放节点的配置文件，data文件夹用来存放节点保存的用户数据，比如JupyterLab中的代码和数据等，db文件夹用来存放deltaboard使用的sqlite数据库文件。
@@ -32,7 +32,7 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/deltaboard:0.6.0 init
 ### 启动节点服务
 
 ```
-$ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboard:0.6.0
+$ docker run -d --name=deltaboard -v ${PWD}:/app -p 8090:8090 deltampc/deltaboard:0.8.0
 ```
 
 ### **访问Deltaboard**
