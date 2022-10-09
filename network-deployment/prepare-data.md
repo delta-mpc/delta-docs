@@ -11,7 +11,7 @@ Delta Node的Data Connector组件的开发工作量较大，目前仍在开发�
 为了方便开发者上手使用，Delta Node的Docker镜像中包含了下载MNIST数据集的命令，运行下面的命令，Delta会自动下载MNIST数据集，并且随机选取1/3保留下来，删掉其他的，以模拟隐私计算网络中，多个不同的节点各自拥有不同的数据的场景：
 
 ```
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.6.0 get-mnist
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.8.0 get-mnist
 ```
 
 ## Delta Node支持的数据格式
