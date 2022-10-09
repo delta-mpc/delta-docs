@@ -68,7 +68,7 @@ Delta也提供了Solidity语言的[智能合约](https://github.com/delta-mpc/de
 
 [Delta Node](https://github.com/delta-mpc/delta-node)是整个隐私计算网络的核心，负责计算任务的整个生命周期的管理，包括任务注册、多节点间任务协调、任务本地执行、结果上报、结果聚合等整个任务执行流程，在整个生命周期中保证本地数据的隐私安全，同时对外提供API，供IDE或者其他系统接入。
 
-![Delta Node架构](.gitbook/assets/image.png)
+![Delta Node架构](<.gitbook/assets/image (2).png>)
 
 Delta Node的数据连接层连接到数据持有者的本地数据，可通过不同的适配器连接多种数据格式，比如文件、MySQL关系型数据库以及HDFS大数据存储等。Delta Node提供API供外部调用，完成任务注册、任务状态查询、计算结果下载等任务相关的功能，以及任务列表查询、节点状态查询、节点配置等节点管理的功能。
 
