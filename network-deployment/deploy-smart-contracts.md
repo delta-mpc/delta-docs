@@ -8,15 +8,15 @@ Delta提供了Solidity语言编写的合约，可以部署在支持EVM虚拟机�
 
 Delta Contracts代码库中包含了合约源代码，以及部署合约需要的自动化工具：
 
-```text
-$ git clone --depth 1 --branch v0.5.2 https://github.com/delta-mpc/delta-contracts.git
+```
+$ git clone --depth 1 --branch v0.8.0 https://github.com/delta-mpc/delta-contracts.git
 ```
 
 ### 安装依赖
 
 使用`npm`来安装源代码依赖的其他代码库：
 
-```text
+```
 $ npm install -g truffle
 ```
 
@@ -24,7 +24,7 @@ $ npm install -g truffle
 
 编辑`truffle-config.js`文件，设置区块链节点的地址：
 
-```text
+```
 module.exports = {
   networks: {
     development: {
@@ -35,8 +35,7 @@ module.exports = {
 }
 ```
 
-其中，`<eth url>`是区块链节点的服务地址，注意需要地址需要加上协议头，即"http://<host>:<ip>"或"ws://<host>:<ip>"。
-如果使用Delta Chain Node进行部署，协议使用"ws://"。
+其中，`<eth url>`是区块链节点的服务地址，注意需要地址需要加上协议头，即"http://:"或"ws://:"。 如果使用Delta Chain Node进行部署，协议使用"ws://"。
 
 然后运行下面的命令，编译并部署IdentityContract合约以及HFLContract合约。IdentityContract是用来进行节点身份管理的合约，HFLContract是用来进行横向联邦学习的合约：
 
@@ -104,6 +103,3 @@ $ truffle migrate
 ### 在区块链浏览器中添加合约信息
 
 部署完智能合约后，为了方便在区块链浏览器中查看合约调用的数据，可以将合约信息添加到区块链浏览器中。
-
-
-
