@@ -37,6 +37,8 @@ class SpectorLogitTask(LogitTask):
             max_clients=3,  # 算法所支持的最大客户端数，必须大雨等于min_clients
             wait_timeout=5,  # 等待超时时间，用来控制一轮计算的超时时间
             connection_timeout=5,  # 连接超时时间，用来控制流程中每个阶段的超时时间
+            verify_timeout=500,  # 验证超时时间，用来控制最后零知识证明阶段的超时时间
+            enable_verify=True  # 是否在任务完成后，开启零知识证明阶段
         )
 
     def dataset(self):
@@ -81,6 +83,8 @@ class SpectorLogitTask(LogitTask):
 _**任务配置**_
 
 在 `super().__init__()` 方法中对任务进行配置。 这些配置项包括任务名称（`name`），所需的最少客户端数（`min_clients`），最大客户端数（`max_clients`），等待超时时间（`wait_timeout`，用来控制一轮计算的超时时间），以及连接超时时间（`connection_timeout`，用来控制流程中每个阶段的超时时间）。
+
+另外，逻辑回归任务还可以在任务完成后，开启零知识证明阶段，用于验证最终结果的收敛性，以及各个节点计算过程中数据的一致性。如果要开启零知识证明，需要将`super().__init__()`中的`enable_verify`参数设置为`True`。同时，可以通过`verify_timeout`参数来控制零知识证明阶段的超时时间。目前，零知识证明阶段耗时较长，`verify_timeout`的默认值为300秒，如果在零知识证明阶段发生超时，建议适当加大`verify_timeout`。
 
 因为网络中的节点不是一直在线的，另外也对想要参与的任务有一些挑选，所以这里定义了任务所需要的节点数量。任务发布后，节点自行选择是否加入任务，当选择加入的节点数满足了任务的要求，任务就会开始执行。
 
@@ -140,9 +144,15 @@ delta_node.create_task(task)
 
 接下来，可以从左侧的导航栏中，前往“任务列表”，找到刚刚提交的任务，点击进去查看具体的执行日志了：
 
+如果没有开启零知识证明，任务的计算阶段完成后，任务就结束了，任务状态会显示为`完成`，如下图所示
+
 ![](../.gitbook/assets/logit-task-board.png)
 
-可以从日志看出，在任务执行中使用了一轮链上安全聚合。可以点击对应的链接进入区块链浏览器，看到详细的transaction执行情况。在Delta的开发文档中有详细的[链上安全聚合原理介绍](../system-design/secure-aggregation-on-blockchain.md)，这里我们就不展开了。
+如果开启了零知识证明，则在计算阶段完成后，还会进行零知识证明阶段，零知识证明完成后，任务状态会由`完成`变为`已确认`，如下图所示
+
+![](../.gitbook/assets/logit-task-board-verify.png)
+
+可以从日志看出，在任务执行中使用了一轮链上安全聚合。如果开启了零知识证明，还会在链上对零知识证明进行验证。可以点击对应的链接进入区块链浏览器，看到详细的transaction执行情况。在Delta的开发文档中有详细的[链上安全聚合原理介绍](../system-design/secure-aggregation-on-blockchain.md)，这里我们就不展开了。
 
 任务执行完后，可以点击下载按钮，下载执行结果文件。执行结果包含三部分，分别是逻辑回归的权重、逻辑回归损失函数的值，以及逻辑回归训练的轮数，可以直接用python读取使用：
 

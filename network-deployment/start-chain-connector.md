@@ -37,17 +37,17 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-chain-connector:0.8.0 init
 
 在`config`文件夹中，会有一个预先生成的配置文件`config.json`:。在首次启动前，我们必须要配置的项目包括Chain Connector的运行模式。如果运行模式配置为Blockchain，那么还需要配置区块链节点的IP地址。
 
-在这里我们将impl设置为`monkey`，即为coordinator模式：
+在这里我们将impl设置为`coordinator`，即为coordinator模式：
 
 ```
 {
   "log": {
     "level": "debug"
   },
-  "impl": "monkey",
+  "impl": "coordinator",
   "host": "0.0.0.0",
   "port": 4500,
-  "monkey": {
+  "coordinator": {
     "db": {
       "type": "sqlite",
       "url": "db/chain.db"
@@ -90,32 +90,46 @@ $ docker logs -f chain_connector
   "impl": "chain",
   "host": "0.0.0.0",
   "port": 4500,
-  "chain": {
-    "nodeAddress": "0x6578aDabE867C4F7b2Ce4c59aBEAbDC754fBb990",
-    "privateKey": "0xf0f239a0cc63b338e4633cec4aaa3b705a4531d45ef0cbcc7ba0a4b993a952f2",
-    "provider": "ws://127.0.0.1:8545",
-    "gasPrice": 20000000000,
-    "gasLimit": 6721975,
-    "chainParam": {
-      "chainId": 1337,
-      "name": ""
-    },
+  "ethereum": {
+    "nodeAddress": "0x6578aDabE867C4F7b2Ce4c59aBEAbDC754fBb990",
+    "privateKey": "0xf0f239a0cc63b338e4633cec4aaa3b705a4531d45ef0cbcc7ba0a4b993a952f2",
+    "provider": "ws://localhost:8545",
+    "gasPrice": 20000000000,
+    "gasLimit": 6721975,
+    "chainParam": {
+      "chainId": 1337,
+      "name": ""
+    },
 
-    "identity": {
-      "contractAddress": "0xCe69c1DDCcD29a821bB4d3BdEEb3EdE9De9C7903"
-    },
-    "hfl": {
-      "contractAddress": "0x7864Bf464F9ecE0D3A95cA55e171D9060cf7336a"
-    }
-  }
+    "identity": {
+      "contractAddress": "0xCe69c1DDCcD29a821bB4d3BdEEb3EdE9De9C7903"
+    },
+    "hfl": {
+      "contractAddress": "0x7864Bf464F9ecE0D3A95cA55e171D9060cf7336a"
+    },
+    "datahub": {
+      "contractAddress": "0x02c1d56eB5C04Cb026cd98Cf38F75A9942EED39B"
+    },
+    "hlr": {
+      "contractAddress": "0x19eE33EC0eAC58205f1797303461dEa88BFF93E9",
+      "verifiers": {
+        "3": "0x075200EBa6317bE48ED73c04082088fab26f5D02"
+      }
+    }
+  }
 }
 ```
 
-接下来，我们需要修改`chain.nodeAddress`、`chain.privateKey`、`chain.provider`、`chain.identity.contractAddress`以及`chain.hfl.contractAddress`这几项配置。
+接下来，我们需要修改`ethereum.nodeAddress`、`ethereum.privateKey`、`ethereum.provider`、`ethereum.identity`、`ethereum.hfl`、`ethereum.datahub`以及`ethereum.hlr`这几项配置。
 
-其中，`chain.nodeAddress`和`chain.privateKey`分别代表用户的区块链钱包地址和私钥。用户可以使用任意与以太坊兼容的钱包（比如[Metamask](https://metamask.io/)），来生成钱包地址和私钥。
+其中，`ethereum.nodeAddress`和`ethereum.privateKey`用来配置用户的区块链钱包地址和私钥。用户可以使用任意与以太坊兼容的钱包（比如[Metamask](https://metamask.io/)），来生成钱包地址和私钥。
 
-`chain.provider`代表区块链节点的地址，这里需要使用WebSocket的链接地址。`chain.identity.contractAddress`和`chain.hfl.contractAddress`分别代表与Delta配套的智能合约的地址。在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
+`chain.provider`用来配置区块链节点的地址，这里需要使用WebSocket的链接地址。
+
+`ethereum.identity`、`ethereum.hfl`、`ethereum.datahub`和`ethereum.hlr`分别对应IdentityContract、HFLContract、DataHub和HLR这些智能合约的配置。
+这些配置项目下的`contractAddress`项，代表对应的智能合约地址。在`ethereum.hlr.verifiers`项下，用来配置不同输入长度所对应的零知识证明验证合约的地址，例如`ethereum.hlr.verifiers。3`，就对应于智能合约`PlonkVerifier3`的地址。
+
+在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
 
 {% content-ref url="deploy-smart-contracts.md" %}
 [deploy-smart-contracts.md](deploy-smart-contracts.md)
