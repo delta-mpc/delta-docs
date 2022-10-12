@@ -38,7 +38,7 @@ module.exports = {
 其中，`<eth url>`是区块链节点的服务地址，注意需要地址需要加上协议头，即"http://:"或"ws://:"。 如果使用Delta Chain Node进行部署，协议使用"ws://"。
 
 然后运行下面的命令，编译并部署`contracts`目录下的智能合约。其中，IdentityContract合约是用来进行节点身份管理的合约，HFLContract合约是用来进行横向联邦学习的合约，
-DataHub合约是用来进行节点数据管理的合约，HLR合约是用来进行横向逻辑回归的合约，PlonkVerifier3合约是用来进行零知识证明的合约：
+DataHub合约是用来进行节点数据管理的合约，HLR合约是用来进行横向逻辑回归的合约，PlonkVerifier3合约是用来验证输入长度为3的零知识证明合约：
 
 ```bash
 $ truffle migrate
