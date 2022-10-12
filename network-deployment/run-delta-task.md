@@ -8,7 +8,7 @@ Deltaboard的JupyterLab中已经放置了横向联邦学习和横向联邦统计
 
 ![](../.gitbook/assets/playground.png)
 
-其中，`en-horizontal-analytics-task.ipynb`和`zh-horizontal-analytics-task.ipynb`对应横向联邦统计任务，`en-horizontal-learning-task.ipynb`和`zh-horizontal-learning-task.ipynb`对应横向联邦学习任务。
+其中，`en-horizontal-analytics-task.ipynb`和`zh-horizontal-analytics-task.ipynb`对应横向联邦统计任务，`en-horizontal-learning-task.ipynb`和`zh-horizontal-learning-task.ipynb`对应横向联邦学习任务, `en-horizontal-logistic-regression-task.ipynb`和`zh-horizontal-logistic-regression-task.ipynb`对应横向逻辑回归任务。
 
 下面我们以横向联邦学习任务为例子，演示如何在Deltaboard中执行计算任务。横向联邦学习示例的任务是一个通过神经网络进行手写数字识别的模型训练。需要用到手写数字的公开数据集[MNIST](http://yann.lecun.com/exdb/mnist)，Delta Node的Docker镜像提供了下载MNIST数据集的功能，并且仅随机保留1/3的样本数据以模拟多节点拥有不同数据的隐私计算场景，详情可参考：
 
