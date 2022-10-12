@@ -86,6 +86,13 @@ Delta Node也会将log同时输出到本地数据文件夹中的log目录，可�
 [prepare-data.md](prepare-data.md)
 {% endcontent-ref %}
 
+如果需要在任务中开启零知识证明，则需要在执行任务前，额外启动Delta ZK服务，用于生成零知识证明。启动Delta ZK请参考：
+
+{% content-ref url="start-delta-zk.md" %}
+[start-delta-zk.md](start-delta-zk.md)
+{% endcontent-ref %}
+
+
 数据准备好后，我们就可以真正开始执行计算任务了。可以部署Deltaboard，在web界面中可视化管理Delta网络，以及在线编辑和运行Delta任务：
 
 {% content-ref url="start-deltaboard.md" %}
