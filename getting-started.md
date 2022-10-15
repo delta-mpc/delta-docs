@@ -88,7 +88,15 @@ http://localhost:8090
 
 
 
-4.如果不需要图形界面来管理网络、开发任务，这里我们就已经可以使用代码连接Delta Node API提交计算任务了：
+4.如果想要开启零知识证明任务验证功能，还需要为每个Delta Node启动一个Delta ZK服务来生成零知识证明：
+
+{% content-ref url="network-deployment/start-delta-zk.md" %}
+[start-delta-zk.md](network-deployment/start-delta-zk.md)
+{% endcontent-ref %}
+
+
+
+5.如果不需要图形界面来管理网络、开发任务，这里我们就已经可以使用代码连接Delta Node API提交计算任务了：
 
 {% content-ref url="delta-task-development/manage-task-with-delta-node-api.md" %}
 [manage-task-with-delta-node-api.md](delta-task-development/manage-task-with-delta-node-api.md)
@@ -96,7 +104,7 @@ http://localhost:8090
 
 
 
-5.（可选）继续启动Deltaboard，Delta Node的图形化管理界面，以及在线代码调试环境。连接到上面配置的其中一个Delta Node：
+6.（可选）继续启动Deltaboard，Delta Node的图形化管理界面，以及在线代码调试环境。连接到上面配置的其中一个Delta Node：
 
 {% content-ref url="network-deployment/start-deltaboard.md" %}
 [start-deltaboard.md](network-deployment/start-deltaboard.md)
@@ -104,7 +112,7 @@ http://localhost:8090
 
 
 
-6.（可选）至此Delta隐私计算网络已经搭建完成，接下来可以在Deltaboard中编写一个隐私计算任务试试看了：
+7.（可选）至此Delta隐私计算网络已经搭建完成，接下来可以在Deltaboard中编写一个隐私计算任务试试看了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
@@ -253,7 +261,15 @@ docker logs -f ganache
 
 ***
 
-6.如果不需要图形界面，就可以使用上面任意一个Delta Node的API，通过代码来提交任务，获取执行结果了：
+***
+
+{% content-ref url="network-deployment/start-delta-zk.md" %}
+[start-delta-zk.md](network-deployment/start-delta-zk.md)
+{% endcontent-ref %}
+
+***
+
+7.如果不需要图形界面，就可以使用上面任意一个Delta Node的API，通过代码来提交任务，获取执行结果了：
 
 {% content-ref url="delta-task-development/manage-task-with-delta-node-api.md" %}
 [manage-task-with-delta-node-api.md](delta-task-development/manage-task-with-delta-node-api.md)
@@ -261,7 +277,7 @@ docker logs -f ganache
 
 ***
 
-7.（可选）启动1个Deltaboard，连接到任意一个Delta Node，用于图形化的网络管理：
+8.（可选）启动1个Deltaboard，连接到任意一个Delta Node，用于图形化的网络管理：
 
 {% content-ref url="network-deployment/start-deltaboard.md" %}
 [start-deltaboard.md](network-deployment/start-deltaboard.md)
@@ -269,7 +285,7 @@ docker logs -f ganache
 
 ***
 
-8.（可选）然后就可以在Deltaboard中编写和测试计算任务了：
+9.（可选）然后就可以在Deltaboard中编写和测试计算任务了：
 
 {% content-ref url="network-deployment/run-delta-task.md" %}
 [run-delta-task.md](network-deployment/run-delta-task.md)
