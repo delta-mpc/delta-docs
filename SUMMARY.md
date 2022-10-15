@@ -22,6 +22,7 @@
 * [部署智能合约](network-deployment/deploy-smart-contracts.md)
 * [启动Chain Connector](network-deployment/start-chain-connector.md)
 * [启动Delta Node](network-deployment/start-delta-node.md)
+* [启动Delta ZK](network-deployment/start-delta-zk.md)
 * [准备节点数据](network-deployment/prepare-data.md)
 * [启动Deltaboard](network-deployment/start-deltaboard.md)
 * [执行计算任务](network-deployment/run-delta-task.md)
