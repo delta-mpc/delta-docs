@@ -6,7 +6,7 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 
 ## 使用Coordinator模式启动Chain Connector
 
-![Coordinator模式下的无区块链Delta隐私计算网络结构](<../.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (1) (1) (1) (1) (1) (1) (1) (1) (2).png>)
+![Coordinator模式下的无区块链Delta隐私计算网络结构](<../.gitbook/assets/53635fc89ddea878178709dd8e55ba9 (2) (2) (3) (1) (4) (4) (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png>)
 
 ### 下载镜像
 
@@ -41,18 +41,18 @@ $ docker run -it --rm -v ${PWD}:/app deltampc/delta-chain-connector:0.8.0 init
 
 ```
 {
-  "log": {
-    "level": "debug"
-  },
-  "impl": "coordinator",
-  "host": "0.0.0.0",
-  "port": 4500,
-  "coordinator": {
-    "db": {
-      "type": "sqlite",
-      "url": "db/chain.db"
-    }
-  }
+  "log": {
+    "level": "debug"
+  },
+  "impl": "coordinator",
+  "host": "0.0.0.0",
+  "port": 4500,
+  "coordinator": {
+    "db": {
+      "type": "sqlite",
+      "url": "db/chain.db"
+    }
+  }
 }
 ```
 
@@ -84,13 +84,13 @@ $ docker logs -f chain_connector
 
 ```
 {
-  "log": {
-    "level": "debug"
-  },
-  "impl": "chain",
-  "host": "0.0.0.0",
-  "port": 4500,
-  "ethereum": {
+  "log": {
+    "level": "debug"
+  },
+  "impl": "chain",
+  "host": "0.0.0.0",
+  "port": 4500,
+  "ethereum": {
     "nodeAddress": "0x6578aDabE867C4F7b2Ce4c59aBEAbDC754fBb990",
     "privateKey": "0xf0f239a0cc63b338e4633cec4aaa3b705a4531d45ef0cbcc7ba0a4b993a952f2",
     "provider": "ws://localhost:8545",
@@ -126,8 +126,7 @@ $ docker logs -f chain_connector
 
 `chain.provider`用来配置区块链节点的地址，这里需要使用WebSocket的链接地址。
 
-`ethereum.identity`、`ethereum.hfl`、`ethereum.datahub`和`ethereum.hlr`分别对应IdentityContract、HFLContract、DataHub和HLR这些智能合约的配置。
-这些配置项目下的`contractAddress`项，代表对应的智能合约地址。在`ethereum.hlr.verifiers`项下，用来配置不同输入长度所对应的零知识证明验证合约的地址，例如`ethereum.hlr.verifiers。3`，就对应于智能合约`PlonkVerifier3`的地址。
+`ethereum.identity`、`ethereum.hfl`、`ethereum.datahub`和`ethereum.hlr`分别对应IdentityContract、HFLContract、DataHub和HLR这些智能合约的配置。 这些配置项目下的`contractAddress`项，代表对应的智能合约地址。在`ethereum.hlr.verifiers`项下，用来配置不同输入长度所对应的零知识证明验证合约的地址，例如`ethereum.hlr.verifiers。3`，就对应于智能合约`PlonkVerifier3`的地址。
 
 在部署智能合约章节可以了解如何部署智能合约并获得合约地址。
 

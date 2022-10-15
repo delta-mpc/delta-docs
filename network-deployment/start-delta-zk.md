@@ -1,6 +1,10 @@
-# 启动Deltaboard
+---
+description: 生成零知识证明的服务
+---
 
-## 通过Docker镜像启动Deltaboard
+# 启动Delta ZK
+
+## 通过Docker镜像启动Delta ZK
 
 推荐使用Delta ZK的Docker镜像来进行部署
 
@@ -10,8 +14,7 @@
 $ docker pull deltampc/delta-zk:0.8.0
 ```
 
-
-### 启动节点服务
+### 启动服务
 
 ```
 $ docker run -d --name=delta_zk -v ${PWD}:/app -p 3400:3400 deltampc/delta-zk:0.8.0
@@ -23,8 +26,7 @@ $ docker run -d --name=delta_zk -v ${PWD}:/app -p 3400:3400 deltampc/delta-zk:0.
 $ docker logs -f delta_zk
 ```
 
-至此Delta ZK启动完成。Delta ZK是用于生成零知识证明的服务，如果需要在任务中开启零知识证明，则在启动Delta Node前，
-必须启动Delta ZK。启动Delta Node请参考：
+至此Delta ZK启动完成。Delta ZK是用于生成零知识证明的服务，如果需要在任务中开启零知识证明，则在启动Delta Node前， 必须启动Delta ZK。启动Delta Node请参考：
 
 {% content-ref url="start-delta-node.md" %}
 [start-delta-node.md](start-delta-node.md)
