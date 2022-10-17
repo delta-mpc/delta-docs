@@ -34,7 +34,7 @@ class SpectorLogitTask(LogitTask):
         super().__init__(
             name="spector_logit",  # 任务名称，用于在Deltaboard中的展示
             min_clients=2,  # 算法所需的最少客户端数，至少为2
-            max_clients=3,  # 算法所支持的最大客户端数，必须大雨等于min_clients
+            max_clients=3,  # 算法所支持的最大客户端数，必须大于等于min_clients
             wait_timeout=5,  # 等待超时时间，用来控制一轮计算的超时时间
             connection_timeout=5,  # 连接超时时间，用来控制流程中每个阶段的超时时间
             verify_timeout=500,  # 验证超时时间，用来控制最后零知识证明阶段的超时时间
