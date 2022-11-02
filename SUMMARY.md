@@ -9,6 +9,7 @@
 
 ## 版本发布说明 <a href="#release-notes" id="release-notes"></a>
 
+* [v0.8.1](release-notes/v0.8.1.md)
 * [v0.8.0](release-notes/v0.8.0.md)
 * [v0.6.0](release-notes/v0.6.0.md)
 * [v0.5.3](release-notes/v0.5.3.md)
@@ -42,6 +43,7 @@
 * [横向联邦统计](system-design/horizontal-federated-analytics.md)
 * [逻辑回归](system-design/logistic-regression.md)
 * [逻辑回归中的零知识证明](system-design/zero-knowledge-proof-in-logistical-regression-task.md)
+* [节点加入与离开网络的机制](system-design/delta-node-join-and-leave.md)
 
 ## 联邦统计 <a href="#federated-analytics" id="federated-analytics"></a>
 
