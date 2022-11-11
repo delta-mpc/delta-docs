@@ -29,7 +29,7 @@ $ cd delta-node
 ### 启动单节点
 
 ```text
-$ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoint ./node --name delta-chain deltampc/delta-chain:dev --dev --ws-external
+$ docker run -d -p 9944:9944 -p 9933:9933 -v ${PWD}/data:/root/.local --entrypoint ./node --name delta-chain deltampc/delta-chain:dev --dev --ws-external --rpc-external
 ```
 
 节点启动后，将在本机的9933端口启动rpc服务，9944端口启动websocket服务，并在根目录自动创建文件夹data，用来保存区块数据。
@@ -52,12 +52,12 @@ Polkadot的这个区块链浏览器完全运行于浏览器中，没有后端来
 
 1. 在Polkadot-JS Apps页面进入：开发者--&gt;RPC calls
 2. 选择功能模块：eth--&gt;getBalance
-3. 输入参数address: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
+3. 输入参数address: 0xd43593c715Fdd31c61141ABd04a99FD6822c8558
 4. 点击“提交RPC调用”
 
 ![](../.gitbook/assets/c6a000b38b07dcf523f32b1422b8c03.png)
 
-可以看到在0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1这个地址有预先设定好的以太余额
+可以看到在0xd43593c715Fdd31c61141ABd04a99FD6822c8558这个地址有预先设定好的以太余额
 
 **转账**
 
@@ -67,7 +67,7 @@ Polkadot的这个区块链浏览器完全运行于浏览器中，没有后端来
 4. 输入参数
 
    ```text
-   source: 0xcee2b721fc2fcbb3c136effec5d555c9f9c97db1
+   source: 0xd43593c715Fdd31c61141ABd04a99FD6822c8558
    target: <Any eth address>
    input: 0x
    value: 1000000000000000000000 // 1000 Ether
