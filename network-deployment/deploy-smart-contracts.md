@@ -20,28 +20,34 @@ $ git clone --depth 1 --branch v0.8.1 https://github.com/delta-mpc/delta-contrac
 $ npm install -g truffle
 ```
 
+在delta-contracts目录下，输入命令：
+
+```
+$ npm install
+```
+
+
 ### 编译及部署智能合约
 
-编辑`truffle-config.js`文件，设置区块链节点的地址：
+编辑`.env`文件，设置用于部署的账户私钥与地址：
 
 ```
-module.exports = {
-  networks: {
-    development: {
-      url: <eth url>,
-      network_id: "*", // Match any network id
-    },
-  },
-}
+DELTA_PKEY = <your private key>
+DELTA_ADDR = <your address>
 ```
 
-其中，`<eth url>`是区块链节点的服务地址，注意需要地址需要加上协议头，即"http://:"或"ws://:"。 如果使用Delta Chain Node进行部署，协议使用"ws://"。
+其中，`<your private key>`用账户的私钥代替，`<your address>`用账户的地址代替。账户中需要提前转账，充入以太。转账的操作可以参考启动区块链节点章节：
+
+{% content-ref url="start-blockchain-node.md" %}
+[start-blockchain-node.md](start-blockchain-node.md)
+{% endcontent-ref %}
+
 
 然后运行下面的命令，编译并部署`contracts`目录下的智能合约。其中，IdentityContract合约是用来进行节点身份管理的合约，HFLContract合约是用来进行横向联邦学习的合约，
 DataHub合约是用来进行节点数据管理的合约，HLR合约是用来进行横向逻辑回归的合约，PlonkVerifier3合约是用来验证输入长度为3的零知识证明合约：
 
 ```bash
-$ truffle migrate
+$ truffle migrate --network delta
 ```
 
 看到如下输出，则表明部署成功：
