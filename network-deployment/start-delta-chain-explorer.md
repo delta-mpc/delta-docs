@@ -60,7 +60,11 @@ COIN=DAI
 
 首先要配置数据库连接，填入数据库的用户名、密码、服务器地址和端口号。如果使用了上一节的方法来启动数据库，则用户名是`postgres`，密码是`1234qwer`，服务器地址是宿主机的IP，端口是`5432`。
 
-另外，需要将`<RPC endpoint url>`和`<Websocket endpoint url>`地址设置为区块链节点的地址。如果使用了上一章的教程启动区块链节点，则服务的IP都是宿主机IP，RPC服务的端口是`9933`，Websocket服务的端口是`9944`。
+另外，需要将`<RPC endpoint url>`和`<Websocket endpoint url>`地址设置为区块链节点的地址。
+
+> 如果使用了上一章的教程启动区块链节点，则服务的IP都是宿主机IP，RPC服务的端口是`9933`，Websocket服务的端口是`9944`。
+
+> 如果是使用Delta All-in-one脚本启动的Ganache节点，那服务的IP地址是Docker的网卡IP，一般是172.17.0.1，PRC和Websocket的端口都是8545。
 
 注意上面两步中，宿主机的IP地址不是`127.0.0.1`，具体取决于操作系统：
 
