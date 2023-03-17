@@ -9,7 +9,7 @@
 从Docker Hub拉取最新的release版本镜像：
 
 ```
-$ docker pull deltampc/delta-node:0.8.1
+$ docker pull deltampc/delta-node:0.8.3
 ```
 
 ### 初始化配置
@@ -26,7 +26,7 @@ $ mkdir delta_node
 
 ```
 $ cd delta_node
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.8.1 init
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-node:0.8.3 init
 ```
 
 运行命令后，会在根目录`delta_node`中，新建文件夹`config,task,data`，其中，`config`文件夹用来存放节点的配置文件，`task`文件夹用来存放节点任务执行的中间结果，`data`用来存放节点提供的数据。
@@ -69,7 +69,7 @@ api_port: 6700
 使用Docker命令行创建并启动节点的container，将上一步创建的文件夹绑定到Container内部的`app`文件夹。另外Delta Node需要对外暴露端口`6700`，用于对外的API以及节点间通信：
 
 ```
-$ docker run -d --name=delta_node_1 -v ${PWD}:/app -p 6700:6700 deltampc/delta-node:0.8.1
+$ docker run -d --name=delta_node_1 -v ${PWD}:/app -p 6700:6700 deltampc/delta-node:0.8.3
 ```
 
 通过Docker的log命令查看Container的执行状态，确认节点已经正常启动：
