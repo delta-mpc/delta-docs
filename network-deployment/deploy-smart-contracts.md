@@ -9,7 +9,7 @@ Delta提供了Solidity语言编写的合约，可以部署在支持EVM虚拟机�
 Delta Contracts代码库中包含了合约源代码，以及部署合约需要的自动化工具：
 
 ```text
-$ git clone --depth 1 --branch v0.8.2 https://github.com/delta-mpc/delta-contracts.git
+$ git clone --depth 1 --branch v0.8.3 https://github.com/delta-mpc/delta-contracts.git
 ```
 
 ### 安装依赖

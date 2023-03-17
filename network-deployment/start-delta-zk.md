@@ -11,13 +11,13 @@ description: 生成零知识证明的服务
 ### 下载镜像
 
 ```
-$ docker pull deltampc/delta-zk:0.8.0
+$ docker pull deltampc/delta-zk:0.8.3
 ```
 
 ### 启动服务
 
 ```
-$ docker run -d --name=delta_zk -v ${PWD}:/app -p 3400:3400 deltampc/delta-zk:0.8.0
+$ docker run -d --name=delta_zk -v ${PWD}:/app -p 3400:3400 deltampc/delta-zk:0.8.3
 ```
 
 通过Docker的log命令查看Container的执行状态，确认节点已经正常启动：

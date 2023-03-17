@@ -11,7 +11,7 @@ Chain Connector还可以配置为不需要连接区块链的Coordinator模式。
 ### 下载镜像
 
 ```
-$ docker pull deltampc/delta-chain-connector:0.8.1
+$ docker pull deltampc/delta-chain-connector:0.8.3
 ```
 
 ### 初始化配置
@@ -28,7 +28,7 @@ $ mkdir delta_chain_connector
 
 ```
 $ cd delta_chain_connector
-$ docker run -it --rm -v ${PWD}:/app deltampc/delta-chain-connector:0.8.1 init
+$ docker run -it --rm -v ${PWD}:/app deltampc/delta-chain-connector:0.8.3 init
 ```
 
 运行命令后，会在根目录`delta_chain_connector`中，新建文件夹`config`，`config`文件夹用来存放节点的配置文件。
@@ -65,7 +65,7 @@ coordinator模式的Chain Connector，还需要配置一个数据库，用于存
 使用Docker命令启动Chain Connector，将上一步创建的文件夹绑定到Container内部的`app`文件夹。另外Chain Connector需要对外暴露端口`4500`，作为对外的API端口：
 
 ```
-$ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delta-chain-connector:0.8.1 run
+$ docker run -d --name=chain_connector -v ${PWD}:/app -p 4500:4500 deltampc/delta-chain-connector:0.8.3 run
 ```
 
 通过Docker的log命令查看Container的执行状态，确认节点已经正常启动：
