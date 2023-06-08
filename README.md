@@ -1,30 +1,38 @@
 # Delta
 
-Out-of-the-Box Blockchain-powered Verifiable PPC Framework
+开箱即用的区块链隐私计算框架
 
-[Homepage](https://deltampc.com/en) | [Documentation](https://docs.deltampc.com/v/en)
+[官网](https://deltampc.com) | [开发文档](https://docs.deltampc.com)
 
-## Overview
+## 功能介绍
 
-Delta performs statistical and machine learning computations jointly on data possessed by a group of data holders while keeping the data private for each of them. Delta is useful in a lot of cases such as risk assessment model training using private data from different banks, or health condition prediction for patients using data from different hospitals.
+Delta可以联合分散在各处的数据，进行统计计算以及机器学习，数据全程不会离开本地，实现了数据的可用不可见，可应用于金融、医疗、政府、知识产权等领域，实现联合风控、联合科研、政企数据连接等需求，充分发挥数据的价值。
+Delta通过封装整合联邦学习、安全多方计算、差分隐私等最新的隐私计算技术，降低了开发门槛，使用者无需了解隐私计算技术，也可快速实现计算需求。 用户可以快速地部署Delta节点，搭建隐私计算网络，联合多方数据，完成隐私计算。
+Delta保证了计算结果的可信性，在用户无法获取原始数据的前提下，通过集成的区块链和零知识证明技术验证计算结果的正确性。
 
-By encapsulating modern privacy-preserving computation techniques inside, Delta doesn't require users to have any knowledge about privacy-preserving computation. Developers just write computation task using PyTorch and Pandas. And send it to the Delta network. The rest parts are taken care of by Delta.
-Delta network determines the task type by checking the distribution status of the data required by the task, and transforms the task into horizontal/vertical federated learning, or federated analytics task and executes it on the network.
+## 框架特点
 
-The original data is never accessible to the developers. Delta integrates Blockchain and Zero Knowledge Proof so that the developer could verify that the computation is actually performed as designed on the required data.
+Delta包含了搭建一个完整的区块链隐私计算网络的全部组件，每个组件都可以使用Docker镜像快速部署。开发者可以根据需要选择需要的组件快速完成网络的搭建。
+Delta对隐私计算底层技术进行了彻底的封装，编写隐私计算任务无需对底层的原理有任何了解，只需要开发者按照以前的方式完成计算任务编写，Delta就可以将其做为隐私计算任务，在多节点网络中进行执行。
+Delta支持使用PyTorch编写的机器学习任务，以及使用Pandas编写的数据统计任务。以前写的PyTorch/Pandas代码几乎可以不加修改的直接在Delta网络中执行，通过隐私计算联合多个节点的数据，获得更大数据集上的模型训练结果、验证结果以及统计数据。
 
-Delta supports running machine learning tasks written in ```PyTorch```, and data analytics tasks written in ```Pandas```. The old ```PyTorch/Pandas``` codes could be executed directly on Delta network with almost zero modification. Developers could get the training/validation/statistical results on a larger dataset at no cost.
+关于Delta框架的详细架构说明，可以参考这篇文章：
 
-## Getting Started
+[系统架构说明](https://docs.deltampc.com/delta-architecture)
 
-Delta network is composed of several components, and all of them could be easily deployed with Docker. Before choosing the required components and starting the network, take a look at the [System Overview](https://docs.deltampc.com/v/en/system-overview) and get a basic understanding about the network components.
+## Delta网络快速搭建
 
-To get your hands dirty and start to play with the network, check the [Getting Started](https://docs.deltampc.com/v/en/getting-started) guide for a quick deployment of the network.
+Delta网络可以使用Docker镜像快速完成搭建，详情请参考：
 
-## Join the Community
+[快速搭建指南](https://docs.deltampc.com/getting-started)
 
-If you have any questions using the source code, submit issues on [Github](https://github.com/delta-mpc).
+## Delta社区
 
-To get connected to other developers or want to know more about privacy-preserving computation techniques, join Delta's Slack:
+***Github***
+
+代码使用中遇到的问题，请在[Github](https://github.com/delta-mpc)提交Issue.
+
+
+***Slack***
 
 [Join Delta on Slack](https://join.slack.com/t/delta-mpc/shared\_invite/zt-uaqm185x-52oCXcxoYvRlFwEoMUC8Tw)
